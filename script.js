@@ -105,7 +105,8 @@ function startRecording(stream) {
                         //Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
                           reader.onload = function(event){
-                            console.log(reader.result);
+                                let text = reader.result;
+                            console.log(text);
                           };
                         reader.readAsText(blob);
 	        };
