@@ -104,7 +104,10 @@ function startRecording(stream) {
 
                         //Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
-                        console.log(reader.readAsArrayBuffer(blob));
+                          reader.onload = function(event){
+                            console.log(JSON.stringify(reader.result));
+                          };
+                        reader.readAsArrayBuffer(blob);
 	        };
 
 	        mediaRecorder.onpause = function(){
