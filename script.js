@@ -116,7 +116,7 @@ function startRecording(stream) {
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
-        stabilize(videoURL);
+        stabilize(blob);
 	videoElement.controls = true;
 }
 
