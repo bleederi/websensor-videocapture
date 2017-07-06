@@ -105,9 +105,9 @@ function startRecording(stream) {
                         //Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
                           reader.onload = function(event){
-                            console.log(JSON.stringify(reader.result));
+                            console.log(reader.result);
                           };
-                        reader.readAsArrayBuffer(blob);
+                        reader.readAsText(blob);
 	        };
 
 	        mediaRecorder.onpause = function(){
@@ -123,7 +123,7 @@ function startRecording(stream) {
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
-        stabilize(blob);
+        //stabilize(blob);
 	videoElement.controls = true;
 }
 
