@@ -67,7 +67,7 @@ function startRecording(stream) {
                 catch(err) {
                         console.log(err.message);
                         console.log("Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags.");
-                        this.innerHTML = "Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags";
+                        //this.innerHTML = "Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags";
                 }
 	        //var options = {mimeType: 'video/webm;codecs=vp9'};
 		//mediaRecorder = new MediaRecorder(stream, options);
