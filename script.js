@@ -25,7 +25,7 @@
 var constraints = {audio: true,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }}};
 var mediaRecorder = null;
 var chunks = [];
-var blob = null;
+var videoData = null;
 
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
@@ -95,13 +95,16 @@ function startRecording(stream) {
 	        };
 
 	        mediaRecorder.onstop = function(){
-		        blob = new Blob(chunks, {type: "video/webm"});
-                        console.log(blob);
+		        var blob = new Blob(chunks, {type: "video/webm"});
 		        chunks = [];
 
 		        var videoURL = window.URL.createObjectURL(blob);
 
 		        videoElement.src = videoURL;
+
+                        //Read blob data so we can stabilize the video                        
+                        var reader = new FileReader();
+                        console.log(reader.readAsArrayBuffer(blob));
 	        };
 
 	        mediaRecorder.onpause = function(){
