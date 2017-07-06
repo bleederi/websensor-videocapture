@@ -96,6 +96,7 @@ function startRecording(stream) {
 
 	        mediaRecorder.onstop = function(){
 		        blob = new Blob(chunks, {type: "video/webm"});
+                        console.log(blob);
 		        chunks = [];
 
 		        var videoURL = window.URL.createObjectURL(blob);
