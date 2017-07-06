@@ -1,0 +1,60 @@
+<!--
+Copyright 2017 Jesse Nieminen
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!doctype html>
+<html lang="en">
+	<head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=0.6">
+                <link rel="manifest" href="manifest.json" />
+                <meta charset="utf-8">
+                <meta name="viewport" content="user-scalable=no, initial-scale=1">
+                <title>Websensor video stabilization demo</title>
+		<style>
+			body{
+				margin: 0;
+			}
+                   #startbutton {
+                        background-color: red;
+                        color: #FFFFFF;
+                        padding: 15px 32px;
+                        border-radius: 10px;
+                        margin:10px
+                    }
+		</style>
+		
+	</head>
+        <template id="video-view">
+                <style>
+                :host {
+                width: 100vh;
+                height: 100vh;
+                }
+                </style>
+        </template>
+	<body>
+                <button id="startbutton" onclick="startDemo()">Start recording</button>
+<div hidden id="debug">
+</div>
+                <video controls autoplay></video><br>
+                <script type="text/javascript" src="script.js"></script>        <!-- Contains the step detection algorithm -->
+	</body>
+</html>
+
+
+
+
+
