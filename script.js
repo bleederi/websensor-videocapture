@@ -35,9 +35,40 @@ function errorCallback(error){
 
 function startDemo () {
 		navigator.getUserMedia(constraints, startRecording, errorCallback);
-	}
+}
 
 function startRecording(stream) {
+
+                try {
+                //Initialize sensors
+                accel_sensor = new Accelerometer();
+                accel_sensor.onchange = () => {
+                };
+                accel_sensor.onactivate = () => {
+                };
+                accel_sensor.start();
+                orientation_sensor = new AbsOriSensor();
+                orientation_sensor.onchange = () => {
+                        this.roll = orientation_sensor.roll;
+                        this.pitch = orientation_sensor.pitch;
+                        this.yaw = orientation_sensor.yaw;
+                        if(!this.initialoriobtained) //obtain initial longitude
+                        {
+                                let yawInitial = orientation_sensor.yaw;
+                                this.longitudeInitial = -yawInitial * 180 / Math.PI;
+                                longitudeOffset = this.longitudeInitial;
+                                this.initialoriobtained = true;
+                        }
+                };
+                orientation_sensor.onactivate = () => {
+                };
+                orientation_sensor.start();
+                }
+                catch(err) {
+                        console.log(err.message);
+                        console.log("Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags.");
+                        this.innerHTML = "Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags";
+                }
 	        //var options = {mimeType: 'video/webm;codecs=vp9'};
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
@@ -49,7 +80,7 @@ function startRecording(stream) {
 	        videoElement.play();
 
 	        mediaRecorder.ondataavailable = function(e) {
-                        console.log("Data available", e);
+                        //console.log("Data available", e);
 		        chunks.push(e.data);
 	        };
 
@@ -83,5 +114,11 @@ function startRecording(stream) {
 
 function stopRecording(){
 	mediaRecorder.stop();
+        //Now stabilize
+        stabilize(blob);
 	videoElement.controls = true;
+}
+
+function stabilize(blob) {
+        console.log(blob);
 }
