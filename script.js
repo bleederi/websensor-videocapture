@@ -80,3 +80,8 @@ function startRecording(stream) {
 	        mediaRecorder.onwarning = function(e){
 	        };
 }
+
+function stopRecording(){
+	mediaRecorder.stop();
+	videoElement.controls = true;
+}
