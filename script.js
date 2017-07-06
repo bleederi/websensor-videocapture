@@ -27,6 +27,7 @@ var mediaRecorder = null;
 var chunks = [];
 
 var videoElement = document.querySelector('video');
+videoElement.controls = false;
 
 function errorCallback(error){
 	console.log("error: ", error);	
@@ -37,9 +38,9 @@ function startDemo () {
 	}
 
 function startRecording(stream) {
-	        var options = {mimeType: 'video/webm;codecs=vp9'};
-		mediaRecorder = new MediaRecorder(stream, options);
-		//mediaRecorder = new MediaRecorder(stream);
+	        //var options = {mimeType: 'video/webm;codecs=vp9'};
+		//mediaRecorder = new MediaRecorder(stream, options);
+		mediaRecorder = new MediaRecorder(stream);
 
 	        mediaRecorder.start(10);
 
@@ -48,6 +49,7 @@ function startRecording(stream) {
 	        videoElement.play();
 
 	        mediaRecorder.ondataavailable = function(e) {
+                        console.log("Data available", e);
 		        chunks.push(e.data);
 	        };
 
@@ -57,6 +59,7 @@ function startRecording(stream) {
 
 
 	        mediaRecorder.onstart = function(){
+                        console.log("Recording started", mediaRecorder.state);
 	        };
 
 	        mediaRecorder.onstop = function(){
