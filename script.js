@@ -37,7 +37,9 @@ var sensorfreq = 60;
 //var yaw = null;
 var accel = {"x": null, "y": null, "z": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null};
+var time = null;
 var orientationData = [];       //array to store all the orientation data
+var timestamps = [];
 var initialoriobtained = false;
 
 //canvas
@@ -115,7 +117,7 @@ function startRecording(stream) {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
-                        timestamp = orientation_sensor.timestamp;
+                        time = orientation_sensor.timestamp;
                         if(!initialoriobtained) //obtain initial orientation
                         {
                                 oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
@@ -146,6 +148,7 @@ function startRecording(stream) {
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
                         console.log(timestamp);
+                        timestamps.push(timestamp);
 		        chunks.push(e.data);
                         
 	        };
