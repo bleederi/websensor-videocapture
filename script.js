@@ -132,7 +132,7 @@ function stopRecording(){
 function stabilize(video) {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
         var canvas = document.querySelector('canvas');
         var ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0);
+        ctx.drawImage(videoElement, 0, 0);
         let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         //console.log(video);
 }
