@@ -28,6 +28,13 @@ var chunks = [];
 var videoData = null;
 var interval = null;
 
+var roll = null;
+var pitch = null;
+var yaw = null;
+var accel = {"x": null, "y": null, "z": null};
+var oriInitial = {"roll": null, "pitch": null, "yaw": null};
+var initialoriobtained = false;
+
 //canvas
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
@@ -49,22 +56,21 @@ function startRecording(stream) {
                 try {
                 //Initialize sensors
                 accel_sensor = new Accelerometer();
-                accel_sensor.onchange = () => {
+                accel_sensor.onreading = () => {
+                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                 };
                 accel_sensor.onactivate = () => {
                 };
                 accel_sensor.start();
                 orientation_sensor = new AbsOriSensor();
                 orientation_sensor.onreading = () => {
-                        this.roll = orientation_sensor.roll;
-                        this.pitch = orientation_sensor.pitch;
-                        this.yaw = orientation_sensor.yaw;
-                        if(!this.initialoriobtained) //obtain initial longitude
+                        roll = orientation_sensor.roll;
+                        pitch = orientation_sensor.pitch;
+                        yaw = orientation_sensor.yaw;
+                        if(!this.initialoriobtained) //obtain initial orientation
                         {
-                                let yawInitial = orientation_sensor.yaw;
-                                this.longitudeInitial = -yawInitial * 180 / Math.PI;
-                                longitudeOffset = this.longitudeInitial;
-                                this.initialoriobtained = true;
+                                oriInitial = {"roll:", orientation_sensor.roll, "pitch:", orientation_sensor.pitch, "yaw:", orientation_sensor.yaw};
+                                initialoriobtained = true;
                         }
                 };
                 orientation_sensor.onactivate = () => {
@@ -143,6 +149,7 @@ function stopRecording(){
 }
 
 function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
+        console.log(oriInitial);
         let x = 0;
         let y = 0;
         let width = 100;
@@ -165,6 +172,8 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
     //ctx.putImageData(newImageData,0,0);
+        x = x + oriDiff.x;
+        y = y + oriDiff.y;
 
         requestAnimationFrame(stabilize);
 }
