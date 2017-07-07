@@ -115,7 +115,7 @@ function startRecording(stream) {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
-                        let timestamp = orientation_sensor.timestamp;
+                        timestamp = orientation_sensor.timestamp;
                         if(!initialoriobtained) //obtain initial orientation
                         {
                                 oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
@@ -145,6 +145,7 @@ function startRecording(stream) {
 
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
+                        console.log(timestamp);
 		        chunks.push(e.data);
                         
 	        };
@@ -160,7 +161,6 @@ function startRecording(stream) {
 
 	        mediaRecorder.onstop = function(){
 		        var blob = new Blob(chunks, {type: "video/webm"});
-                        console.log(blob.timestamps);
 		        chunks = [];
 
 		        var videoURL = window.URL.createObjectURL(blob);
