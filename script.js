@@ -236,6 +236,7 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
     //ctx.putImageData(newImageData,0,0);
+        //xD
         x = x + oriDiff.roll;
         y = y + oriDiff.pitch;
         nFrame = nFrame + 1;
