@@ -183,6 +183,8 @@ videoElement.addEventListener('loadedmetadata', function() {
                             console.log(text);
                           };
                         reader.readAsText(blob);*/
+                        console.log(orientationData);
+                        console.log(timestamps);
                         stabilize();
                         //interval=window.setInterval(stabilize,20);
 	        };
@@ -211,13 +213,6 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         let y = 0;
         let width = 100;
         let height = 100;
-                        //Read blob data so we can stabilize the video                        
-                        /*var reader = new FileReader();
-                          reader.onload = function(event){
-                                let text = reader.result;
-                            console.log(text);
-                          };
-                        reader.readAsText(blob);*/
         let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
