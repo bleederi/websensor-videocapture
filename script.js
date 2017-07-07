@@ -146,6 +146,7 @@ function startRecording(stream) {
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
 		        chunks.push(e.data);
+                        
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -159,6 +160,7 @@ function startRecording(stream) {
 
 	        mediaRecorder.onstop = function(){
 		        var blob = new Blob(chunks, {type: "video/webm"});
+                        console.log(blob.timestamps);
 		        chunks = [];
 
 		        var videoURL = window.URL.createObjectURL(blob);
@@ -200,13 +202,19 @@ function stopRecording(){
 }
 
 function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
-        console.log(orientationData);
-        console.log(oriInitial);
+        //console.log(orientationData);
+        //console.log(oriInitial);
         let x = 0;
         let y = 0;
         let width = 100;
         let height = 100;
-        console.log(videoElement);
+                        //Read blob data so we can stabilize the video                        
+                        /*var reader = new FileReader();
+                          reader.onload = function(event){
+                                let text = reader.result;
+                            console.log(text);
+                          };
+                        reader.readAsText(blob);*/
         let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
