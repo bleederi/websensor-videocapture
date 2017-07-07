@@ -141,7 +141,8 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         let y = 0;
         let width = 100;
         let height = 100;
-        ctx.drawImage(videoElement,5,5,260,125)
+        ctx.drawImage(videoElement,5,5,260,125);
+        ctx.beginPath();
         ctx.rect(x,y,width,height);
         ctx.stroke();
 
