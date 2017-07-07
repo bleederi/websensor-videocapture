@@ -26,7 +26,7 @@ var constraints = {audio: true,video: {  width: { min: 640, ideal: 640, max: 640
 var mediaRecorder = null;
 var chunks = [];
 var videoData = null;
-var i = null;
+var interval = null;
 
 //canvas
 var canvas = document.querySelector('canvas');
@@ -115,7 +115,8 @@ function startRecording(stream) {
                             console.log(text);
                           };
                         reader.readAsText(blob);*/
-                        i=window.setInterval(stabilize,20);
+                        stabilize();
+                        //interval=window.setInterval(stabilize,20);
 	        };
 
 	        mediaRecorder.onpause = function(){
@@ -147,6 +148,6 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
                 let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
                 pixeldataArray.push(pixeldata);
         }
-        //requestAnimationFrame(stabilize);
         console.log(pixeldataArray);
+        requestAnimationFrame(stabilize);
 }
