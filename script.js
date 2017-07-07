@@ -36,7 +36,8 @@ var sensorfreq = 60;
 //var pitch = null;
 //var yaw = null;
 var accel = {"x": null, "y": null, "z": null};
-var oriInitial = {"roll": null, "pitch": null, "yaw": null};
+var orientation = {"roll": null, "pitch": null, "yaw": null, "time": null};
+var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var time = null;
 var orientationData = [];       //array to store all the orientation data
 var timestamps = [];
@@ -123,7 +124,7 @@ function startRecording(stream) {
                                 oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 initialoriobtained = true;
                         }
-                        let orientation = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                        orientation = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                 };
                 orientation_sensor.onactivate = () => {
                 };
