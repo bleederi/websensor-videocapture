@@ -104,12 +104,12 @@ function startRecording(stream) {
 		        videoElement.src = videoURL;
 
                         //Read blob data so we can stabilize the video                        
-                        var reader = new FileReader();
+                        /*var reader = new FileReader();
                           reader.onload = function(event){
                                 let text = reader.result;
                             console.log(text);
                           };
-                        reader.readAsText(blob);
+                        reader.readAsText(blob);*/
                         stabilize(blob);
 	        };
 
