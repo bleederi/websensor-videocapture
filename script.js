@@ -69,7 +69,7 @@ function startRecording(stream) {
                         yaw = orientation_sensor.yaw;
                         if(!this.initialoriobtained) //obtain initial orientation
                         {
-                                oriInitial = {"roll:", orientation_sensor.roll, "pitch:", orientation_sensor.pitch, "yaw:", orientation_sensor.yaw};
+                                oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw};
                                 initialoriobtained = true;
                         }
                 };
