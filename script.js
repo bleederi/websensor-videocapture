@@ -109,8 +109,8 @@ function startRecording(stream) {
 		        videoElement.src = videoURL;
                         
                         //resize canvas
-                        canvas.height = videoElement.height;
-                        canvas.width = videoElement.width;
+                        //canvas.height = videoElement.height;
+                        //canvas.width = videoElement.width;
 
                         //Read blob data so we can stabilize the video                        
                         /*var reader = new FileReader();
