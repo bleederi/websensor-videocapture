@@ -116,7 +116,7 @@ function startRecording(stream) {
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
                         let timestamp = orientation_sensor.timestamp;
-                        if(!this.initialoriobtained) //obtain initial orientation
+                        if(!initialoriobtained) //obtain initial orientation
                         {
                                 oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": timestamp};
                                 initialoriobtained = true;
