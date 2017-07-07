@@ -148,7 +148,7 @@ function startRecording(stream) {
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
                         console.log(timestamp);
-                        timestamps.push(timestamp);
+                        timestamps.push(time);
 		        chunks.push(e.data);
                         
 	        };
