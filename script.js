@@ -124,7 +124,6 @@ function startRecording(stream) {
                                 initialoriobtained = true;
                         }
                         let orientation = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                        orientationData.push(orientation);
                 };
                 orientation_sensor.onactivate = () => {
                 };
@@ -147,9 +146,10 @@ function startRecording(stream) {
 
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
-                        console.log(time);
+                        //console.log(time);
                         timestamps.push(time);
 		        chunks.push(e.data);
+                        orientationData.push(orientation);
                         
 	        };
 
