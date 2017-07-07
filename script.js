@@ -206,6 +206,7 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         let y = 0;
         let width = 100;
         let height = 100;
+        console.log(videoElement);
         let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
