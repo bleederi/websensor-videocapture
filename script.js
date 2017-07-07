@@ -154,6 +154,7 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         let y = 0;
         let width = 100;
         let height = 100;
+        let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
         ctx.drawImage(videoElement,5,5);
         ctx.beginPath();
         ctx.rect(x,y,width,height);
@@ -172,8 +173,8 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
     //ctx.putImageData(newImageData,0,0);
-        x = x + oriDiff.x;
-        y = y + oriDiff.y;
+        x = x + oriDiff.roll;
+        y = y + oriDiff.pitch;
 
         requestAnimationFrame(stabilize);
 }
