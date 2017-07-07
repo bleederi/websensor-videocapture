@@ -55,7 +55,7 @@ function startRecording(stream) {
                 };
                 accel_sensor.start();
                 orientation_sensor = new AbsOriSensor();
-                orientation_sensor.onchange = () => {
+                orientation_sensor.onreading = () => {
                         this.roll = orientation_sensor.roll;
                         this.pitch = orientation_sensor.pitch;
                         this.yaw = orientation_sensor.yaw;
@@ -137,7 +137,13 @@ function stopRecording(){
 }
 
 function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
+        let x = 0;
+        let y = 0;
+        let width = 100;
+        let height = 100;
         ctx.drawImage(videoElement,5,5,260,125)
+        ctx.rect(x,y,width,height);
+        ctx.stroke();
 
         //ctx.drawImage(videoElement, 0, 0);
         let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -149,5 +155,9 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
                 pixeldataArray.push(pixeldata);
         }
         console.log(pixeldataArray);
+        //newImageData.data = data;
+    // Draw the pixels onto the visible canvas
+    //ctx.putImageData(newImageData,0,0);
+
         requestAnimationFrame(stabilize);
 }
