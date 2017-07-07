@@ -38,10 +38,12 @@ var sensorfreq = 60;
 var accel = {"x": null, "y": null, "z": null};
 var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
-var time = null;
-var orientationData = [];       //array to store all the orientation data
-var timestamps = [];
 var initialoriobtained = false;
+var orientationData = [];       //array to store all the orientation data
+
+var time = null;
+var timestamps = [];
+var nFrame = 0; //frame number with which we can combine timestamp and frame data
 
 //canvas
 var canvas = document.querySelector('canvas');
@@ -210,6 +212,7 @@ function stopRecording(){
 function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
         //console.log(orientationData);
         //console.log(oriInitial);
+        console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         let x = 0;
         let y = 0;
         let width = 100;
@@ -235,6 +238,6 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
     //ctx.putImageData(newImageData,0,0);
         x = x + oriDiff.roll;
         y = y + oriDiff.pitch;
-
+        nFrame = nFrame + 1;
         requestAnimationFrame(stabilize);
 }
