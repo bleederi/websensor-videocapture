@@ -30,6 +30,7 @@ var interval = null;
 
 var accel_sensor = null;
 var orientation_sensor = null;
+var sensorfreq = 60;
 
 //var roll = null;
 //var pitch = null;
@@ -81,13 +82,13 @@ function startRecording(stream) {
 
                 try {
                 //Initialize sensors
-                accel_sensor = new Accelerometer();
+                /*accel_sensor = new Accelerometer();
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                 };
                 accel_sensor.onactivate = () => {
                 };
-                accel_sensor.start();
+                accel_sensor.start();*/
                 orientation_sensor = new AbsOriSensor();
                 orientation_sensor.onreading = () => {
                         let roll = orientation_sensor.roll;
