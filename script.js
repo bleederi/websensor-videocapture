@@ -118,10 +118,10 @@ function startRecording(stream) {
                         let timestamp = orientation_sensor.timestamp;
                         if(!initialoriobtained) //obtain initial orientation
                         {
-                                oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": timestamp};
+                                oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 initialoriobtained = true;
                         }
-                        let orientation = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": timestamp};
+                        let orientation = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         orientationData.push(orientation);
                 };
                 orientation_sensor.onactivate = () => {
