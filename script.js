@@ -43,6 +43,27 @@ var ctx = canvas.getContext('2d');
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
 
+class AbsOriSensor {
+        constructor() {
+        const sensor = new AbsoluteOrientationSensor({ frequency: sensorfreq });
+        const mat4 = new Float32Array(16);
+        const euler = new Float32Array(3);
+        sensor.onreading = () => {
+                sensor.populateMatrix(mat4);
+                toEulerianAngle(sensor.quaternion, euler);      //From quaternion to Eulerian angles
+                this.roll = euler[0];
+                this.pitch = euler[1];
+                this.yaw = euler[2];
+                if (this.onreading) this.onreading();
+        };
+        sensor.onactivate = () => {
+                if (this.onactivate) this.onactivate();
+        };
+        const start = () => sensor.start();
+        Object.assign(this, { start });
+        }
+}
+
 function errorCallback(error){
 	console.log("error: ", error);	
 }
