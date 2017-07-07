@@ -140,6 +140,13 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
 
         //ctx.drawImage(videoElement, 0, 0);
         let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let pixeldataArray = [];
+        //loop through every pixel
+        for(let i=0; i<imageData.data.length; i = i+4)
+        {
+                let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
+                pixeldataArray.push(pixeldata);
+        }
         //requestAnimationFrame(stabilize);
-        console.log(imageData);
+        console.log(pixeldataArray);
 }
