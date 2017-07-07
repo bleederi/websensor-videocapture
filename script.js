@@ -26,6 +26,7 @@ var constraints = {audio: true,video: {  width: { min: 640, ideal: 640, max: 640
 var mediaRecorder = null;
 var chunks = [];
 var videoData = null;
+var i = null;
 
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
@@ -132,7 +133,9 @@ function stopRecording(){
 function stabilize(video) {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
         var canvas = document.querySelector('canvas');
         var ctx = canvas.getContext('2d');
-        ctx.drawImage(videoElement, 0, 0);
-        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        i=window.setInterval(function() {ctx.drawImage(videoElement,5,5,260,125)},20);},false);
+        //ctx.drawImage(videoElement, 0, 0);
+        //let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        //requestAnimationFrame(stabilize);
         //console.log(video);
 }
