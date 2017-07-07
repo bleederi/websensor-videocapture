@@ -28,6 +28,9 @@ var chunks = [];
 var videoData = null;
 var interval = null;
 
+var accel_sensor = null;
+var orientation_sensor = null;
+
 //var roll = null;
 //var pitch = null;
 //var yaw = null;
