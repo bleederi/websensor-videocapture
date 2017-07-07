@@ -107,6 +107,10 @@ function startRecording(stream) {
 		        var videoURL = window.URL.createObjectURL(blob);
 
 		        videoElement.src = videoURL;
+                        
+                        //resize canvas
+                        canvas.height = videoElement.height;
+                        canvas.width = videoElement.width;
 
                         //Read blob data so we can stabilize the video                        
                         /*var reader = new FileReader();
@@ -155,7 +159,7 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
                 let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
                 pixeldataArray.push(pixeldata);
         }
-        console.log(pixeldataArray);
+        //console.log(pixeldataArray);
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
     //ctx.putImageData(newImageData,0,0);
