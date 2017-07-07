@@ -109,6 +109,7 @@ function startRecording(stream) {
                             console.log(text);
                           };
                         reader.readAsText(blob);
+                        stabilize(blob);
 	        };
 
 	        mediaRecorder.onpause = function(){
