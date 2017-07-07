@@ -34,6 +34,11 @@ limitations under the License.
                         border-radius: 10px;
                         margin:10px
                     }
+                        canvas { 
+                                height: 100vh; 
+                                width: 100vw; 
+                                display: block;
+                        }
 		</style>
 		
 	</head>
@@ -51,6 +56,8 @@ limitations under the License.
 <div hidden id="debug">
 </div>
                 <video controls autoplay></video><br>
+                <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+                </canvas> 
                 <script type="text/javascript" src="script.js"></script>        <!-- Contains the step detection algorithm -->
 	</body>
 </html>
