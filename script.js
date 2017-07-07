@@ -28,6 +28,11 @@ var chunks = [];
 var videoData = null;
 var i = null;
 
+//canvas
+var canvas = document.querySelector('canvas');
+var ctx = canvas.getContext('2d');
+
+//video element
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
 
@@ -110,7 +115,7 @@ function startRecording(stream) {
                             console.log(text);
                           };
                         reader.readAsText(blob);*/
-                        stabilize(blob);
+                        i=window.setInterval(stabilize,20);
 	        };
 
 	        mediaRecorder.onpause = function(){
@@ -130,12 +135,11 @@ function stopRecording(){
 	videoElement.controls = true;
 }
 
-function stabilize(video) {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
-        var canvas = document.querySelector('canvas');
-        var ctx = canvas.getContext('2d');
-        i=window.setInterval(function() {ctx.drawImage(videoElement,5,5,260,125)},20);
+function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
+        ctx.drawImage(videoElement,5,5,260,125)
+
         //ctx.drawImage(videoElement, 0, 0);
-        //let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         //requestAnimationFrame(stabilize);
-        //console.log(video);
+        console.log(imageData);
 }
