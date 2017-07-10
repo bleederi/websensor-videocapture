@@ -81,6 +81,11 @@ class AbsOriSensor {
         }
 }
 
+function update_debug()
+{
+                        document.getElementById("ori").textContent = `${ori.roll} ${ori.pitch} ${ori.yaw}`;
+}
+
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
 function toEulerianAngle(quat, out)
 {
@@ -217,7 +222,7 @@ console.log(x.open('get', blobUrl));*/
                         };*/
                         //ctx.clearRect(0, 0, canvas.width, canvas.height);
                         //stabilize(dataArray2);        //now we can operate on it
-                        //interval=window.setInterval(stabilize,20);
+                        interval=window.setInterval(update_debug,100);
 	        };
 
 	        mediaRecorder.onpause = function(){
