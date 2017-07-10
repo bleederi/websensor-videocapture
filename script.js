@@ -173,12 +173,6 @@ function startRecording(stream) {
 
 	        mediaRecorder.onstart = function(){
                         console.log("Recording started", mediaRecorder.state);
-                        //resize canvas
-videoElement.addEventListener('loadedmetadata', function() {
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-});
-readFrameData(blob, orientationData);    //reads the video into dataArray2
 	        };
 
 	        mediaRecorder.onstop = function(){
@@ -215,7 +209,7 @@ x.onload = function() {
     alert(x.responseText);
 };
 console.log(x.open('get', blobUrl));*/
-                        //readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        readFrameData(blob, orientationData);    //reads the video into dataArray2
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
                                 cancelAnimationFrame(ref);
@@ -257,8 +251,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 /*ctx.beginPath();
                 ctx.rect(x,y,widthR,heightR);
-                ctx.stroke();
-*/
+                ctx.stroke();*/
+
                 //ctx.drawImage(videoElement, 0, 0);
                 let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 /*let pixeldataArray = [];
