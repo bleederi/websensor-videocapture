@@ -254,8 +254,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         //x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.Pi));
-                        x = oriDiff.yaw;
+                        x = 100*oriDiff.yaw;
                         y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
+                        y = 100*oriDiff.roll;
                 }
                 else
                 {          
