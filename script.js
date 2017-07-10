@@ -251,7 +251,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         let y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
                 }
                 else
-                {             
+                {          
                         let x = 0;
                         let y = 0;
                 }                
@@ -272,10 +272,10 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //pixeldataArray.push(pixeldata);
                 }
                 //pixeldataArray.push(imageData);*/
-                if(oriDiff) {
+                if(ori !== undefined) {
                         let timestamp = dataArray[nFrame].time;
                         let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
-                        dataArray2.push(frameData2);        
+                        dataArray2.push(frameData2);
                         //console.log(pixeldataArray);
                         //newImageData.data = data;
                     // Draw the pixels onto the visible canvas
