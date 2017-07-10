@@ -293,7 +293,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         } */ 
         if(nFrame >= orientationData.length-1)
         {
-                //cancelAnimationFrame(ref);
+                cancelAnimationFrame(ref);
         }
 }
 
