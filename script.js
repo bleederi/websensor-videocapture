@@ -242,10 +242,10 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         while(!videoElement.ended)
         {
-                let x = 0;
-                let y = 0;
-                let width = 100;
-                let height = 100;
+                //let x = 0;
+                //let y = 0;
+                //let width = 100;
+                //let height = 100;
                 let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 ctx.beginPath();
@@ -264,7 +264,7 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
                 pixeldataArray.push(imageData);
                 //if(nFrame < dataArray.length) {
                         let timestamp = dataArray[nFrame].time;
-                        let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
+                        let frameData2 = {"imagedata": pixeldataArray, "time": timestamp, "oridiff": oriDiff};
                         //var b = new Object;     //need to push by value
                         //Object.assign(b, frameData2);
                         //dataArray2.push(b);
@@ -288,5 +288,5 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
 function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
         let frame = dataArrayArg[0];      //first frame
         //console.log(frame);
-        ctx.drawImage(frame,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
 }
