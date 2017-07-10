@@ -57,6 +57,7 @@ var videoElement = document.querySelector('video');
 videoElement.controls = false;
 
 var ref = null;
+var extraFrames = 0;
 
 class AbsOriSensor {
         constructor() {
@@ -240,7 +241,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         
         //console.log(orientationData);
         //console.log(oriInitial);
-        nFrame = videoElement.webkitDecodedFrameCount;
+        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
@@ -263,7 +264,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         x = 0;
                         y = 0;
                 }            
-                console.log(x, y); 
+                //console.log(x, y); 
                 let widthR = 100;
                 let heightR = 100;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -306,6 +307,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         } */ 
         if(nFrame >= orientationData.length-1)
         {
+                extraFrames = extraFrames + nFrame;
+                nFrame = 0;
                 //cancelAnimationFrame(ref);
         }
 }
