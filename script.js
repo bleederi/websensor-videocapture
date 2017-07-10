@@ -40,6 +40,8 @@ var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
+var frameData = {"data": null, "time": null, "ori": null};
+var dataArray = [];     //array to store all the combined data
 
 var time = null;
 var timestamps = [];
@@ -151,9 +153,12 @@ function startRecording(stream) {
                         //console.log("Data available", e);
                         //console.log(time);
                         timestamps.push(time);
+                        frameData.time = time;
 		        chunks.push(e.data);
+                        frameData.data = e.data;         
                         orientationData.push(ori);
-                        
+                        frameData.ori = ori;
+                        dataArray.push(frameData);
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -186,8 +191,9 @@ videoElement.addEventListener('loadedmetadata', function() {
                             console.log(text);
                           };
                         reader.readAsText(blob);*/
-                        console.log(orientationData);
-                        console.log(timestamps);
+                        //console.log(orientationData);
+                        //console.log(timestamps);
+                        console.log(dataArray);
                         stabilize();
                         //interval=window.setInterval(stabilize,20);
 	        };
@@ -212,7 +218,8 @@ function stopRecording(){
 function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
         //console.log(orientationData);
         //console.log(oriInitial);
-        console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+        //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+        
         let x = 0;
         let y = 0;
         let width = 100;
