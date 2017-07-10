@@ -242,14 +242,14 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         while(!videoElement.ended)
         {
-                //let x = 0;
-                //let y = 0;
-                //let width = 100;
-                //let height = 100;
+                let x = 0;
+                let y = 0;
+                let widthR = 100;
+                let heightR = 100;
                 let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 ctx.beginPath();
-                ctx.rect(x,y,width,height);
+                ctx.rect(x,y,widthR,heightR);
                 ctx.stroke();
 
                 //ctx.drawImage(videoElement, 0, 0);
