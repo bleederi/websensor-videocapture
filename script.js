@@ -203,7 +203,7 @@ var x = new XMLHttpRequest();
 x.onload = function() {
     alert(x.responseText);
 };
-x.open('get', blobUrl);
+console.log(x.open('get', blobUrl));
                         stabilize();
                         //interval=window.setInterval(stabilize,20);
 	        };
