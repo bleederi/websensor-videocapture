@@ -237,40 +237,43 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         //console.log(orientationData);
         //console.log(oriInitial);
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
-        let x = 0;
-        let y = 0;
-        let width = 100;
-        let height = 100;
-        let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
-        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
-        ctx.beginPath();
-        ctx.rect(x,y,width,height);
-        ctx.stroke();
-
-        //ctx.drawImage(videoElement, 0, 0);
-        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        let pixeldataArray = [];
-        //loop through every pixel
-        for(let i=0; i<imageData.data.length; i = i+4)
+        while(!videoElement.ended)
         {
-                let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
-                pixeldataArray.push(pixeldata);
+                let x = 0;
+                let y = 0;
+                let width = 100;
+                let height = 100;
+                let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
+                ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+                ctx.beginPath();
+                ctx.rect(x,y,width,height);
+                ctx.stroke();
+
+                //ctx.drawImage(videoElement, 0, 0);
+                let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let pixeldataArray = [];
+                //loop through every pixel
+                for(let i=0; i<imageData.data.length; i = i+4)
+                {
+                        let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
+                        pixeldataArray.push(pixeldata);
+                }
+                let timestamp = dataArray[nFrame].time;
+                let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
+                //var b = new Object;     //need to push by value
+                //Object.assign(b, frameData2);
+                //dataArray2.push(b);
+                dataArray2.push(frameData2);        
+                //console.log(pixeldataArray);
+                //newImageData.data = data;
+            // Draw the pixels onto the visible canvas
+            //ctx.putImageData(newImageData,0,0);
+                //xD
+                x = x + oriDiff.roll;
+                y = y + oriDiff.pitch;
+                nFrame = nFrame + 1;
         }
-        let timestamp = dataArray[nFrame].time;
-        let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
-        //var b = new Object;     //need to push by value
-        //Object.assign(b, frameData2);
-        //dataArray2.push(b);
-        dataArray2.push(frameData2);        
-        //console.log(pixeldataArray);
-        //newImageData.data = data;
-    // Draw the pixels onto the visible canvas
-    //ctx.putImageData(newImageData,0,0);
-        //xD
-        x = x + oriDiff.roll;
-        y = y + oriDiff.pitch;
-        nFrame = nFrame + 1;
-        requestAnimationFrame(readFrameData);
+        //requestAnimationFrame(readFrameData);
 }
 
 function stabilize(dataArray) { //Create a stabilized video from the pixel data given as input
