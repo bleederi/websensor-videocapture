@@ -272,7 +272,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //pixeldataArray.push(pixeldata);
                 }
                 //pixeldataArray.push(imageData);*/
-                if(oriDiff !== undefined) {
+                if(oriDiff) {
                         let timestamp = dataArray[nFrame].time;
                         let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
                         dataArray2.push(frameData2);        
