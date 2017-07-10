@@ -277,7 +277,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 ctx.stroke();
 
                 //ctx.drawImage(videoElement, 0, 0);
-                let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                //let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 /*let pixeldataArray = [];
                 //loop through every pixel
                 for(let i=0; i<imageData.data.length; i = i+4)
@@ -287,9 +287,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 }
                 //pixeldataArray.push(imageData);*/
                 if(ori !== undefined) {
-                        let timestamp = dataArray[nFrame].time;
-                        let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
-                        dataArray2.push(frameData2);
+                        //let timestamp = dataArray[nFrame].time;
+                        //let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
+                        //dataArray2.push(frameData2);
                         //console.log(pixeldataArray);
                         //newImageData.data = data;
                     // Draw the pixels onto the visible canvas
