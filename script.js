@@ -278,13 +278,14 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         nFrame = nFrame + 1;
                 //}
         //} 
+        /*
         if(dataArray2.length === timestamps.length)     //now we have read the whole blob - should use callback here instead of if condition
         {
                 console.log("ended");
                 cancelAnimationFrame(ref);
                 console.log(dataArray2);
                 stabilize(dataArray2);
-        }      
+        } */     
         ref = requestAnimationFrame(readFrameData);
 }
 
