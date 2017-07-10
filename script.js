@@ -196,6 +196,14 @@ videoElement.addEventListener('loadedmetadata', function() {
                         //console.log(orientationData);
                         //console.log(timestamps);
                         console.log(dataArray);
+var blobUrl = URL.createObjectURL(blob);
+var x = new XMLHttpRequest();
+// set x.responseType = 'blob' if you want to get a Blob object:
+// x.responseType = 'blob';
+x.onload = function() {
+    alert(x.responseText);
+};
+x.open('get', blobUrl);
                         stabilize();
                         //interval=window.setInterval(stabilize,20);
 	        };
