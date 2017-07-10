@@ -237,23 +237,27 @@ function stopRecording(){
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
         console.log("frame");
+        
         //console.log(orientationData);
         //console.log(oriInitial);
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
         //{
+        let x = 0;
+        let y = 0;
+        let oriDiff = null;
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
                 if(ori !== undefined)
                 {
-                        let oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                        let x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.Pi));
-                        let y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
+                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                        x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.Pi));
+                        y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
                 }
                 else
                 {          
-                        let x = 0;
-                        let y = 0;
+                        x = 0;
+                        y = 0;
                 }                
                 let widthR = 100;
                 let heightR = 100;
