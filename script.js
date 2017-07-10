@@ -232,7 +232,6 @@ console.log(x.open('get', blobUrl));*/
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
-        console.log(dataArray2);
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
@@ -281,6 +280,7 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         {
                 console.log("ended");
                 cancelAnimationFrame(ref);
+                console.log(dataArray2);
                 stabilize(dataArray2);
         }      
         ref = requestAnimationFrame(readFrameData);
@@ -289,5 +289,6 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
 function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
         let frame = dataArrayArg[0];      //first frame
         console.log(frame);
-        ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        //ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.putImageData(frame.imagedata);
 }
