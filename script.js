@@ -241,8 +241,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
         //{
+                if(nFrame < orientationData.length)
+                {
                 let ori = orientationData[nFrame];
                 let oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                }
                 let x = 100*oriDiff.yaw;
                 let y = 100*oriDiff.roll;
                 let widthR = 100;
