@@ -149,8 +149,8 @@ function startRecording(stream) {
 	        mediaRecorder.start(10);
 
 	        var url = window.URL;
-	        videoElement.src = url ? url.createObjectURL(stream) : stream;
-	        videoElement.play();
+	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
+                //videoElement.play();
 
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
@@ -214,8 +214,7 @@ console.log(x.open('get', blobUrl));*/
                                 cancelAnimationFrame(ref);
                         };
                         //ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        console.log(dataArray2);
-                        stabilize(dataArray2);        //now we can operate on it
+                        //stabilize(dataArray2);        //now we can operate on it
                         //interval=window.setInterval(stabilize,20);
 	        };
 
@@ -232,7 +231,8 @@ console.log(x.open('get', blobUrl));*/
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
-        //stabilize(blob);
+        console.log(dataArray2);
+        stabilize(dataArray2);
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
