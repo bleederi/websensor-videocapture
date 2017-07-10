@@ -286,7 +286,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 console.log(dataArray2);
                 stabilize(dataArray2);
         } */ 
-        if(nFrame < orientationData.length)
+        if(nFrame < orientationData.length-1)
         {    
                 nFrame = nFrame + 1;
                 ref = requestAnimationFrame(readFrameData);
