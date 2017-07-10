@@ -196,7 +196,7 @@ videoElement.addEventListener('loadedmetadata', function() {
                         reader.readAsText(blob, "video/webm");*/
                         //console.log(orientationData);
                         //console.log(timestamps);
-                        console.log(dataArray);
+                        //console.log(dataArray);
 /*
 var blobUrl = URL.createObjectURL(blob);
 var x = new XMLHttpRequest();
@@ -207,6 +207,7 @@ x.onload = function() {
 };
 console.log(x.open('get', blobUrl));*/
                         stabilize();
+                        console.log(dataArray2);
                         //interval=window.setInterval(stabilize,20);
 	        };
 
