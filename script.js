@@ -241,7 +241,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         
         //console.log(orientationData);
         //console.log(oriInitial);
-        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
+        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;    //assume no dropped frames
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
@@ -265,8 +265,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         y = 0;
                 }            
                 //console.log(x, y); 
-                let widthR = 100;
-                let heightR = 100;
+                let widthR = 0.8*canvas.width;
+                let heightR = 0.8*canvas.height;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 ctx.beginPath();
