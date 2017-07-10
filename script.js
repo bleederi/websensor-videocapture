@@ -255,7 +255,9 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         }
         let timestamp = dataArray[nFrame].time;
         let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
-        dataArray2.push(frameData2);
+        var b = new Object;     //need to push by value
+        Object.assign(b, frameData2);
+        dataArray2.push(b);
         //console.log(pixeldataArray);
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
