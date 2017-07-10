@@ -187,15 +187,16 @@ videoElement.addEventListener('loadedmetadata', function() {
 });
 
                         //Read blob data so we can stabilize the video                        
-                        /*var reader = new FileReader();
-                          reader.onload = function(event){
+                        var reader = new FileReader();
+                         reader.onload = function(event){
                                 let text = reader.result;
-                            console.log(text);
+                                console.log(text);
                           };
-                        reader.readAsText(blob);*/
+                        reader.readAsText(blob, "video/webm");
                         //console.log(orientationData);
                         //console.log(timestamps);
                         console.log(dataArray);
+/*
 var blobUrl = URL.createObjectURL(blob);
 var x = new XMLHttpRequest();
 // set x.responseType = 'blob' if you want to get a Blob object:
@@ -203,7 +204,7 @@ var x = new XMLHttpRequest();
 x.onload = function() {
     alert(x.responseText);
 };
-console.log(x.open('get', blobUrl));
+console.log(x.open('get', blobUrl));*/
                         stabilize();
                         //interval=window.setInterval(stabilize,20);
 	        };
