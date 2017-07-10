@@ -246,23 +246,23 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
         //{
-        let x = 0;
-        let y = 0;
+        let dx = 0;
+        let dy = 0;
         let oriDiff = null;
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                        x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                        dx = -videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
                         //x = 100*oriDiff.yaw;
-                        y = videoElement.videoWidth*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
+                        dy = -videoElement.videoWidth*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
                         //y = 100*oriDiff.roll;
                 }
                 else
                 {          
-                        x = 0;
-                        y = 0;
+                        dx = 0;
+                        dy = 0;
                 }            
                 //console.log(x, y); 
                 let widthR = 0.8*canvas.width;
@@ -270,7 +270,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 ctx.beginPath();
-                ctx.rect(x,y,widthR,heightR);
+                ctx.rect(dx,dy,widthR,heightR);
                 ctx.stroke();
 
                 //ctx.drawImage(videoElement, 0, 0);
