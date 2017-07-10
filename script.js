@@ -246,7 +246,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         
         //console.log(orientationData);
         //console.log(oriInitial);
-        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;    //assume no dropped frames
+        nFrame = videoElement.webkitDecodedFrameCount + videoElement.webkitDroppedFrameCount - extraFrames;
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
