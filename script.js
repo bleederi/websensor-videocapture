@@ -40,9 +40,6 @@ var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
-var frameData = {"data": null, "time": null, "ori": null};
-var dataArray = [];     //array to store all the combined data
-var dataArray2 = [];     //array to store all the combined data
 
 var time = null;
 var timestamps = [];
@@ -55,8 +52,6 @@ var ctx = canvas.getContext('2d');
 //video element
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
-
-var ref = null;
 
 class AbsOriSensor {
         constructor() {
@@ -128,10 +123,10 @@ function startRecording(stream) {
                         time = orientation_sensor.timestamp;
                         if(!initialoriobtained) //obtain initial orientation
                         {
-                                oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                                oriInitial = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 initialoriobtained = true;
                         }
-                        ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                        ori = {"roll:": orientation_sensor.roll, "pitch:": orientation_sensor.pitch, "yaw:": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                 };
                 orientation_sensor.onactivate = () => {
                 };
@@ -149,21 +144,16 @@ function startRecording(stream) {
 	        mediaRecorder.start(10);
 
 	        var url = window.URL;
-	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
-                //videoElement.play();
+	        videoElement.src = url ? url.createObjectURL(stream) : stream;
+	        videoElement.play();
 
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
                         //console.log(time);
                         timestamps.push(time);
-                        frameData.time = time;
 		        chunks.push(e.data);
-                        frameData.data = e.data;         
                         orientationData.push(ori);
-                        frameData.ori = ori;
-                        var b = new Object;     //need to push by value
-                        Object.assign(b, frameData);
-                        dataArray.push(b);
+                        
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -182,7 +172,6 @@ function startRecording(stream) {
 		        var videoURL = window.URL.createObjectURL(blob);
 
 		        videoElement.src = videoURL;
-                        //videoElement.load();
                         
                         //resize canvas
 videoElement.addEventListener('loadedmetadata', function() {
@@ -190,32 +179,16 @@ videoElement.addEventListener('loadedmetadata', function() {
   canvas.height = videoElement.videoHeight;
 });
 
-                        /*//Read blob data so we can stabilize the video                        
-                        var reader = new FileReader();
-                         reader.onload = function(event){
+                        //Read blob data so we can stabilize the video                        
+                        /*var reader = new FileReader();
+                          reader.onload = function(event){
                                 let text = reader.result;
-                                console.log(text);
+                            console.log(text);
                           };
-                        reader.readAsText(blob, "video/webm");*/
-                        //console.log(orientationData);
-                        //console.log(timestamps);
-                        //console.log(dataArray);
-/*
-var blobUrl = URL.createObjectURL(blob);
-var x = new XMLHttpRequest();
-// set x.responseType = 'blob' if you want to get a Blob object:
-// x.responseType = 'blob';
-x.onload = function() {
-    alert(x.responseText);
-};
-console.log(x.open('get', blobUrl));*/
-                        readFrameData(blob, orientationData);    //reads the video into dataArray2
-                        /*videoElement.onended = function() {
-                                alert("The video has ended");
-                                cancelAnimationFrame(ref);
-                        };*/
-                        //ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        //stabilize(dataArray2);        //now we can operate on it
+                        reader.readAsText(blob);*/
+                        console.log(orientationData);
+                        console.log(timestamps);
+                        stabilize();
                         //interval=window.setInterval(stabilize,20);
 	        };
 
@@ -232,71 +205,40 @@ console.log(x.open('get', blobUrl));*/
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
+        //stabilize(blob);
 	videoElement.controls = true;
 }
-//Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
-function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
+
+function stabilize() {     //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
         //console.log(orientationData);
         //console.log(oriInitial);
-        //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
-        //while(!videoElement.ended)
-        //{
-                //videoElement.playbackRate = 0.5;        //fix playback being too fast
-                let ori = orientationData[nFrame];
-                let oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                let x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.Pi));
-                let y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
-                let widthR = 100;
-                let heightR = 100;
-                ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
-                /*ctx.beginPath();
-                ctx.rect(x,y,widthR,heightR);
-                ctx.stroke();*/
+        console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+        let x = 0;
+        let y = 0;
+        let width = 100;
+        let height = 100;
+        let oriDiff = {"roll": -oriInitial.roll, "pitch": -oriInitial.pitch, "yaw": -oriInitial.yaw};
+        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.beginPath();
+        ctx.rect(x,y,width,height);
+        ctx.stroke();
 
-                //ctx.drawImage(videoElement, 0, 0);
-                let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                /*let pixeldataArray = [];
-                //loop through every pixel
-                for(let i=0; i<imageData.data.length; i = i+4)
-                {
-                        let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
-                        //pixeldataArray.push(pixeldata);
-                }
-                //pixeldataArray.push(imageData);*/
-                //if(nFrame < dataArray.length) {
-                        let timestamp = dataArray[nFrame].time;
-                        let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
-                        //var b = new Object;     //need to push by value
-                        //Object.assign(b, frameData2);
-                        //dataArray2.push(b);
-                        dataArray2.push(frameData2);        
-                        //console.log(pixeldataArray);
-                        //newImageData.data = data;
-                    // Draw the pixels onto the visible canvas
-                    //ctx.putImageData(newImageData,0,0);
-                        //ctx.putImageData(imageData, 0, 0)
-                        //xD
-                //}
-        //} 
-                nFrame = nFrame + 1;
-                ref = requestAnimationFrame(readFrameData);
-        /*
-        if(dataArray2.length === timestamps.length)     //now we have read the whole blob - should use callback here instead of if condition
+        //ctx.drawImage(videoElement, 0, 0);
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let pixeldataArray = [];
+        //loop through every pixel
+        for(let i=0; i<imageData.data.length; i = i+4)
         {
-                console.log("ended");
-                cancelAnimationFrame(ref);
-                console.log(dataArray2);
-                stabilize(dataArray2);
-        } */ 
-        if(nFrame >= orientationData.length-1)
-        {
-                cancelAnimationFrame(ref);
+                let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
+                pixeldataArray.push(pixeldata);
         }
-}
-
-function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
-        let frame = dataArrayArg[0];      //first frame
-        console.log(frame);
-        //ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
-        //ctx.putImageData(frame.imagedata, 0, 0);
+        //console.log(pixeldataArray);
+        //newImageData.data = data;
+    // Draw the pixels onto the visible canvas
+    //ctx.putImageData(newImageData,0,0);
+        //xD
+        x = x + oriDiff.roll;
+        y = y + oriDiff.pitch;
+        nFrame = nFrame + 1;
+        requestAnimationFrame(stabilize);
 }
