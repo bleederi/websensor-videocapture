@@ -186,13 +186,13 @@ videoElement.addEventListener('loadedmetadata', function() {
   canvas.height = videoElement.videoHeight;
 });
 
-                        //Read blob data so we can stabilize the video                        
+                        /*//Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
                          reader.onload = function(event){
                                 let text = reader.result;
                                 console.log(text);
                           };
-                        reader.readAsText(blob, "video/webm");
+                        reader.readAsText(blob, "video/webm");*/
                         //console.log(orientationData);
                         //console.log(timestamps);
                         console.log(dataArray);
