@@ -158,7 +158,9 @@ function startRecording(stream) {
                         frameData.data = e.data;         
                         orientationData.push(ori);
                         frameData.ori = ori;
-                        dataArray.push(frameData);
+                        var b = new Object;     //need to push by value
+                        Object.assign(b, frameData);
+                        dataArray.push(b);
 	        };
 
 	        mediaRecorder.onerror = function(e){
