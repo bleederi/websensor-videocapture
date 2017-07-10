@@ -290,5 +290,5 @@ function stabilize(dataArrayArg) { //Create a stabilized video from the pixel da
         let frame = dataArrayArg[0];      //first frame
         console.log(frame);
         //ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
-        ctx.putImageData(frame.imagedata);
+        ctx.putImageData(frame.imagedata, 0, 0);
 }
