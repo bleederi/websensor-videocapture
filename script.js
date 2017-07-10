@@ -240,7 +240,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         
         //console.log(orientationData);
         //console.log(oriInitial);
-        //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+        console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
         //{
         let x = 0;
@@ -258,7 +258,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 {          
                         x = 0;
                         y = 0;
-                }                
+                }             
                 let widthR = 100;
                 let heightR = 100;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
