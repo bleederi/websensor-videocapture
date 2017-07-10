@@ -210,10 +210,10 @@ x.onload = function() {
 };
 console.log(x.open('get', blobUrl));*/
                         readFrameData(blob, orientationData);    //reads the video into dataArray2
-                        videoElement.onended = function() {
+                        /*videoElement.onended = function() {
                                 alert("The video has ended");
                                 cancelAnimationFrame(ref);
-                        };
+                        };*/
                         //ctx.clearRect(0, 0, canvas.width, canvas.height);
                         //stabilize(dataArray2);        //now we can operate on it
                         //interval=window.setInterval(stabilize,20);
