@@ -244,8 +244,6 @@ function stopRecording(){
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log("frame");
         
-        //console.log(orientationData);
-        //console.log(oriInitial);
         nFrame = videoElement.webkitDecodedFrameCount + videoElement.webkitDroppedFrameCount - extraFrames;
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
@@ -310,6 +308,10 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 console.log(dataArray2);
                 stabilize(dataArray2);
         } */ 
+        if(videoElement.ended)
+        {
+                console.log("ended");
+        }
         if(nFrame >= orientationData.length-1)
         {
                 extraFrames = extraFrames + nFrame;
