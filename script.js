@@ -267,7 +267,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 }
                 //pixeldataArray.push(imageData);*/
                 //if(nFrame < dataArray.length) {
-                        let timestamp = dataArray[nFrame].time;
+                        //let timestamp = dataArray[nFrame].time;
                         //let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
                         //var b = new Object;     //need to push by value
                         //Object.assign(b, frameData2);
