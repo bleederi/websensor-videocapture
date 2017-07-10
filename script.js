@@ -238,7 +238,7 @@ function stopRecording(){
 function readFrameData(blob) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log(orientationData);
         //console.log(oriInitial);
-        console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+        //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
         //{
                 let x = 0;
@@ -290,5 +290,5 @@ function stabilize(dataArrayArg) { //Create a stabilized video from the pixel da
         let frame = dataArrayArg[0];      //first frame
         console.log(frame);
         //ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
-        ctx.putImageData(frame.imagedata, 0, 0);
+        ctx.putImageData(frame.imagedata[0], 0, 0);
 }
