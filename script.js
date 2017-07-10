@@ -244,11 +244,16 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //{
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
-                //let oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                //let x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.Pi));
-                //let y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
-                let x = 0;
-                let y = 0;
+                if(ori !== undefined)
+                {
+                        let oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                        let x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.Pi));
+                        let y = videoElement.videoWidth*(oriDiff.roll/(2*Math.Pi));     //each 2pi means 1 video height
+                }
+                else             
+                        let x = 0;
+                        let y = 0;
+                }                
                 let widthR = 100;
                 let heightR = 100;
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
@@ -293,7 +298,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         } */ 
         if(nFrame >= orientationData.length-1)
         {
-                cancelAnimationFrame(ref);
+                //cancelAnimationFrame(ref);
         }
 }
 
