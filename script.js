@@ -236,7 +236,7 @@ function stopRecording(){
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
-        console.log("frame");
+        //console.log("frame");
         
         //console.log(orientationData);
         //console.log(oriInitial);
