@@ -239,9 +239,9 @@ function stopRecording(){
 function readFrameData(blob) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log(orientationData);
         //console.log(oriInitial);
-        //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
-        while(!videoElement.ended)
-        {
+        console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+        //while(!videoElement.ended)
+        //{
                 let x = 0;
                 let y = 0;
                 let widthR = 100;
@@ -276,7 +276,7 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
                         //xD
                         nFrame = nFrame + 1;
                 //}
-        }       
+        //}       
         ref = requestAnimationFrame(readFrameData);
         if(videoElement.ended)
         {
