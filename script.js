@@ -283,7 +283,7 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         }
 }
 
-function stabilize(dataArray) { //Create a stabilized video from the pixel data given as input
-        let frame = console.log(dataArray[0]);      //first frame
+function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
+        let frame = console.log(dataArrayArg[0]);      //first frame
         //ctx.drawImage(frame,0,0, videoElement.videoWidth, videoElement.videoHeight);
 }
