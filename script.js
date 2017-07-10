@@ -207,8 +207,11 @@ x.onload = function() {
 };
 console.log(x.open('get', blobUrl));*/
                         readFrameData(blob);    //reads the video into dataArray2
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        console.log(dataArray2);
+                        videoElement.onended = function() {
+                                alert("The video has ended");
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                console.log(dataArray2);
+                        }; 
                         //stabilize(dataArray2);        //now we can operate on it
                         //interval=window.setInterval(stabilize,20);
 	        };
