@@ -42,6 +42,7 @@ var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
 var frameData = {"data": null, "time": null, "ori": null};
 var dataArray = [];     //array to store all the combined data
+var dataArray2 = [];     //array to store all the combined data
 
 var time = null;
 var timestamps = [];
@@ -230,7 +231,6 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
         //console.log(orientationData);
         //console.log(oriInitial);
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
-        
         let x = 0;
         let y = 0;
         let width = 100;
@@ -250,6 +250,9 @@ function stabilize() {     //Idea: copy video to canvas, operate on the video, a
                 let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
                 pixeldataArray.push(pixeldata);
         }
+        let timestamp = dataArray[nFrame].time;
+        let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
+        dataArray2.push(frameData2);
         //console.log(pixeldataArray);
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
