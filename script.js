@@ -258,9 +258,10 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         }
         let timestamp = dataArray[nFrame].time;
         let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
-        var b = new Object;     //need to push by value
-        Object.assign(b, frameData2);
-        dataArray2.push(b);
+        //var b = new Object;     //need to push by value
+        //Object.assign(b, frameData2);
+        //dataArray2.push(b);
+        dataArray2.push(frameData2);        
         //console.log(pixeldataArray);
         //newImageData.data = data;
     // Draw the pixels onto the visible canvas
@@ -269,7 +270,7 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
         x = x + oriDiff.roll;
         y = y + oriDiff.pitch;
         nFrame = nFrame + 1;
-        requestAnimationFrame(stabilize);
+        requestAnimationFrame(readFrameData);
 }
 
 function stabilize(dataArray) { //Create a stabilized video from the pixel data given as input
