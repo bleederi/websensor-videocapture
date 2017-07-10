@@ -259,8 +259,9 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
                 for(let i=0; i<imageData.data.length; i = i+4)
                 {
                         let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
-                        pixeldataArray.push(pixeldata);
+                        //pixeldataArray.push(pixeldata);
                 }
+                pixeldataArray.push(imageData);
                 //if(nFrame < dataArray.length) {
                         let timestamp = dataArray[nFrame].time;
                         let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
@@ -287,5 +288,5 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
 function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
         let frame = dataArrayArg[0];      //first frame
         //console.log(frame);
-        //ctx.drawImage(frame,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.drawImage(frame,0,0, videoElement.videoWidth, videoElement.videoHeight);
 }
