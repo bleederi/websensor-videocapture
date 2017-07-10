@@ -261,25 +261,26 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
                         let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
                         pixeldataArray.push(pixeldata);
                 }
-                let timestamp = dataArray[nFrame].time;
-                let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
-                //var b = new Object;     //need to push by value
-                //Object.assign(b, frameData2);
-                //dataArray2.push(b);
-                dataArray2.push(frameData2);        
-                //console.log(pixeldataArray);
-                //newImageData.data = data;
-            // Draw the pixels onto the visible canvas
-            //ctx.putImageData(newImageData,0,0);
-                //xD
-                x = x + oriDiff.roll;
-                y = y + oriDiff.pitch;
-                nFrame = nFrame + 1;
+                if(nFrame <= dataArray.length) {
+                        let timestamp = dataArray[nFrame].time;
+                        let frameData2 = {"pixeldata": pixeldataArray, "time": timestamp};
+                        //var b = new Object;     //need to push by value
+                        //Object.assign(b, frameData2);
+                        //dataArray2.push(b);
+                        dataArray2.push(frameData2);        
+                        //console.log(pixeldataArray);
+                        //newImageData.data = data;
+                    // Draw the pixels onto the visible canvas
+                    //ctx.putImageData(newImageData,0,0);
+                        //xD
+                        nFrame = nFrame + 1;
+                }
         }       
         ref = requestAnimationFrame(readFrameData);
         if(videoElement.ended)
         {
                 console.log("ended");
+                cancelAnimationFrame(ref);
         }
 }
 
