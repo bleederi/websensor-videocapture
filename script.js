@@ -275,7 +275,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                     //ctx.putImageData(newImageData,0,0);
                         //ctx.putImageData(imageData, 0, 0)
                         //xD
-                        nFrame = nFrame + 1;
                 //}
         //} 
         /*
@@ -288,6 +287,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         } */ 
         if(nFrame < orientationData.length)
         {    
+                nFrame = nFrame + 1;
                 ref = requestAnimationFrame(readFrameData);
         }
 }
