@@ -209,7 +209,7 @@ console.log(x.open('get', blobUrl));*/
                         readFrameData(blob);    //reads the video into dataArray2
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
                         console.log(dataArray2);
-                        stabilize(dataArray2);        //now we can operate on it
+                        //stabilize(dataArray2);        //now we can operate on it
                         //interval=window.setInterval(stabilize,20);
 	        };
 
@@ -271,5 +271,5 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
 
 function stabilize(dataArray) { //Create a stabilized video from the pixel data given as input
         let frame = console.log(dataArray[0]);      //first frame
-        ctx.drawImage(frame,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        //ctx.drawImage(frame,0,0, videoElement.videoWidth, videoElement.videoHeight);
 }
