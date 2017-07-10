@@ -241,12 +241,12 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
         //{
-                let x = 0;
-                let y = 0;
-                let widthR = 100;
-                let heightR = 100;
                 let ori = orientationData[nFrame];
                 let oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                let x = 100*oriDiff.yaw;
+                let y = 100*oriDiff.roll;
+                let widthR = 100;
+                let heightR = 100;
                 ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 ctx.beginPath();
                 ctx.rect(x,y,widthR,heightR);
@@ -291,5 +291,5 @@ function stabilize(dataArrayArg) { //Create a stabilized video from the pixel da
         let frame = dataArrayArg[0];      //first frame
         console.log(frame);
         //ctx.drawImage(frame.imagedata,0,0, videoElement.videoWidth, videoElement.videoHeight);
-        ctx.putImageData(frame.imagedata, 0, 0);
+        //ctx.putImageData(frame.imagedata, 0, 0);
 }
