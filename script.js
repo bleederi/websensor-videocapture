@@ -56,6 +56,8 @@ var ctx = canvas.getContext('2d');
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
 
+var ref = null;
+
 class AbsOriSensor {
         constructor() {
         const sensor = new AbsoluteOrientationSensor({ frequency: sensorfreq });
@@ -209,6 +211,7 @@ console.log(x.open('get', blobUrl));*/
                         readFrameData(blob);    //reads the video into dataArray2
                         videoElement.onended = function() {
                                 alert("The video has ended");
+                                cancelAnimationFrame(ref);
                         };
                         //ctx.clearRect(0, 0, canvas.width, canvas.height);
                         console.log(dataArray2);
@@ -272,8 +275,12 @@ function readFrameData(blob) {     //Read video data from blob to object form wi
                 x = x + oriDiff.roll;
                 y = y + oriDiff.pitch;
                 nFrame = nFrame + 1;
+        }       
+        ref = requestAnimationFrame(readFrameData);
+        if(videoElement.ended)
+        {
+                console.log("ended");
         }
-        //requestAnimationFrame(readFrameData);
 }
 
 function stabilize(dataArray) { //Create a stabilized video from the pixel data given as input
