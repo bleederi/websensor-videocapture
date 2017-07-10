@@ -150,7 +150,7 @@ function startRecording(stream) {
 
 	        var url = window.URL;
 	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
-                //videoElement.play();
+                videoElement.play();
 
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
