@@ -247,7 +247,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let y = 100*oriDiff.roll;
                 let widthR = 100;
                 let heightR = 100;
-                ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+                //ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
                 ctx.beginPath();
                 ctx.rect(x,y,widthR,heightR);
                 ctx.stroke();
