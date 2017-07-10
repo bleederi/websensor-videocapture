@@ -260,7 +260,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 {          
                         x = 0;
                         y = 0;
-                }             
+                }            
+                console.log(x, y); 
                 let widthR = 100;
                 let heightR = 100;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
