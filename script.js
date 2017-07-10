@@ -252,7 +252,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 ctx.rect(x,y,widthR,heightR);
                 ctx.stroke();
 
-                //ctx.drawImage(videoElement, 0, 0);
+                ctx.drawImage(videoElement, 0, 0);
                 let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 let pixeldataArray = [];
                 //loop through every pixel
@@ -273,7 +273,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //newImageData.data = data;
                     // Draw the pixels onto the visible canvas
                     //ctx.putImageData(newImageData,0,0);
-                        ctx.putImageData(imageData, 0, 0)
+                        //ctx.putImageData(imageData, 0, 0)
                         //xD
                         nFrame = nFrame + 1;
                 //}
