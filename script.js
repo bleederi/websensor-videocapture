@@ -32,6 +32,7 @@ var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
 var sensorfreq = 60;
+var selectedSensor = null;
 
 //var roll = null;
 //var pitch = null;
@@ -88,6 +89,8 @@ function update_debug()
                         document.getElementById("ori").textContent = `${ori.roll} ${ori.pitch} ${ori.yaw}`;
                         document.getElementById("accel").textContent = `${accel.x} ${accel.y} ${accel.z}`;
                         document.getElementById("rrate").textContent = `${velGyro.x} ${velGyro.y} ${velGyro.z}`;
+                        document.getElementById("selectedSensor").textContent = `${selectedSensor}`;
+                        selectedSensor = document.getElementById("selectSensor").value; 
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
