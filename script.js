@@ -236,7 +236,7 @@ x.onload = function() {
     alert(x.responseText);
 };
 console.log(x.open('get', blobUrl));*/
-                        readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        readFrameData(blob, orientationData, dataArray);    //reads the video into dataArray2
                         console.log(dataArray);
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
@@ -263,7 +263,7 @@ function stopRecording(){
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
-function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
+function readFrameData(blob, oriArray, dataArray) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log("frame");
         
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
@@ -278,7 +278,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 //let ori = orientationData[nFrame];
                 let ori = dataArray[nFrame].ori;
                 let aVel = dataArray[nFrame].aVel;
-                console.log(ori);
+                //console.log(nFrame, ori, aVel);
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
