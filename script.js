@@ -276,10 +276,10 @@ function readFrameData(blob, oriArray, dataArrayL) {     //Read video data from 
         let oriDiff = null;
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
-                if(ori !== undefined)
+                if(ori !== undefined && dataArrayL[nFrame] !== undefined)
                 {
                         //ori = dataArrayL[nFrame].ori;
-                        let aVel = dataArrayL[nFrame].aVel;
+                        //let aVel = dataArrayL[nFrame].aVel;
                         console.log(nFrame, ori, aVel);
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         if(selectedSensor === "acceleration")
