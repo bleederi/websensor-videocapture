@@ -269,6 +269,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         console.log(dataArray);
         console.log(dataL);
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
+        console.log(nFrame);
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
@@ -284,6 +285,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         console.log(dataL);
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
+                let framedata = dataArray[nFrame];
                 if(ori !== undefined && dataArray !== undefined)
                 {
                         //ori = dataArrayL[nFrame].ori;
