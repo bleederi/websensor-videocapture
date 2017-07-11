@@ -43,7 +43,8 @@ var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
-var frameData = {"data": null, "time": null, "ori": null};
+var aVelData = [];
+var frameData = {"data": null, "time": null, "ori": null, "aVel": null};
 var dataArray = [];     //array to store all the combined data
 var dataArray2 = [];     //array to store all the combined data
 
@@ -183,8 +184,10 @@ function startRecording(stream) {
                         frameData.time = time;
 		        chunks.push(e.data);
                         frameData.data = e.data;         
-                        orientationData.push(ori);
+                        //orientationData.push(ori);
+                        //aVelData.push(velGyro);
                         frameData.ori = ori;
+                        frameData.aVel = aVel;
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
                         dataArray.push(b);
@@ -271,7 +274,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let dy = 0;
         let oriDiff = null;
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
-                let ori = orientationData[nFrame];
+                //let ori = orientationData[nFrame];
+                let ori = dataArray[nFrame].ori;
+                let aVel = dataArray[nFrame].aVel;
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
@@ -283,8 +288,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         }
                         else if(selectedSensor === "gyro")
                         {
-                                dx = videoElement.videoWidth*(velGyro.y/(2*Math.PI));
-                                dy = -videoElement.videoHeight*(velGyro.x/(2*Math.PI));     //each 2pi means 1 video height
+                                dx = -videoElement.videoWidth*(aVel.y/(2));
+                                dy = -videoElement.videoHeight*(aVel.x/(2));     //each 2pi means 1 video height
 
                         }
                         else    //orientation - default
