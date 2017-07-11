@@ -185,7 +185,7 @@ function startRecording(stream) {
 		        chunks.push(e.data);
                         frameData.data = e.data;         
                         orientationData.push(ori);
-                        aVelData.push(velGyro);
+                        aVelData.push(aVel);
                         frameData.ori = ori;
                         frameData.aVel = aVel;
                         var b = new Object;     //need to push by value
