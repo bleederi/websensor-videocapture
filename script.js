@@ -184,8 +184,8 @@ function startRecording(stream) {
                         frameData.time = time;
 		        chunks.push(e.data);
                         frameData.data = e.data;         
-                        //orientationData.push(ori);
-                        //aVelData.push(velGyro);
+                        orientationData.push(ori);
+                        aVelData.push(velGyro);
                         frameData.ori = ori;
                         frameData.aVel = aVel;
                         var b = new Object;     //need to push by value
@@ -275,12 +275,12 @@ function readFrameData(blob, oriArray, dataArray) {     //Read video data from b
         let dy = 0;
         let oriDiff = null;
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
-                //let ori = orientationData[nFrame];
-                let ori = dataArray[nFrame].ori;
-                let aVel = dataArray[nFrame].aVel;
-                console.log(nFrame, ori, aVel);
+                let ori = orientationData[nFrame];
                 if(ori !== undefined)
                 {
+                        ori = dataArray[nFrame].ori;
+                        let aVel = dataArray[nFrame].aVel;
+                        console.log(nFrame, ori, aVel);
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         if(selectedSensor === "acceleration")
                         {
