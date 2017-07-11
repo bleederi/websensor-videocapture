@@ -30,6 +30,7 @@ var interval = null;
 
 var accel_sensor = null;
 var orientation_sensor = null;
+var gyroscope = null;
 var sensorfreq = 60;
 
 //var roll = null;
