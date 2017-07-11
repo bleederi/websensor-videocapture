@@ -274,6 +274,9 @@ function readFrameData(blob, oriArray, dataArrayL) {     //Read video data from 
         let dx = 0;
         let dy = 0;
         let oriDiff = null;
+        var dataL = new Object;     //need to push by value
+        Object.assign(dataL, dataArrayL);
+        console.log(dataL);
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
                 if(ori !== undefined && dataArrayL !== undefined)
