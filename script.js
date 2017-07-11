@@ -283,8 +283,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         }
                         else if(selectedSensor === "gyro")
                         {
-                                dx = videoElement.videoWidth*(velGyro.x/(2*Math.PI));
-                                dy = -videoElement.videoHeight*(velGyro.y/(2*Math.PI));     //each 2pi means 1 video height
+                                dx = videoElement.videoWidth*(velGyro.y/(2*Math.PI));
+                                dy = -videoElement.videoHeight*(velGyro.x/(2*Math.PI));     //each 2pi means 1 video height
 
                         }
                         else    //orientation - default
