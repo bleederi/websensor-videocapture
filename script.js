@@ -38,7 +38,7 @@ var selectedSensor = null;
 //var pitch = null;
 //var yaw = null;
 var accel = {"x": null, "y": null, "z": null};
-var velGyro = {"x": null, "y": null, "z": null};
+var aVel = {"x": null, "y": null, "z": null};
 var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
@@ -89,7 +89,7 @@ function update_debug()
 {
                         document.getElementById("ori").textContent = `${ori.roll} ${ori.pitch} ${ori.yaw}`;
                         document.getElementById("accel").textContent = `${accel.x} ${accel.y} ${accel.z}`;
-                        document.getElementById("rrate").textContent = `${velGyro.x} ${velGyro.y} ${velGyro.z}`;
+                        document.getElementById("rrate").textContent = `${aVel.x} ${aVel.y} ${aVel.z}`;
                         document.getElementById("selectedSensor").textContent = `${selectedSensor}`;
 }
 
@@ -140,7 +140,7 @@ function startRecording(stream) {
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
                 gyroscope.onreading = () => {
-                        velGyro = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
+                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
                 };
                 gyroscope.onactivate = () => {
                 };
