@@ -167,6 +167,7 @@ function startRecording(stream) {
                         console.log("Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags.");
                         //this.innerHTML = "Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags";
                 }
+                        interval=window.setInterval(update_debug,100);
 	        //var options = {mimeType: 'video/webm;codecs=vp9'};
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
@@ -244,7 +245,6 @@ console.log(x.open('get', blobUrl));*/
                         };*/
                         //ctx.clearRect(0, 0, canvas.width, canvas.height);
                         //stabilize(dataArray2);        //now we can operate on it
-                        interval=window.setInterval(update_debug,100);
 	        };
 
 	        mediaRecorder.onpause = function(){
@@ -276,7 +276,7 @@ function readFrameData(blob, oriArray, dataArrayL) {     //Read video data from 
         let oriDiff = null;
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
-                if(ori !== undefined && dataArrayL[nFrame] !== undefined)
+                if(ori !== undefined && dataArrayL !== undefined)
                 {
                         //ori = dataArrayL[nFrame].ori;
                         //let aVel = dataArrayL[nFrame].aVel;
