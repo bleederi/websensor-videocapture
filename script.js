@@ -119,13 +119,20 @@ function startRecording(stream) {
 
                 try {
                 //Initialize sensors
-                /*accel_sensor = new Accelerometer();
+                accel_sensor = new Accelerometer();
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                 };
                 accel_sensor.onactivate = () => {
                 };
-                accel_sensor.start();*/
+                accel_sensor.start();
+                gyroscope = new Gyroscope();
+                gyroscope.onreading = () => {
+                        //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                };
+                gyroscope.onactivate = () => {
+                };
+                gyroscope.start();
                 orientation_sensor = new AbsOriSensor();
                 orientation_sensor.onreading = () => {
                         let roll = orientation_sensor.roll;
