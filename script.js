@@ -90,7 +90,11 @@ function update_debug()
                         document.getElementById("accel").textContent = `${accel.x} ${accel.y} ${accel.z}`;
                         document.getElementById("rrate").textContent = `${velGyro.x} ${velGyro.y} ${velGyro.z}`;
                         document.getElementById("selectedSensor").textContent = `${selectedSensor}`;
-                        selectedSensor = document.getElementById("selectSensor").value; 
+}
+
+function selectSensor() {
+        selectedSensor = document.getElementById("selectSensor").value;
+        console.log(selectedSensor, " selected");
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
