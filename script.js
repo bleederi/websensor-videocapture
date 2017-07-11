@@ -278,7 +278,7 @@ function readFrameData(blob, oriArray, dataArray) {     //Read video data from b
                 //let ori = orientationData[nFrame];
                 let ori = dataArray[nFrame].ori;
                 let aVel = dataArray[nFrame].aVel;
-                //console.log(nFrame, ori, aVel);
+                console.log(nFrame, ori, aVel);
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
