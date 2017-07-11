@@ -94,7 +94,7 @@ function update_debug()
 
 function selectSensor() {
         selectedSensor = document.getElementById("selectSensor").value;
-        console.log(selectedSensor, " selected");
+        console.log(selectedSensor, "selected");
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
@@ -130,14 +130,14 @@ function startRecording(stream) {
 
                 try {
                 //Initialize sensors
-                accel_sensor = new Accelerometer();
+                accel_sensor = new Accelerometer({frequency: sensorfreq, includeGravity: false});
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                 };
                 accel_sensor.onactivate = () => {
                 };
                 accel_sensor.start();
-                gyroscope = new Gyroscope();
+                gyroscope = new Gyroscope({frequency: sensorfreq});
                 gyroscope.onreading = () => {
                         velGyro = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
                 };
