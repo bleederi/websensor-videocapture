@@ -237,6 +237,7 @@ x.onload = function() {
 };
 console.log(x.open('get', blobUrl));*/
                         readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        console.log(dataArray);
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
                                 cancelAnimationFrame(ref);
@@ -277,6 +278,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 //let ori = orientationData[nFrame];
                 let ori = dataArray[nFrame].ori;
                 let aVel = dataArray[nFrame].aVel;
+                console.log(ori);
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
