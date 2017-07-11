@@ -36,6 +36,7 @@ var sensorfreq = 60;
 //var pitch = null;
 //var yaw = null;
 var accel = {"x": null, "y": null, "z": null};
+var velGyro = {"x": null, "y": null, "z": null};
 var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
@@ -84,6 +85,8 @@ class AbsOriSensor {
 function update_debug()
 {
                         document.getElementById("ori").textContent = `${ori.roll} ${ori.pitch} ${ori.yaw}`;
+                        document.getElementById("accel").textContent = `${accel.x} ${accel.y} ${accel.z}`;
+                        document.getElementById("rrate").textContent = `${velGyro.x} ${velGyro.y} ${velGyro.z}`;
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
@@ -128,7 +131,7 @@ function startRecording(stream) {
                 accel_sensor.start();
                 gyroscope = new Gyroscope();
                 gyroscope.onreading = () => {
-                        //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        velGyro = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
                 };
                 gyroscope.onactivate = () => {
                 };
