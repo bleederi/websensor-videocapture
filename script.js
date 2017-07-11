@@ -189,9 +189,10 @@ function startRecording(stream) {
                         aVelData.push(aVel);
                         frameData.ori = ori;
                         frameData.aVel = aVel;
-                        var b = new Object;     //need to push by value
-                        Object.assign(b, frameData);
-                        dataArray.push(b);
+                        dataArray.push(frameData);
+                        //var b = new Object;     //need to push by value
+                        //Object.assign(b, frameData);
+                        //dataArray.push(b);
 	        };
 
 	        mediaRecorder.onerror = function(e){
