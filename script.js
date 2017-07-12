@@ -156,12 +156,12 @@ function startRecording(stream) {
 
                 try {
                 //Initialize sensors
-                accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq, includeGravity: true});
-                const gravity =  new LowPassFilterData(accel_sensor, 0.8);
+                accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
+                //const gravity =  new LowPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
-                        gravity.update(accel);
-                        accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
+                        //gravity.update(accel);
+                        //accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
                 };
                 accel_sensor.onactivate = () => {
                 };
@@ -218,7 +218,7 @@ function startRecording(stream) {
                         frameData.ori = ori;
                         frameData.aVel = aVel;
                         frameData.accel = accel;
-                        frameData.accelnog = accelNoG;
+                        //frameData.accelnog = accelNoG;
                         //dataArray.push(frameData);
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
@@ -323,7 +323,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let oriDiff = null;
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
-                let accelerationnog = frameDataL.accelnog;
+                let accelerationnog = frameDataL.accel;
                 velocity = {"x": velocity.x + accelerationnog.x * deltaT/1000, "y": velocity.y + accelerationnog.y * deltaT/1000, "z": velocity.z + accelerationnog.z * deltaT/1000};    //velocity per second TODO: add friction
                 console.log(velocity);
                 /*if(dataL === undefined)
