@@ -296,6 +296,7 @@ videoElement.addEventListener('loadedmetadata', function() {
 });
 videoElement.addEventListener('play', function() { 
         videoElement.play();
+        nFrame = 0;
         readFrameData(blob, orientationData);    //reads the video into dataArray2
 }, false);
 
