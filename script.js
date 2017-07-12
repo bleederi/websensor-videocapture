@@ -212,10 +212,11 @@ function startRecording(stream) {
                         aVelData.push(aVel);
                         frameData.ori = ori;
                         frameData.aVel = aVel;
-                        dataArray.push(frameData);
-                        //var b = new Object;     //need to push by value
-                        //Object.assign(b, frameData);
-                        //dataArray.push(b);
+                        //dataArray.push(frameData);
+                        var b = new Object;     //need to push by value
+                        Object.assign(b, frameData);
+                        dataArray.push(b);
+                        frameData = null;
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -295,8 +296,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         }        
         //console.log(dataL);
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
-        let frameData = dataArray[nFrame];
-        console.log(frameData);
+        let frameDataL = dataArray[nFrame];
+        //console.log(frameDataL);
         //console.log(nFrame);
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
@@ -315,7 +316,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log(dataL);
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
-                let framedata = dataArray[nFrame];
                 if(ori !== undefined && dataArray !== undefined)
                 {
                         //ori = dataArrayL[nFrame].ori;
