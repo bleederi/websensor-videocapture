@@ -18,8 +18,6 @@
  *
 */
 
-
-//TODO: adapt video stabilization to device orientation (frame of acceleration taken into consideration)
 'use strict';
 
 var constraints = {audio: true,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }}};
@@ -371,7 +369,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
                 let acceleration_filtered = null;
-                if(magnitude(frameDataL.accel) > 0.2)    //filter out small values in acceleration (noise)
+                if(magnitude(frameDataL.accel) > 0.5)    //filter out small values in acceleration (noise)
                 {
                         acceleration_filtered = frameDataL.accel;
                 }
@@ -392,29 +390,15 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //ori = dataArrayL[nFrame].ori;
                         //let aVel = dataArrayL[nFrame].aVel;
                         //console.log(nFrame, ori, aVel);
-                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};/*
-                        if(selectedSensor === "acceleration")
-                        {
-                                dx = videoElement.videoWidth*(accel.x/(2*Math.PI));
-                                dy = -videoElement.videoHeight*(accel.y/(2*Math.PI));     //each 2pi means 1 video height
-
-                        }
-                        else if(selectedSensor === "gyro")
-                        {
-                                dx = -videoElement.videoWidth*(aVel.y/(2));
-                                dy = -videoElement.videoHeight*(aVel.x/(2));     //each 2pi means 1 video height
-
-                        }
-                        else    //orientation - default
-                        {*/
-                                //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
-                                dx = -videoElement.videoWidth*velocity.x*deltaT/1000;
+                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                                dx = -(videoElement.videoWidth*(aVel.y/(2)) + videoElement.videoWidth*velocity.x*deltaT/1000;
+                                dy = -videoElement.videoHeight*(aVel.x/(2)) + videoElement.videoHeight*velocity.y*deltaT/1000;
                                 x = x + dx;
-                                //x = 100*oriDiff.yaw;
-                                //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
-                                dy = videoElement.videoHeight*velocity.y*deltaT/1000;       //how many pixels to move
                                 y = y + dy;
+                                //x = 100*oriDiff.yaw;
                                 //y = 100*oriDiff.roll;
+                                //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                                //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
                         //}          
                         //console.log(x, y);
 
