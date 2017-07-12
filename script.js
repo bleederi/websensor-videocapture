@@ -38,6 +38,8 @@ var selectedSensor = null;
 //var pitch = null;
 //var yaw = null;
 var accel = {"x": null, "y": null, "z": null};
+var accelNoG = {"x": null, "y": null, "z": null};
+var gravity = null;
 var aVel = {"x": null, "y": null, "z": null};
 var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
@@ -63,6 +65,18 @@ videoElement.controls = false;
 var ref = null;
 var extraFrames = 0;
 
+class LowPassFilterData {       //https://w3c.github.io/motion-sensors/#pass-filters
+  constructor(reading, bias) {
+    Object.assign(this, { x: reading.x, y: reading.y, z: reading.z });
+    this.bias = bias;
+  }
+        update(reading) {
+                this.x = this.x * this.bias + reading.x * (1 - this.bias);
+                this.y = this.y * this.bias + reading.y * (1 - this.bias);
+                this.z = this.z * this.bias + reading.z * (1 - this.bias);
+        }
+};
+
 class AbsOriSensor {
         constructor() {
         const sensor = new AbsoluteOrientationSensor({ frequency: sensorfreq });
@@ -87,9 +101,10 @@ class AbsOriSensor {
 
 function update_debug()
 {
-                        document.getElementById("ori").textContent = `${ori.roll} ${ori.pitch} ${ori.yaw}`;
-                        document.getElementById("accel").textContent = `${accel.x} ${accel.y} ${accel.z}`;
-                        document.getElementById("rrate").textContent = `${aVel.x} ${aVel.y} ${aVel.z}`;
+                        document.getElementById("ori").textContent = `Orientation: ${ori.roll} ${ori.pitch} ${ori.yaw}`;
+                        document.getElementById("accel").textContent = `Acceleration: ${accel.x} ${accel.y} ${accel.z}`;
+                        document.getElementById("accelnog").textContent = `Linear acceleration (no gravity): ${accelNoG.x} ${accelNoG.y} ${accelNoG.z}`;
+                        document.getElementById("rrate").textContent = `Rotation rate: ${aVel.x} ${aVel.y} ${aVel.z}`;
                         document.getElementById("selectedSensor").textContent = `${selectedSensor}`;
 }
 
@@ -132,8 +147,11 @@ function startRecording(stream) {
                 try {
                 //Initialize sensors
                 accel_sensor = new Accelerometer({frequency: sensorfreq, includeGravity: false});
+                gravity =  new LowPassFilterData(accelerometer, 0.8);
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        gravity.update(accel);
+                        accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
                 };
                 accel_sensor.onactivate = () => {
                 };
