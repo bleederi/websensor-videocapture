@@ -324,7 +324,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
                 let accelerationnog = frameDataL.accelnog;
-                velocity = {"x": velocity.x + accelerationnog.x * deltaT/1000, "y": velocity.y + accelerationnog.y * deltaT/1000, "z": velocity.z + accelerationnog.z * deltaT/1000};    //TODO: add friction
+                velocity = {"x": velocity.x + accelerationnog.x * deltaT/1000, "y": velocity.y + accelerationnog.y * deltaT/1000, "z": velocity.z + accelerationnog.z * deltaT/1000};    //velocity per second TODO: add friction
                 console.log(velocity);
                 /*if(dataL === undefined)
                 {
@@ -353,11 +353,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         else    //orientation - default
                         {*/
                                 //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
-                                dx = videoElement.videoWidth*velocity.x;
+                                dx = -videoElement.videoWidth*velocity.x*deltaT/1000;
                                 x = x + dx;
                                 //x = 100*oriDiff.yaw;
                                 //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
-                                dy = videoElement.videoHeight*velocity.y;       //how many pixels to move
+                                dy = videoElement.videoHeight*velocity.y*deltaT/1000;       //how many pixels to move
                                 y = y + dy;
                                 //y = 100*oriDiff.roll;
                         //}          
