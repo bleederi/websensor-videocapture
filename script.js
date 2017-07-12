@@ -67,6 +67,8 @@ videoElement.controls = false;
 
 var ref = null;
 var extraFrames = 0;
+var x = 0;
+var y = 0;      //position for the square
 
 class LowPassFilterData {       //https://w3c.github.io/motion-sensors/#pass-filters
   constructor(reading, bias) {
@@ -352,9 +354,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         {*/
                                 //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
                                 dx = dx + velocity.x;
+                                x = x + dx;
                                 //x = 100*oriDiff.yaw;
                                 //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
                                 dy = dy + velocity.y;
+                                y = y + dy;
                                 //y = 100*oriDiff.roll;
                         //}          
                         //console.log(x, y);
@@ -396,7 +400,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
-        ctx.rect(dx+0.1*canvas.width,dy+0.1*canvas.height,widthR,heightR);
+        ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         ctx.stroke();
         if(videoElement.ended)
         {
