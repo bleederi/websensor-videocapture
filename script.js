@@ -370,8 +370,15 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let oriDiff = null;
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
-                let accelerationnog = frameDataL.accel;
-                velocity = {"x": velocity.x + accelerationnog.x * deltaT/1000, "y": velocity.y + accelerationnog.y * deltaT/1000, "z": velocity.z + accelerationnog.z * deltaT/1000};    //velocity per second TODO: add friction
+                let acceleration_filtered = null;
+                if(magnitude(frameDataL.accel > 0.2)    //filter out small values in acceleration (noise)
+                {
+                        acceleration_filtered = frameDataL.accel;
+                else
+                {
+                        acceleration_filtered = {"x":0, "y":0, "z": 0};
+                }
+                velocity = {"x": velocity.x + acceleration_filtered.x * deltaT/1000, "y": velocity.y + acceleration_filtered.y * deltaT/1000, "z": velocity.z + acceleration_filtered.z * deltaT/1000};    //velocity per second TODO: add friction
                 console.log(velocity);
                 /*if(dataL === undefined)
                 {
