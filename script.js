@@ -55,6 +55,7 @@ var velocity = {"x": 0, "y": 0, "z": 0};
 var time = null;
 var timestamps = [];
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
+var prevFrame = null;      //previous frame
 
 //canvas
 var canvas = document.querySelector('canvas');
@@ -410,9 +411,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         if(nFrame >= orientationData.length-1)
         {
                 extraFrames = extraFrames + nFrame;
+                previousFrame = null;
                 nFrame = 0;
                 cancelAnimationFrame(ref);
         }
+        previousFrame = nFrame;
         nFrame = nFrame + 1;
         ref = requestAnimationFrame(readFrameData);
 }
