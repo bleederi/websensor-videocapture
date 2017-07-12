@@ -318,9 +318,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let dy = 0;
                 let oriDiff = null;
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
-                console.log(deltaT);
-                let acceleration = frameDataL.accelnog;
-                velocity += {"x": velocity.x + acceleration.x * deltaT, "y": velocity.y + acceleration.y * deltaT, "z": velocity.z + acceleration.z * deltaT};    //TODO: add friction
+                //console.log(deltaT);
+                let accelerationnog = frameDataL.accelnog;
+                velocity = {"x": velocity.x + accelerationnog.x * deltaT, "y": velocity.y + accelerationnog.y * deltaT, "z": velocity.z + accelerationnog.z * deltaT};    //TODO: add friction
                 /*if(dataL === undefined)
                 {
                         var dataL = new Object;     //need to push by value
@@ -349,9 +349,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 }
                                 else    //orientation - default
                                 {
-                                        dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                                        //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                                        dx = dx + velocity.x;
                                         //x = 100*oriDiff.yaw;
-                                        dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
+                                        //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
+                                        dy = dy + velocity.y;
                                         //y = 100*oriDiff.roll;
                                 }
                         }
@@ -409,7 +411,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         {
                 extraFrames = extraFrames + nFrame;
                 nFrame = 0;
-                //cancelAnimationFrame(ref);
+                cancelAnimationFrame(ref);
         }
         nFrame = nFrame + 1;
         ref = requestAnimationFrame(readFrameData);
