@@ -38,6 +38,7 @@ var selectedSensor = null;
 //var pitch = null;
 //var yaw = null;
 var accel = {"x": null, "y": null, "z": null};
+var accel_last = {"x": null, "y": null, "z": null};
 var accelNoG = {"x": null, "y": null, "z": null};
 var gravity = null;
 var aVel = {"x": null, "y": null, "z": null};
@@ -80,6 +81,50 @@ class LowPassFilterData {       //https://w3c.github.io/motion-sensors/#pass-fil
                 this.y = this.y * this.bias + reading.y * (1 - this.bias);
                 this.z = this.z * this.bias + reading.z * (1 - this.bias);
         }
+};
+
+class KalmanFilter {
+  constructor() {
+    this.Q_angle = 0.01;
+    this.Q_gyro = 0.0003;
+    this.R_angle = 0.01;
+
+    this.reset();
+  }
+
+  reset() {
+    this.angle = 0.0;
+    this.bias = 0;
+
+    this.P00 = 0;
+    this.P01 = 0;
+    this.P10 = 0;
+    this.P11 = 0;
+  }
+
+  filter(accAngle, gyroRate, dt) {
+    this.angle += dt * (gyroRate - this.bias);
+
+    this.P00 += -dt * (this.P10 + this.P01) + this.Q_angle * dt;
+    this.P01 += -dt * this.P11;
+    this.P10 += -dt * this.P11;
+    this.P11 += + this.Q_gyro * dt;
+
+    let axis = accAngle - this.angle;
+    let S = this.P00 + this.R_angle;
+    let K0 = this.P00 / S;
+    let K1 = this.P10 / S;
+
+    this.angle += K0 * axis;
+    this.bias  += K1 * axis;
+
+    this.P00 -= K0 * this.P00;
+    this.P01 -= K0 * this.P01;
+    this.P10 -= K1 * this.P00;
+    this.P11 -= K1 * this.P01;
+
+    return this.angle;
+  }
 };
 
 class AbsOriSensor {
@@ -159,7 +204,9 @@ function startRecording(stream) {
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
                 //const gravity =  new LowPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
-                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
+                        accel_last = accel;     //for smoothing the data
                         //gravity.update(accel);
                         //accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
                 };
