@@ -371,7 +371,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
                 let acceleration_filtered = null;
-                if(magnitude(frameDataL.accel > 0.2)    //filter out small values in acceleration (noise)
+                if(magnitude(frameDataL.accel > 0.2))    //filter out small values in acceleration (noise)
                 {
                         acceleration_filtered = frameDataL.accel;
                 }
