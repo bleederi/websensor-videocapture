@@ -350,6 +350,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log("frame");
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
         //console.log(prevFrame, nFrame);
+        let x = 0;
+        let y = 0;
         let dx = 0;
         let dy = 0;
         if(nFrame === 0)
