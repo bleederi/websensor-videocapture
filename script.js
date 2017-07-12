@@ -300,13 +300,14 @@ function stopRecording(){
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log("frame");
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
-        console.log(prevFrame, nFrame);
+        //console.log(prevFrame, nFrame);
         if(nFrame === 0)
         {
                 console.log(dataArray);
         }
         else if(nFrame !== 0 && nFrame !== prevFrame && videoElement.playing)    //all subsequent frames
         {
+                console.log(nFrame);
                 //console.log(dataL);
                 let frameDataL = dataArray[nFrame];
                 //console.log(frameDataL);
