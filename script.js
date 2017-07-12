@@ -46,7 +46,7 @@ var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
 var aVelData = [];
-var frameData = {"data": null, "time": null, "ori": null, "aVel": null};
+var frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null};
 var dataArray = [];     //array to store all the combined data
 var dataArray2 = [];     //array to store all the combined data
 
@@ -214,11 +214,13 @@ function startRecording(stream) {
                         aVelData.push(aVel);
                         frameData.ori = ori;
                         frameData.aVel = aVel;
+                        frameData.accel = accel;
+                        frameData.accelnog = accelNoG;
                         //dataArray.push(frameData);
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
                         dataArray.push(b);
-                        frameData = {"data": null, "time": null, "ori": null, "aVel": null};
+                        frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null};
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -300,6 +302,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         {    
                 //console.log(dataL);
                 nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
+                console.log(nFrame);
                 let frameDataL = dataArray[nFrame];
                 //console.log(frameDataL);
                 //console.log(nFrame);
@@ -312,7 +315,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let oriDiff = null;
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 console.log(deltaT);
-                let acceleration = frameDataL
+                let acceleration = frameDataL.accelnog;
                 velocity += {"x": velocity.x + acceleration.x * deltaT, "y": velocity.y + acceleration.y * deltaT, "z": velocity.z + acceleration.z * deltaT};    //TODO: add friction
                 /*if(dataL === undefined)
                 {
