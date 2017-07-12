@@ -246,6 +246,10 @@ videoElement.addEventListener('loadedmetadata', function() {
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
 });
+videoElement.addEventListener('play', function() { 
+        videoElement.play();
+        readFrameData(blob, orientationData);    //reads the video into dataArray2
+}, false);
 
                         /*//Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
@@ -399,6 +403,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         if(videoElement.ended)
         {
                 console.log("ended");
+                cancelAnimationFrame(ref);
         }
         if(nFrame >= orientationData.length-1)
         {
