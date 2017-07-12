@@ -19,7 +19,7 @@
 */
 
 
-
+//TODO: adapt video stabilization to device orientation (frame of acceleration taken into consideration)
 'use strict';
 
 var constraints = {audio: true,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }}};
@@ -374,6 +374,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 if(magnitude(frameDataL.accel > 0.2)    //filter out small values in acceleration (noise)
                 {
                         acceleration_filtered = frameDataL.accel;
+                }
                 else
                 {
                         acceleration_filtered = {"x":0, "y":0, "z": 0};
