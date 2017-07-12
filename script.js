@@ -284,8 +284,11 @@ function stopRecording(){
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log("frame");
-        console.log(dataArray);
-        console.log(dataL);
+        if(nFrame === 0)
+        {
+                console.log(dataArray);
+        }        
+        //console.log(dataL);
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
         console.log(nFrame);
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
@@ -300,7 +303,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 var dataL = new Object;     //need to push by value
                 Object.assign(dataL, dataArray);
         }
-        console.log(dataL);
+        //console.log(dataL);
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
                 let framedata = dataArray[nFrame];
@@ -308,7 +311,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 {
                         //ori = dataArrayL[nFrame].ori;
                         //let aVel = dataArrayL[nFrame].aVel;
-                        console.log(nFrame, ori, aVel);
+                        //console.log(nFrame, ori, aVel);
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         if(selectedSensor === "acceleration")
                         {
