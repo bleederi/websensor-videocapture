@@ -324,7 +324,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
                 let accelerationnog = frameDataL.accelnog;
-                velocity = {"x": velocity.x + accelerationnog.x * deltaT, "y": velocity.y + accelerationnog.y * deltaT, "z": velocity.z + accelerationnog.z * deltaT};    //TODO: add friction
+                velocity = {"x": velocity.x + accelerationnog.x * deltaT/1000, "y": velocity.y + accelerationnog.y * deltaT/1000, "z": velocity.z + accelerationnog.z * deltaT/1000};    //TODO: add friction
                 console.log(velocity);
                 /*if(dataL === undefined)
                 {
