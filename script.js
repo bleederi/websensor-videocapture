@@ -50,6 +50,8 @@ var frameData = {"data": null, "time": null, "ori": null, "aVel": null};
 var dataArray = [];     //array to store all the combined data
 var dataArray2 = [];     //array to store all the combined data
 
+var velocity = {"x": 0, "y": 0, "z": 0};
+
 var time = null;
 var timestamps = [];
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
@@ -293,101 +295,104 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         if(nFrame === 0)
         {
                 console.log(dataArray);
-        }        
-        //console.log(dataL);
-        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
-        let frameDataL = dataArray[nFrame];
-        //console.log(frameDataL);
-        //console.log(nFrame);
-        //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
-        //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
-        //while(!videoElement.ended)
-        //{
-        let dx = 0;
-        let dy = 0;
-        let oriDiff = null;
-        //let deltaT = dataArray[nFrame] - lastTime;
-        //velocity += acceleration * deltaT - VEL_FRICTION * velocity;
-        /*if(dataL === undefined)
-        {
-                var dataL = new Object;     //need to push by value
-                Object.assign(dataL, dataArray);
-        }*/
-        //console.log(dataL);
-                //videoElement.playbackRate = 0.5;        //fix playback being too fast
-                let ori = orientationData[nFrame];
-                if(ori !== undefined && dataArray !== undefined)
+        }
+        else    //all subsequent frames
+        {    
+                //console.log(dataL);
+                nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
+                let frameDataL = dataArray[nFrame];
+                //console.log(frameDataL);
+                //console.log(nFrame);
+                //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
+                //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
+                //while(!videoElement.ended)
+                //{
+                let dx = 0;
+                let dy = 0;
+                let oriDiff = null;
+                let deltaT = frameDataL.time - dataArray[nFrame-1].time;
+                console.log(deltaT);
+                let acceleration = frameDataL
+                velocity += {"x": velocity.x + acceleration.x * deltaT, "y": velocity.y + acceleration.y * deltaT, "z": velocity.z + acceleration.z * deltaT};    //TODO: add friction
+                /*if(dataL === undefined)
                 {
-                        //ori = dataArrayL[nFrame].ori;
-                        //let aVel = dataArrayL[nFrame].aVel;
-                        //console.log(nFrame, ori, aVel);
-                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                        if(selectedSensor === "acceleration")
+                        var dataL = new Object;     //need to push by value
+                        Object.assign(dataL, dataArray);
+                }*/
+                //console.log(dataL);
+                        //videoElement.playbackRate = 0.5;        //fix playback being too fast
+                        let ori = orientationData[nFrame];
+                        if(ori !== undefined && dataArray !== undefined)
                         {
-                                dx = videoElement.videoWidth*(accel.x/(2*Math.PI));
-                                dy = -videoElement.videoHeight*(accel.y/(2*Math.PI));     //each 2pi means 1 video height
+                                //ori = dataArrayL[nFrame].ori;
+                                //let aVel = dataArrayL[nFrame].aVel;
+                                //console.log(nFrame, ori, aVel);
+                                oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                                if(selectedSensor === "acceleration")
+                                {
+                                        dx = videoElement.videoWidth*(accel.x/(2*Math.PI));
+                                        dy = -videoElement.videoHeight*(accel.y/(2*Math.PI));     //each 2pi means 1 video height
 
+                                }
+                                else if(selectedSensor === "gyro")
+                                {
+                                        dx = -videoElement.videoWidth*(aVel.y/(2));
+                                        dy = -videoElement.videoHeight*(aVel.x/(2));     //each 2pi means 1 video height
+
+                                }
+                                else    //orientation - default
+                                {
+                                        dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                                        //x = 100*oriDiff.yaw;
+                                        dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
+                                        //y = 100*oriDiff.roll;
+                                }
                         }
-                        else if(selectedSensor === "gyro")
+                        else
+                        {          
+                                dx = 0;
+                                dy = 0;
+                        }            
+                        //console.log(x, y); 
+                        let widthR = 0.8*canvas.width;
+                        let heightR = 0.8*canvas.height;
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+                        ctx.beginPath();
+                        ctx.rect(dx+0.1*canvas.width,dy+0.1*canvas.height,widthR,heightR);
+                        ctx.stroke();
+
+                        //ctx.drawImage(videoElement, 0, 0);
+                        //let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                        /*let pixeldataArray = [];
+                        //loop through every pixel
+                        for(let i=0; i<imageData.data.length; i = i+4)
                         {
-                                dx = -videoElement.videoWidth*(aVel.y/(2));
-                                dy = -videoElement.videoHeight*(aVel.x/(2));     //each 2pi means 1 video height
-
+                                let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
+                                //pixeldataArray.push(pixeldata);
                         }
-                        else    //orientation - default
-                        {
-                                dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
-                                //x = 100*oriDiff.yaw;
-                                dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
-                                //y = 100*oriDiff.roll;
+                        //pixeldataArray.push(imageData);*/
+                        if(ori !== undefined) {
+                                //let timestamp = dataArray[nFrame].time;
+                                //let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
+                                //dataArray2.push(frameData2);
+                                //console.log(pixeldataArray);
+                                //newImageData.data = data;
+                            // Draw the pixels onto the visible canvas
+                            //ctx.putImageData(newImageData,0,0);
+                                //ctx.putImageData(imageData, 0, 0)
+                                //xD
                         }
-                }
-                else
-                {          
-                        dx = 0;
-                        dy = 0;
-                }            
-                //console.log(x, y); 
-                let widthR = 0.8*canvas.width;
-                let heightR = 0.8*canvas.height;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
-                ctx.beginPath();
-                ctx.rect(dx+0.1*canvas.width,dy+0.1*canvas.height,widthR,heightR);
-                ctx.stroke();
-
-                //ctx.drawImage(videoElement, 0, 0);
-                //let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                /*let pixeldataArray = [];
-                //loop through every pixel
-                for(let i=0; i<imageData.data.length; i = i+4)
+                //} 
+                /*
+                if(dataArray2.length === timestamps.length)     //now we have read the whole blob - should use callback here instead of if condition
                 {
-                        let pixeldata = {"red": imageData.data[i], "green":imageData.data[i+1], "blue": imageData.data[i+2], "alpha":imageData.data[i+3]};
-                        //pixeldataArray.push(pixeldata);
-                }
-                //pixeldataArray.push(imageData);*/
-                if(ori !== undefined) {
-                        //let timestamp = dataArray[nFrame].time;
-                        //let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
-                        //dataArray2.push(frameData2);
-                        //console.log(pixeldataArray);
-                        //newImageData.data = data;
-                    // Draw the pixels onto the visible canvas
-                    //ctx.putImageData(newImageData,0,0);
-                        //ctx.putImageData(imageData, 0, 0)
-                        //xD
-                }
-        //} 
-                nFrame = nFrame + 1;
-                ref = requestAnimationFrame(readFrameData);
-        /*
-        if(dataArray2.length === timestamps.length)     //now we have read the whole blob - should use callback here instead of if condition
-        {
-                console.log("ended");
-                cancelAnimationFrame(ref);
-                console.log(dataArray2);
-                stabilize(dataArray2);
-        } */ 
+                        console.log("ended");
+                        cancelAnimationFrame(ref);
+                        console.log(dataArray2);
+                        stabilize(dataArray2);
+                } */ 
+        }
         if(videoElement.ended)
         {
                 console.log("ended");
@@ -398,6 +403,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 nFrame = 0;
                 //cancelAnimationFrame(ref);
         }
+        nFrame = nFrame + 1;
+        ref = requestAnimationFrame(readFrameData);
 }
 
 function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
