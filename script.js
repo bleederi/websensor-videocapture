@@ -364,14 +364,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 dx = 0;
                                 dy = 0;
                         }            
-                        //console.log(x, y); 
-                        let widthR = 0.8*canvas.width;
-                        let heightR = 0.8*canvas.height;
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
-                        ctx.beginPath();
-                        ctx.rect(dx+0.1*canvas.width,dy+0.1*canvas.height,widthR,heightR);
-                        ctx.stroke();
+                        //console.log(x, y);
 
                         //ctx.drawImage(videoElement, 0, 0);
                         //let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -404,6 +397,14 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         stabilize(dataArray2);
                 } */ 
         }
+        //render video and rect
+        let widthR = 0.8*canvas.width;
+        let heightR = 0.8*canvas.height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.beginPath();
+        ctx.rect(dx+0.1*canvas.width,dy+0.1*canvas.height,widthR,heightR);
+        ctx.stroke();
         if(videoElement.ended)
         {
                 console.log("ended");
@@ -412,7 +413,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         if(nFrame >= orientationData.length-1)
         {
                 extraFrames = extraFrames + nFrame;
-                previousFrame = null;
+                prevFrame = null;
                 nFrame = 0;
                 cancelAnimationFrame(ref);
         }
