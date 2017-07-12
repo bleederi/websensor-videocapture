@@ -147,7 +147,7 @@ function startRecording(stream) {
                 try {
                 //Initialize sensors
                 accel_sensor = new Accelerometer({frequency: sensorfreq, includeGravity: false});
-                gravity =  new LowPassFilterData(accelerometer, 0.8);
+                gravity =  new LowPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         gravity.update(accel);
