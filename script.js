@@ -295,7 +295,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         }        
         //console.log(dataL);
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
-        console.log(nFrame);
+        let frameData = dataArray[nFrame];
+        console.log(frameData);
+        //console.log(nFrame);
         //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
         //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
         //while(!videoElement.ended)
@@ -303,11 +305,13 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let dx = 0;
         let dy = 0;
         let oriDiff = null;
-        if(dataL === undefined)
+        //let deltaT = dataArray[nFrame] - lastTime;
+        //velocity += acceleration * deltaT - VEL_FRICTION * velocity;
+        /*if(dataL === undefined)
         {
                 var dataL = new Object;     //need to push by value
                 Object.assign(dataL, dataArray);
-        }
+        }*/
         //console.log(dataL);
                 //videoElement.playbackRate = 0.5;        //fix playback being too fast
                 let ori = orientationData[nFrame];
