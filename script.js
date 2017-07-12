@@ -205,8 +205,7 @@ function startRecording(stream) {
                         //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
                         //accel_last = accel;     //for smoothing the data
-                        accel_filtered.update(accel_sensor);
-                        console.log(accel_filtered);                    
+                        accel_filtered.update(accel_sensor);                   
                         accel = accel_filtered;                        
                         //accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
                 };
