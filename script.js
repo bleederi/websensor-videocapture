@@ -418,7 +418,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 cancelAnimationFrame(ref);
         }
         prevFrame = nFrame;
-        nFrame = nFrame + 1;
         ref = requestAnimationFrame(readFrameData);
 }
 
