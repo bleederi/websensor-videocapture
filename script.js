@@ -31,7 +31,7 @@ var interval = null;
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
-var sensorfreq = 60;
+var sensorfreq = 30;
 var selectedSensor = null;
 
 //var roll = null;
@@ -204,8 +204,8 @@ function startRecording(stream) {
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
                 //const gravity =  new LowPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
-                        //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
-                        accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
+                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
                         accel_last = accel;     //for smoothing the data
                         //gravity.update(accel);
                         //accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
