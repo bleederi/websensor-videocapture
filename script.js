@@ -323,6 +323,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 //console.log(deltaT);
                 let accelerationnog = frameDataL.accelnog;
                 velocity = {"x": velocity.x + accelerationnog.x * deltaT, "y": velocity.y + accelerationnog.y * deltaT, "z": velocity.z + accelerationnog.z * deltaT};    //TODO: add friction
+                console.log(velocity);
                 /*if(dataL === undefined)
                 {
                         var dataL = new Object;     //need to push by value
@@ -331,39 +332,31 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 //console.log(dataL);
                         //videoElement.playbackRate = 0.5;        //fix playback being too fast
                         let ori = orientationData[nFrame];
-                        if(ori !== undefined && dataArray !== undefined)
+                        //ori = dataArrayL[nFrame].ori;
+                        //let aVel = dataArrayL[nFrame].aVel;
+                        //console.log(nFrame, ori, aVel);
+                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};/*
+                        if(selectedSensor === "acceleration")
                         {
-                                //ori = dataArrayL[nFrame].ori;
-                                //let aVel = dataArrayL[nFrame].aVel;
-                                //console.log(nFrame, ori, aVel);
-                                oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                                if(selectedSensor === "acceleration")
-                                {
-                                        dx = videoElement.videoWidth*(accel.x/(2*Math.PI));
-                                        dy = -videoElement.videoHeight*(accel.y/(2*Math.PI));     //each 2pi means 1 video height
+                                dx = videoElement.videoWidth*(accel.x/(2*Math.PI));
+                                dy = -videoElement.videoHeight*(accel.y/(2*Math.PI));     //each 2pi means 1 video height
 
-                                }
-                                else if(selectedSensor === "gyro")
-                                {
-                                        dx = -videoElement.videoWidth*(aVel.y/(2));
-                                        dy = -videoElement.videoHeight*(aVel.x/(2));     //each 2pi means 1 video height
-
-                                }
-                                else    //orientation - default
-                                {
-                                        //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
-                                        dx = dx + velocity.x;
-                                        //x = 100*oriDiff.yaw;
-                                        //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
-                                        dy = dy + velocity.y;
-                                        //y = 100*oriDiff.roll;
-                                }
                         }
-                        else
-                        {          
-                                dx = 0;
-                                dy = 0;
-                        }            
+                        else if(selectedSensor === "gyro")
+                        {
+                                dx = -videoElement.videoWidth*(aVel.y/(2));
+                                dy = -videoElement.videoHeight*(aVel.x/(2));     //each 2pi means 1 video height
+
+                        }
+                        else    //orientation - default
+                        {*/
+                                //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                                dx = dx + velocity.x;
+                                //x = 100*oriDiff.yaw;
+                                //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
+                                dy = dy + velocity.y;
+                                //y = 100*oriDiff.roll;
+                        //}          
                         //console.log(x, y);
 
                         //ctx.drawImage(videoElement, 0, 0);
@@ -376,7 +369,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //pixeldataArray.push(pixeldata);
                         }
                         //pixeldataArray.push(imageData);*/
-                        if(ori !== undefined) {
+                        //if(ori !== undefined) {
                                 //let timestamp = dataArray[nFrame].time;
                                 //let frameData2 = {"imagedata": imageData, "time": timestamp, "oridiff": oriDiff};
                                 //dataArray2.push(frameData2);
@@ -386,7 +379,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                             //ctx.putImageData(newImageData,0,0);
                                 //ctx.putImageData(imageData, 0, 0)
                                 //xD
-                        }
+                        //}
                 //} 
                 /*
                 if(dataArray2.length === timestamps.length)     //now we have read the whole blob - should use callback here instead of if condition
