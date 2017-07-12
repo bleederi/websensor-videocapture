@@ -353,11 +353,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         else    //orientation - default
                         {*/
                                 //dx = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
-                                dx = velocity.x;
+                                dx = videoElement.videoWidth*velocity.x;
                                 x = x + dx;
                                 //x = 100*oriDiff.yaw;
                                 //dy = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
-                                dy = velocity.y;
+                                dy = videoElement.videoHeight*velocity.y;       //how many pixels to move
                                 y = y + dy;
                                 //y = 100*oriDiff.roll;
                         //}          
