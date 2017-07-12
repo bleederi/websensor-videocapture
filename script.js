@@ -216,7 +216,7 @@ function startRecording(stream) {
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
                         dataArray.push(b);
-                        frameData = null;
+                        frameData = {"data": null, "time": null, "ori": null, "aVel": null};
 	        };
 
 	        mediaRecorder.onerror = function(e){
