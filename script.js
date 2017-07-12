@@ -38,7 +38,7 @@ var selectedSensor = null;
 var accel = {"x": null, "y": null, "z": null};
 var accel_last = {"x": null, "y": null, "z": null};
 var accelNoG = {"x": null, "y": null, "z": null};
-var gravity = null;
+var accel_filtered = null;
 var aVel = {"x": null, "y": null, "z": null};
 var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
@@ -200,12 +200,13 @@ function startRecording(stream) {
                 try {
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
-                //const gravity =  new LowPassFilterData(accel_sensor, 0.8);
+                const accel_filtered =  new LowPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
-                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
-                        accel_last = accel;     //for smoothing the data
-                        //gravity.update(accel);
+                        //accel_last = accel;     //for smoothing the data
+                        accel_filtered.update(accel_filtered);
+                        accel = accel_filtered;                        
                         //accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
                 };
                 accel_sensor.onactivate = () => {
