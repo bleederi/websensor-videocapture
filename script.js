@@ -301,6 +301,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log("frame");
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
         //console.log(prevFrame, nFrame);
+        let dx = 0;
+        let dy = 0;
         if(nFrame === 0)
         {
                 console.log(dataArray);
@@ -316,8 +318,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
                 //while(!videoElement.ended)
                 //{
-                let dx = 0;
-                let dy = 0;
                 let oriDiff = null;
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
