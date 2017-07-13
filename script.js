@@ -319,7 +319,6 @@ function startRecording(stream) {
 
 		        videoElement.src = videoURLBase + "#xywh=pixel:0,0,320,240";
                         videoElement.load();
-        duration = videoElement.duration;
                         
                         //resize canvas
 videoElement.addEventListener('loadedmetadata', function() {
@@ -328,6 +327,7 @@ videoElement.addEventListener('loadedmetadata', function() {
 });
 videoElement.addEventListener('play', function() { 
         videoElement.play();
+        duration = videoElement.duration;
         nFrame = 0;
         readFrameData(blob, orientationData);    //reads the video into dataArray2
 }, false);
@@ -351,7 +351,7 @@ x.onload = function() {
     alert(x.responseText);
 };
 console.log(x.open('get', blobUrl));*/
-                        readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        //readFrameData(blob, orientationData);    //reads the video into dataArray2
                         //console.log(dataArray);
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
