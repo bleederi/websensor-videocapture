@@ -239,7 +239,7 @@ function startRecording(stream) {
                 gyroscope.onactivate = () => {
                 };
                 gyroscope.start();
-                orientation_sensor = new AbsOriSensor();
+                orientation_sensor = new RelativeOrientationSensor({frequency: sensorfreq});
                 orientation_sensor.onreading = () => {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
