@@ -452,7 +452,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
                         videoElement.currentTime = timeFromStart/1000;
-                        videoElement.play();
                         console.log(videoElement.currentTime);                        
                         //}          
                         //console.log(x, y);
@@ -497,7 +496,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.currentTime = parseFloat(videoElement.duration * Math.random().toFixed(3));
         //videoElement.src = videoURL;
         //videoElement.load();
-        //videoElement.play();
+        videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
