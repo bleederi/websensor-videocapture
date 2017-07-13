@@ -144,9 +144,9 @@ class KalmanFilter {
   }
 };
 
-class AbsOriSensor {
+class OriSensor {
         constructor() {
-        const sensor = new AbsoluteOrientationSensor({ frequency: sensorfreq });
+        const sensor = new OrientationSensor({ frequency: sensorfreq });
         const mat4 = new Float32Array(16);
         const euler = new Float32Array(3);
         sensor.onreading = () => {
@@ -242,7 +242,7 @@ function startRecording(stream) {
                 gyroscope.onactivate = () => {
                 };
                 gyroscope.start();
-                orientation_sensor = new RelativeOrientationSensor({frequency: sensorfreq});
+                orientation_sensor = new OriSensor({frequency: sensorfreq});
                 orientation_sensor.onreading = () => {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
@@ -425,8 +425,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = y + dy;
                                 //x = 100*oriDiff.yaw;
                                 //y = 100*oriDiff.roll;
-                                x = videoElement.videoWidth*(oriDiff.yaw/1000*(Math.PI));
-                                y = -videoElement.videoHeight*(oriDiff.roll/1000*(Math.PI));     //each 2pi means 1 video height
+                                x = videoElement.videoWidth*(oriDiff.yaw/2*(Math.PI));
+                                y = -videoElement.videoHeight*(oriDiff.roll/2*(Math.PI));     //each 2pi means 1 video height
                         //}          
                         //console.log(x, y);
 
