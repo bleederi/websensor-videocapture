@@ -396,7 +396,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         {
                 console.log(nFrame);
                 //console.log(dataL);
-                timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms) 
+                timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms)
+                console.log(timeFromStart);
                 //console.log(frameDataL);
                 //console.log(nFrame);
                 //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
