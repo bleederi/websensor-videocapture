@@ -452,6 +452,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
                         videoElement.currentTime = timeFromStart/1000;
+                        videoElement.play();
                         console.log(videoElement.currentTime);                        
                         //}          
                         //console.log(x, y);
