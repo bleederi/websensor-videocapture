@@ -451,7 +451,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 y = -videoElement.videoHeight*(oriDiff.roll/2*(Math.PI));     //each 2pi means 1 video height
                         let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
-                        videoElement.currentTime = cTime * duration;
+                        videoElement.currentTime = timeFromStart;
                         console.log(videoElement.currentTime);                        
                         //}          
                         //console.log(x, y);
