@@ -358,7 +358,7 @@ x.onload = function() {
     alert(x.responseText);
 };
 console.log(x.open('get', blobUrl));*/
-                        readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        //readFrameData(blob, orientationData);    //reads the video into dataArray2
                         //console.log(dataArray);
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
@@ -451,7 +451,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 y = -videoElement.videoHeight*(oriDiff.roll/2*(Math.PI));     //each 2pi means 1 video height
                         //let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
-                        //videoElement.currentTime = timeFromStart/1000;
+                        //videoElement.pause();
+                        videoElement.currentTime = timeFromStart/1000;
                         //console.log(videoElement.currentTime);                        
                         //}          
                         //console.log(x, y);
@@ -490,7 +491,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
-        let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
+        //let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
         //videoElement.currentTime = timeFromStart/1000;        //TODO: fix currentTime
         //videoElement.currentTime = (nFrame/dataArray.length)*videoElement.duration;
         //videoElement.currentTime = parseFloat(videoElement.duration * Math.random().toFixed(3));
