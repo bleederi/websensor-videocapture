@@ -393,6 +393,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 console.log(nFrame);
                 //console.log(dataL);
                 let frameDataL = dataArray[nFrame];
+                let timeFromStart = frameDataL.time - dataArray[0].time; //time since recording start (in ms) 
                 //console.log(frameDataL);
                 //console.log(nFrame);
                 //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
@@ -472,7 +473,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
         let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
-        videoElement.currentTime = frameDataL.time/1000;
+        videoElement.currentTime = timeFromStart/1000;
         //videoElement.src = videoURL;
         //videoElement.load();
         //videoElement.play();
