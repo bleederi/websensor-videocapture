@@ -146,7 +146,7 @@ class KalmanFilter {
 
 class OriSensor {
         constructor() {
-        const sensor = new OrientationSensor({ frequency: sensorfreq });
+        const sensor = new RelativeOrientationSensor({ frequency: sensorfreq });
         const mat4 = new Float32Array(16);
         const euler = new Float32Array(3);
         sensor.onreading = () => {
