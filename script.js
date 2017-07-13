@@ -310,7 +310,7 @@ function startRecording(stream) {
 		        var blob = new Blob(chunks, {type: "video/webm"});
 		        chunks = [];
 
-		        videoURL = window.URL.createObjectURL(blob) + "#xywh=pixel:0,0,320,240&t=0,2";
+		        videoURL = window.URL.createObjectURL(blob);
 
 		        videoElement.src = videoURL;
                         videoElement.load();
@@ -466,6 +466,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
+        videoURL = window.URL.createObjectURL(blob) + "#xywh=pixel:0,0,320,240";
+        videoElement.src = videoURL;
+        videoElement.load();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
