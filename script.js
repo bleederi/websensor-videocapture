@@ -390,7 +390,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         if(nFrame === 0)
         {
                 console.log(dataArray);
-                timeAtStart = dataArray[0].ori.time;
+                timeAtStart = frameDataL.ori.time;
         }
         else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
         {
