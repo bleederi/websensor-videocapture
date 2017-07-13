@@ -466,7 +466,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
-        let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
+        let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240" + "&t=" + videoElement.currentTime;
         videoElement.src = videoURL;
         videoElement.load();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
