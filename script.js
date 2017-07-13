@@ -219,6 +219,7 @@ function startRecording(stream) {
                 try {
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
+                // Remove drift with a high pass filter.
                 const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
                         //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
@@ -415,14 +416,14 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //console.log(nFrame, ori, aVel);
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         //accelerometer not taken into account atm
-                                //dx = -(videoElement.videoWidth*(aVel.y/(2)) + 0*videoElement.videoWidth*velocity.x)*deltaT/1000;
-                                //dy = (-videoElement.videoHeight*(aVel.x/(2)) + 0*videoElement.videoHeight*velocity.y)*deltaT/1000;
-                                //x = x + dx;
-                                //y = y + dy;
+                                dx = -(videoElement.videoWidth*(aVel.y/(2)) + 0*videoElement.videoWidth*velocity.x)*deltaT/1000;
+                                dy = (-videoElement.videoHeight*(aVel.x/(2)) + 0*videoElement.videoHeight*velocity.y)*deltaT/1000;
+                                x = x + dx;
+                                y = y + dy;
                                 //x = 100*oriDiff.yaw;
                                 //y = 100*oriDiff.roll;
-                                x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
-                                y = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
+                                //x = videoElement.videoWidth*(oriDiff.yaw/(2*Math.PI));
+                                //y = -videoElement.videoHeight*(oriDiff.roll/(2*Math.PI));     //each 2pi means 1 video height
                         //}          
                         //console.log(x, y);
 
