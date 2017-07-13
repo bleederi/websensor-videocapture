@@ -324,7 +324,7 @@ function startRecording(stream) {
 videoElement.addEventListener('loadedmetadata', function() {
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
-        duration = videoElement.duration;
+        //duration = videoElement.duration;
 });
 /*
 videoElement.addEventListener('durationchange', function() {
