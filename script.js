@@ -347,7 +347,7 @@ x.onload = function() {
     alert(x.responseText);
 };
 console.log(x.open('get', blobUrl));*/
-                        //readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        readFrameData(blob, orientationData);    //reads the video into dataArray2
                         //console.log(dataArray);
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
@@ -384,12 +384,12 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         canvas.height = videoElement.videoHeight;
         let dx = 0;
         let dy = 0;
-        var timeAtStart = null;
+        var timeAtStart = oriInitial.time;
         var timeFromStart = null;
         if(nFrame === 0)
         {
                 console.log(dataArray);
-                timeAtStart = dataArray[0].time;
+                //timeAtStart = dataArray[0].time;
         }
         else if(nFrame !== 0 && nFrame !== prevFrame)    //all subsequent frames
         {
@@ -476,7 +476,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
         let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
-        videoElement.currentTime = timeFromStart/1000;
+        //videoElement.currentTime = timeFromStart/1000;
         //videoElement.src = videoURL;
         //videoElement.load();
         //videoElement.play();
