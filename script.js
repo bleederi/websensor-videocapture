@@ -491,7 +491,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.beginPath();
         ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         ctx.stroke();
-        nFrame = nFrame + 1;
         if(videoElement.ended)
         {
                 x = 0;
@@ -509,6 +508,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 cancelAnimationFrame(ref);
         }
         prevFrame = nFrame;
+        nFrame = nFrame + 1;
         ref = requestAnimationFrame(readFrameData);
 }
 
