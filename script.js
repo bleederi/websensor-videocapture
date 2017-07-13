@@ -386,7 +386,7 @@ function stopRecording(){
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
         //console.log("frame");
-        //nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
+        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
         //console.log(prevFrame, nFrame);
         //let x = 0;
         //let y = 0;
@@ -519,7 +519,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 cancelAnimationFrame(ref);
         }
         prevFrame = nFrame;
-        nFrame = nFrame + 1;
+        //nFrame = nFrame + 1;
         ref = requestAnimationFrame(readFrameData);
 }
 
