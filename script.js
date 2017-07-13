@@ -312,7 +312,7 @@ function startRecording(stream) {
 		        videoURL = window.URL.createObjectURL(blob) + "#t=0,2";
 
 		        videoElement.src = videoURL;
-                        //videoElement.load();
+                        videoElement.load();
                         
                         //resize canvas
 videoElement.addEventListener('loadedmetadata', function() {
