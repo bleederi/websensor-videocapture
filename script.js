@@ -69,6 +69,25 @@ var extraFrames = 0;
 var x = 0;
 var y = 0;      //position for the square
 
+class HighPassFilterData {      //https://w3c.github.io/motion-sensors/#pass-filters
+  constructor(reading, cutoffFrequency) {
+    Object.assign(this, { x: reading.x, y: reading.y, z: reading.z });
+    this.cutoff = cutoffFrequency;
+    this.timestamp = reading.timestamp;
+  }
+
+  update(reading) {
+    let dt = reading.timestamp - this.timestamp / 1000;
+    this.timestamp = reading.timestamp;
+
+    for (let i of ["x", "y", "z"]) {
+      let alpha = this.cutoff / (this.cutoff + dt);
+      this[i] = this[i] + alpha * (reading[i] - this[i]);
+    }
+  }
+};
+
+
 class LowPassFilterData {       //https://w3c.github.io/motion-sensors/#pass-filters
   constructor(reading, bias) {
     Object.assign(this, { x: reading.x, y: reading.y, z: reading.z });
@@ -200,7 +219,7 @@ function startRecording(stream) {
                 try {
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
-                const accel_filtered =  new LowPassFilterData(accel_sensor, 0.8);
+                const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
                         //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
