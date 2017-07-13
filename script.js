@@ -476,7 +476,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
         let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
-        videoElement.currentTime = timeFromStart/1000;
+        //videoElement.currentTime = timeFromStart/1000;
         //videoElement.src = videoURL;
         //videoElement.load();
         //videoElement.play();
