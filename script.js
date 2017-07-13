@@ -412,7 +412,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //videoElement.playbackRate = 0.5;        //fix playback being too fast
                         let ori = orientationData[nFrame];
                         //ori = dataArrayL[nFrame].ori;
-                        let aVel = dataArrayL[nFrame].aVel;
+                        let aVel = frameDataL.aVel;
                         //console.log(nFrame, ori, aVel);
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         //accelerometer not taken into account atm
