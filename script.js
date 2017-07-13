@@ -324,12 +324,11 @@ function startRecording(stream) {
 videoElement.addEventListener('loadedmetadata', function() {
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
-});
-        videoElement.play();
         duration = videoElement.duration;
+});
+        //videoElement.play();
 videoElement.addEventListener('play', function() { 
         videoElement.play();
-        duration = videoElement.duration;
         nFrame = 0;
         readFrameData(blob, orientationData);    //reads the video into dataArray2
 }, false);
