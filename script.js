@@ -59,7 +59,8 @@ var prevFrame = null;      //previous frame
 //canvas
 var canvas = document.querySelector('canvas');
 //var canvas = document.createElement('canvas');
-CSS.elementSources.set("pfcanvas", canvas);
+//CSS.elementSources.set("pfcanvas", canvas);
+canvas.src = 
 var ctx = canvas.getContext('2d');
 //var ctx = document.getCSSCanvasContext("2d", "name_of_canvas", 100, 100); - polyfill from https://css-tricks.com/media-fragments-uri-spatial-dimension/
 
@@ -314,7 +315,7 @@ function startRecording(stream) {
 
 		        videoURLBase = window.URL.createObjectURL(blob);
 
-		        videoElement.src = videoURLBase;
+		        videoElement.src = videoURLBase + "#xywh=pixel:0,0,320,240";
                         videoElement.load();
                         
                         //resize canvas
@@ -468,10 +469,10 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
-        let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240" + "&t=" + videoElement.currentTime;
-        videoElement.src = videoURL;
-        videoElement.load();
-        videoElement.play();
+        let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
+        //videoElement.src = videoURL;
+        //videoElement.load();
+        //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
