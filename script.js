@@ -220,13 +220,13 @@ function startRecording(stream) {
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
                 // Remove drift with a high pass filter.
-                const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
+                //const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
                 accel_sensor.onreading = () => {
-                        //accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
                         //accel_last = accel;     //for smoothing the data
-                        accel_filtered.update(accel_sensor);                   
-                        accel = accel_filtered;                        
+                        //accel_filtered.update(accel_sensor);                   
+                        //accel = accel_filtered;                        
                         //accelNoG = {x:accel.x - gravity.x, y:accel.y - gravity.y, z:accel.z - gravity.z};
                 };
                 accel_sensor.onactivate = () => {
@@ -235,6 +235,7 @@ function startRecording(stream) {
                 gyroscope = new Gyroscope({frequency: sensorfreq});
                 const gyro_data = new HighPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
+                        gyro_data.update(gyroscope);
                         aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
                 };
                 gyroscope.onactivate = () => {
