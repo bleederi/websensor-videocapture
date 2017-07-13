@@ -526,8 +526,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.stroke();
         if(videoElement.ended)
         {
-                x = 0;
-                y = 0;
+                //x = 0;
+                //y = 0;
                 console.log("ended");
                 cancelAnimationFrame(ref);
         }
