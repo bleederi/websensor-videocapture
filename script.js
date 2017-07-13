@@ -325,6 +325,8 @@ videoElement.addEventListener('loadedmetadata', function() {
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
 });
+        videoElement.play();
+        duration = videoElement.duration;
 videoElement.addEventListener('play', function() { 
         videoElement.play();
         duration = videoElement.duration;
@@ -351,7 +353,7 @@ x.onload = function() {
     alert(x.responseText);
 };
 console.log(x.open('get', blobUrl));*/
-                        //readFrameData(blob, orientationData);    //reads the video into dataArray2
+                        readFrameData(blob, orientationData);    //reads the video into dataArray2
                         //console.log(dataArray);
                         /*videoElement.onended = function() {
                                 alert("The video has ended");
