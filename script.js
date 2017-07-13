@@ -320,6 +320,8 @@ function startRecording(stream) {
 		        videoElement.src = videoURLBase + "#xywh=pixel:0,0,320,240";
                         videoElement.load();
         duration = videoElement.duration;
+        videoElement.play();
+        nFrame = 0;
                         
                         //resize canvas
 videoElement.addEventListener('loadedmetadata', function() {
@@ -374,7 +376,7 @@ console.log(x.open('get', blobUrl));*/
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
-	videoElement.controls = true;
+	//videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
