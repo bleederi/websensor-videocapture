@@ -521,7 +521,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
-ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 2*canvas.width, 2*canvas.height);
+ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
         //ctx.beginPath();
         //ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         //ctx.stroke();
