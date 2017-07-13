@@ -309,7 +309,7 @@ function startRecording(stream) {
 		        var blob = new Blob(chunks, {type: "video/webm"});
 		        chunks = [];
 
-		        videoURL = window.URL.createObjectURL(blob) + "#t=0,2";
+		        videoURL = window.URL.createObjectURL(blob) + "#t=0,2&xywh=160,120,320,240";
 
 		        videoElement.src = videoURL;
                         videoElement.load();
