@@ -233,8 +233,9 @@ function startRecording(stream) {
                 };
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
+                const gyro_data = new HighPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
-                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
+                        aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
                 };
                 gyroscope.onactivate = () => {
                 };
@@ -393,14 +394,14 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
                 let acceleration_filtered = null;
-                if(magnitude(frameDataL.accel) > 0.5)    //filter out small values in acceleration (noise)
-                {
+                //if(magnitude(frameDataL.accel) > 0.5)    //filter out small values in acceleration (noise)
+                //{
                         acceleration_filtered = frameDataL.accel;
-                }
+                /*}
                 else
                 {
                         acceleration_filtered = {"x":0, "y":0, "z": 0};
-                }
+                }*/
                 velocity = {"x": velocity.x + acceleration_filtered.x * deltaT/1000, "y": velocity.y + acceleration_filtered.y * deltaT/1000, "z": velocity.z + acceleration_filtered.z * deltaT/1000};    //velocity per second TODO: add friction
                 //console.log(velocity);
                 /*if(dataL === undefined)
