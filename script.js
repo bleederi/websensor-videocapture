@@ -447,8 +447,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = y + dy;
                                 //x = 100*oriDiff.yaw;
                                 //y = 100*oriDiff.roll;
-                                x = videoElement.videoWidth*(oriDiff.yaw/2*(Math.PI));
-                                y = -videoElement.videoHeight*(oriDiff.roll/2*(Math.PI));     //each 2pi means 1 video height
+                                x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
+                                y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
                         //let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
                         //videoElement.pause();
