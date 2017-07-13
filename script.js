@@ -456,6 +456,21 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
     var timer = setInterval(function() {
         if (videoElement.readyState ==4 || !videoElement.paused) {
             videoElement.play();
+        //render video and rect
+        let widthR = 0.8*canvas.width;
+        let heightR = 0.8*canvas.height;
+        //let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
+        //videoElement.currentTime = timeFromStart/1000;        //TODO: fix currentTime
+        //videoElement.currentTime = (nFrame/dataArray.length)*videoElement.duration;
+        //videoElement.currentTime = parseFloat(videoElement.duration * Math.random().toFixed(3));
+        //videoElement.src = videoURL;
+        //videoElement.load();
+        //videoElement.play();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.beginPath();
+        ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
+        ctx.stroke();
             clearInterval(timer);
         }       
     }, 50);
