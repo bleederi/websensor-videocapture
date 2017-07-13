@@ -480,7 +480,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
         //videoElement.currentTime = timeFromStart/1000;        //TODO: fix currentTime
         //videoElement.currentTime = (nFrame/dataArray.length)*videoElement.duration;
-        videoElement.currentTime = videoElement.duration * parseFloat(Math.random().toFixed(3));
+        videoElement.currentTime = parseFloat(videoElement.duration * Math.random().toFixed(3));
         //videoElement.src = videoURL;
         //videoElement.load();
         //videoElement.play();
