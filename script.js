@@ -53,6 +53,7 @@ var velocity = {"x": 0, "y": 0, "z": 0};
 
 var time = null;
 var timestamps = [];
+var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 
@@ -255,6 +256,7 @@ function startRecording(stream) {
                         if(!initialoriobtained) //obtain initial orientation
                         {
                                 oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                                timeatstart = orientation_sensor.timestamp;
                                 initialoriobtained = true;
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
@@ -384,13 +386,12 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         canvas.height = videoElement.videoHeight;
         let dx = 0;
         let dy = 0;
-        var timeAtStart = null;
         var timeFromStart = null;
         let frameDataL = dataArray[nFrame];
         if(nFrame === 0)
         {
                 console.log(dataArray);
-                timeAtStart = frameDataL.ori.time;
+                //timeAtStart = frameDataL.ori.time;
         }
         else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
         {
