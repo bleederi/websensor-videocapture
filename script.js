@@ -64,7 +64,7 @@ var ctx = canvas.getContext('2d');
 //video element
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
-var videoURL = null;
+var videoURLBase = null;
 
 var ref = null;
 var extraFrames = 0;
@@ -310,9 +310,9 @@ function startRecording(stream) {
 		        var blob = new Blob(chunks, {type: "video/webm"});
 		        chunks = [];
 
-		        videoURL = window.URL.createObjectURL(blob);
+		        videoURLBase = window.URL.createObjectURL(blob);
 
-		        videoElement.src = videoURL;
+		        videoElement.src = videoURLBase;
                         videoElement.load();
                         
                         //resize canvas
@@ -466,7 +466,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
-        videoURL = window.URL.createObjectURL(blob) + "#xywh=pixel:0,0,320,240";
+        let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
         videoElement.src = videoURL;
         videoElement.load();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
