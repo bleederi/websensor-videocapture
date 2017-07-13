@@ -326,6 +326,9 @@ videoElement.addEventListener('loadedmetadata', function() {
   canvas.height = videoElement.videoHeight;
         duration = videoElement.duration;
 });
+videoElement.addEventListener('durationchange', function() {
+        duration = videoElement.duration;
+});
         //videoElement.play();
 videoElement.addEventListener('play', function() { 
         videoElement.play();
