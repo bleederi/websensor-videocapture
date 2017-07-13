@@ -440,7 +440,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = 100*oriDiff.roll;
                                 x = videoElement.videoWidth*(oriDiff.yaw/2*(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/2*(Math.PI));     //each 2pi means 1 video height
-                        videoElement.currentTime = (nFrame/dataArray.length)*videoElement.duration;
+                        videoElement.currentTime = parseFloat((nFrame/dataArray.length*videoElement.duration).toFixed(3));
                         //}          
                         //console.log(x, y);
 
