@@ -451,8 +451,14 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 y = -videoElement.videoHeight*(oriDiff.roll/2*(Math.PI));     //each 2pi means 1 video height
                         //let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
-                        //videoElement.pause();
+                        videoElement.pause();
                         videoElement.currentTime = timeFromStart/1000;
+    var timer = setInterval(function() {
+        if (videoElement.paused && videoElement.readyState ==4 || !videoElement.paused) {
+            videoElement.play();
+            clearInterval(timer);
+        }       
+    }, 50);
                         //console.log(videoElement.currentTime);                        
                         //}          
                         //console.log(x, y);
