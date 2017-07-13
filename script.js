@@ -58,10 +58,10 @@ var prevFrame = null;      //previous frame
 
 //canvas
 var canvas = document.querySelector('canvas');
+//var canvas = document.createElement('canvas');
+CSS.elementSources.set("pfcanvas", canvas);
 var ctx = canvas.getContext('2d');
 //var ctx = document.getCSSCanvasContext("2d", "name_of_canvas", 100, 100); - polyfill from https://css-tricks.com/media-fragments-uri-spatial-dimension/
-var canvas = document.createElement('canvas');
-CSS.elementSources.set("pfcanvas", canvas);
 
 //video element
 var videoElement = document.querySelector('video');
