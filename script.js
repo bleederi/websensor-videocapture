@@ -380,21 +380,23 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //let x = 0;
         //let y = 0;
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
         let dx = 0;
         let dy = 0;
+        var timeAtStart = null;
         var timeFromStart = null;
         if(nFrame === 0)
         {
                 console.log(dataArray);
+                timeAtStart = dataArray[0].time;
         }
         else if(nFrame !== 0 && nFrame !== prevFrame)    //all subsequent frames
         {
                 console.log(nFrame);
                 //console.log(dataL);
                 let frameDataL = dataArray[nFrame];
-                timeFromStart = frameDataL.time - dataArray[0].time; //time since recording start (in ms) 
+                timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms) 
                 //console.log(frameDataL);
                 //console.log(nFrame);
                 //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
