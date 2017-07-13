@@ -390,9 +390,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log(prevFrame, nFrame);
         //let x = 0;
         //let y = 0;
-        //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
-        canvas.width = videoElement.videoWidth;
-        canvas.height = videoElement.videoHeight;
         let dx = 0;
         let dy = 0;
         var timeFromStart = null;
@@ -449,6 +446,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = 100*oriDiff.roll;
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
+        //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
+        //canvas.width = videoElement.videoWidth;
+        //canvas.height = videoElement.videoHeight;
                         //let cTime = (nFrame/dataArray.length);
                         //console.log(cTime, duration);
                         //videoElement.pause();
@@ -520,7 +520,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.load();
         //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        //ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR);
         ctx.beginPath();
         ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         ctx.stroke();
