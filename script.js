@@ -478,10 +478,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
         let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
-        videoElement.currentTime = timeFromStart/1000;        //TODO: fix currentTime
+        //videoElement.currentTime = timeFromStart/1000;        //TODO: fix currentTime
         //videoElement.currentTime = (nFrame/dataArray.length)*videoElement.duration;
+        videoElement.currentTime = videoElement.duration * Math.random();
         //videoElement.src = videoURL;
-        videoElement.load();
+        //videoElement.load();
         //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
