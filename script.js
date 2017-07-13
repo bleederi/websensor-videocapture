@@ -233,10 +233,11 @@ function startRecording(stream) {
                 };
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
-                const gyro_data = new HighPassFilterData(gyroscope, 0.8);
+                //const gyro_data = new HighPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
-                        gyro_data.update(gyroscope);
-                        aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
+                        //gyro_data.update(gyroscope);
+                        //aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
+                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
                 };
                 gyroscope.onactivate = () => {
                 };
