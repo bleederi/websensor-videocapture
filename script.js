@@ -533,8 +533,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         }
         if(nFrame >= orientationData.length-1)
         {
-                x = 0;
-                y = 0;
+                //x = 0;
+                //y = 0;
                 extraFrames = extraFrames + nFrame;
                 prevFrame = null;
                 nFrame = 0;
