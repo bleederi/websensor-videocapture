@@ -63,6 +63,7 @@ var ctx = canvas.getContext('2d');
 //video element
 var videoElement = document.querySelector('video');
 videoElement.controls = false;
+var videoURL = null;
 
 var ref = null;
 var extraFrames = 0;
@@ -308,7 +309,7 @@ function startRecording(stream) {
 		        var blob = new Blob(chunks, {type: "video/webm"});
 		        chunks = [];
 
-		        var videoURL = window.URL.createObjectURL(blob);
+		        videoURL = window.URL.createObjectURL(blob) + "#t=0,2";
 
 		        videoElement.src = videoURL;
                         //videoElement.load();
