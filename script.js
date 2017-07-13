@@ -386,16 +386,16 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let dy = 0;
         var timeAtStart = oriInitial.time;
         var timeFromStart = null;
+        let frameDataL = dataArray[nFrame];
         if(nFrame === 0)
         {
                 console.log(dataArray);
                 //timeAtStart = dataArray[0].time;
         }
-        else if(nFrame !== 0 && nFrame !== prevFrame && dataArray[nFrame] !== undefined)    //all subsequent frames
+        else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
         {
                 console.log(nFrame);
                 //console.log(dataL);
-                let frameDataL = dataArray[nFrame];
                 timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms) 
                 //console.log(frameDataL);
                 //console.log(nFrame);
