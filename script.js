@@ -240,7 +240,7 @@ function startRecording(stream) {
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
                 // Remove drift with a high pass filter.
                 const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
-                console.log(accel_filtered);
+                //console.log(accel_filtered);  //null, null, null
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
@@ -262,7 +262,7 @@ function startRecording(stream) {
                 gyroscope.onactivate = () => {
                 };
                 gyroscope.start();
-                orientation_sensor = new OriSensor({frequency: sensorfreq});
+                orientation_sensor = new RelativeOrientationSensor({frequency: sensorfreq});
                 //Low-pass filter the orientation data
                 const ori_filtered =  new LowPassFilterOrientation(orientation_sensor, 0.8);
                 console.log(ori_filtered);
@@ -278,7 +278,7 @@ function startRecording(stream) {
                                 initialoriobtained = true;
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                        //console.log(orientation_sensor);
+                        console.log(orientation_sensor);
                         ori_filtered.update(orientation_sensor);
                         //console.log(ori_filtered);
                         //ori.roll = ori_filtered.roll;
