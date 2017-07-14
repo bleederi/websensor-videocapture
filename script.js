@@ -418,6 +418,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //let y = 0;
         let dx = 0;
         let dy = 0;
+        let angle = null;
         var timeFromStart = null;
         let frameDataL = dataArray[nFrame];
         if(nFrame === 0)
@@ -473,6 +474,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //TODO: The stabilization box needs to have an angle
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
+                                angle = oriDiff.yaw*Math.PI/180;
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
         //canvas.height = videoElement.videoHeight;
@@ -547,7 +549,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.load();
         //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.rotate(oriDiff.yaw*Math.PI/180);
+        ctx.rotate(angle);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
