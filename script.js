@@ -283,10 +283,10 @@ function startRecording(stream) {
                         ori_filtered.update(ori);
                         //console.log(ori_filtered);
                         //ori = ori_filtered;
-                        ori.roll = ori_filtered.roll;
-                        ori.pitch = ori_filtered.pitch;
-                        ori.yaw = ori_filtered.yaw;
-                        ori.time = orientation_sensor.timestamp;
+                        //ori.roll = ori_filtered.roll;
+                        //ori.pitch = ori_filtered.pitch;
+                        //ori.yaw = ori_filtered.yaw;
+                        //ori.time = orientation_sensor.timestamp;
                         //console.log(ori_filtered);
                 };
                 orientation_sensor.onactivate = () => {
@@ -476,9 +476,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = 100*oriDiff.roll;
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
-                                //angle = (oriDiff.yaw/Math.PI)*180;
                                 angle = oriDiff.yaw;
-                                console.log(x, y, angle);
+                                //console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
         //canvas.height = videoElement.videoHeight;
