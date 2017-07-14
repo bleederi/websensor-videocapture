@@ -57,6 +57,7 @@ var beta = 0;
 var gamma = 0;
 var accl = null;
 
+var timeInitial = null;
 var time = null;
 var timestamp = null;
 var timestamps = [];
@@ -243,6 +244,7 @@ function startDemo () {
 function startRecording(stream) {
 
                 try {
+                timeInitial = Date.now();
                 const bias = 0.98;
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
@@ -303,6 +305,7 @@ function startRecording(stream) {
                                 oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 timeAtStart = orientation_sensor.timestamp;
                                 initialoriobtained = true;
+                                console.log(timeInitial, timeAtStart);
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         //console.log(orientation_sensor);
