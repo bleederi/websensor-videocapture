@@ -57,6 +57,7 @@ var beta = 0;
 var gamma = 0;
 
 var time = null;
+var timestamp = null;
 var timestamps = [];
 var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
@@ -241,7 +242,6 @@ function startDemo () {
 function startRecording(stream) {
 
                 try {
-                let timestamp = null;
                 const bias = 0.98;
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
