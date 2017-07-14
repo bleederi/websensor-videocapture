@@ -75,6 +75,7 @@ var ref = null;
 var extraFrames = 0;
 var x = 0;
 var y = 0;      //position for the square
+var angle = 0;
 
 class HighPassFilterData {      //https://w3c.github.io/motion-sensors/#pass-filters
   constructor(reading, cutoffFrequency) {
@@ -420,7 +421,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //let y = 0;
         let dx = 0;
         let dy = 0;
-        let angle = null;
+        //let angle = null;
         var timeFromStart = null;
         let frameDataL = dataArray[nFrame];
         if(nFrame === 0)
@@ -473,10 +474,10 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = y + dy;
                                 //x = 100*oriDiff.yaw;
                                 //y = 100*oriDiff.roll;
-                        //TODO: The stabilization box needs to have an angle
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
                                 angle = -oriDiff.yaw*Math.PI/180;
+                                console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
         //canvas.height = videoElement.videoHeight;
