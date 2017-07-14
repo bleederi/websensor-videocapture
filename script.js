@@ -586,19 +586,20 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.load();
         //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
         ctx.translate(trans.x, trans.y);
         ctx.rotate(-angle);
         //console.log(angle);
         //ctx.beginPath();
-        //ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
+        ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
+        ctx.clip();
         //ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         //ctx.rect((x+0.1*canvas.width)+(x*Math.cos(angle) - y*Math.sin(angle)),y+0.1*canvas.height,widthR,heightR);        //rotated and translated rect
         //ctx.stroke();
         //ctx.drawImage(videoElement,-widthR/2, -heightR/2, widthR, heightR, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, -trans.x, -trans.y, 1.1*canvas.width, 1.1*canvas.height);
+        //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, -trans.x, -trans.y, 1.1*canvas.width, 1.1*canvas.height);
         ctx.rotate(angle);
         ctx.translate(-trans.x, -trans.y);
         }
@@ -609,7 +610,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 console.log("ended");
                 cancelAnimationFrame(ref);
         }
-        if(nFrame >= orientationData.length-1)
+        else if(nFrame >= orientationData.length-1)
         {
                 //x = 0;
                 //y = 0;
@@ -618,9 +619,12 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                 nFrame = 0;
                 cancelAnimationFrame(ref);
         }
-        prevFrame = nFrame;
-        //nFrame = nFrame + 1;
-        ref = requestAnimationFrame(readFrameData);
+        else
+        {
+                prevFrame = nFrame;
+                //nFrame = nFrame + 1;
+                ref = requestAnimationFrame(readFrameData);
+        }
 }
 
 function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
