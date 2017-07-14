@@ -264,6 +264,7 @@ function startRecording(stream) {
                 orientation_sensor = new OriSensor({frequency: sensorfreq});
                 //Low-pass filter the orientation data
                 const ori_filtered =  new LowPassFilterOrientation(orientation_sensor, 0.8);
+                console.log(ori_filtered);
                 orientation_sensor.onreading = () => {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
@@ -276,9 +277,9 @@ function startRecording(stream) {
                                 initialoriobtained = true;
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                        console.log(orientation_sensor);
+                        //console.log(orientation_sensor);
                         ori_filtered.update(orientation_sensor);
-                        console.log(ori_filtered);
+                        //console.log(ori_filtered);
                         //ori.roll = ori_filtered.roll;
                         //ori.pitch = ori_filtered.pitch;
                         //ori.yaw = ori_filtered.yaw;
