@@ -277,7 +277,10 @@ function startRecording(stream) {
                         }
                         //ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         ori_filtered.update(orientation_sensor);
-                        ori = ori_filtered;
+                        ori.roll = ori_filtered.roll;
+                        ori.pitch = ori_filtered.pitch;
+                        ori.yaw = ori_filtered.yaw;
+                        ori.time = orientation_sensor.timestamp;
                 };
                 orientation_sensor.onactivate = () => {
                 };
