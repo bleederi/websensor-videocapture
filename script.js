@@ -261,7 +261,7 @@ function startRecording(stream) {
                 gyroscope.onactivate = () => {
                 };
                 gyroscope.start();
-                orientation_sensor = new RelativeOrientationSensor({frequency: sensorfreq});
+                orientation_sensor = new OriSensor({frequency: sensorfreq});
                 //Low-pass filter the orientation data
                 const ori_filtered =  new LowPassFilterOrientation(orientation_sensor, 0.8);
                 orientation_sensor.onreading = () => {
@@ -276,7 +276,8 @@ function startRecording(stream) {
                                 initialoriobtained = true;
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                        //ori_filtered.update(orientation_sensor);
+                        console.log(orientation_sensor);
+                        ori_filtered.update(orientation_sensor);
                         //ori.roll = ori_filtered.roll;
                         //ori.pitch = ori_filtered.pitch;
                         //ori.yaw = ori_filtered.yaw;
