@@ -239,7 +239,8 @@ function startRecording(stream) {
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
                 // Remove drift with a high pass filter.
-                //const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
+                const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
+                console.log(accel_filtered);
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
