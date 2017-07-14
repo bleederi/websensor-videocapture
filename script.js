@@ -595,7 +595,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.beginPath();
         ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
         var imgData=ctx.getImageData(-widthR/2, -heightR/2, widthR, heightR);
-        ctx.clip();
+        //ctx.clip();
         //ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         //ctx.rect((x+0.1*canvas.width)+(x*Math.cos(angle) - y*Math.sin(angle)),y+0.1*canvas.height,widthR,heightR);        //rotated and translated rect
         ctx.stroke();
