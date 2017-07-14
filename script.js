@@ -169,9 +169,9 @@ class KalmanFilter {
   }
 };
 
-class AbsOriSensor {
+class OriSensor {
         constructor() {
-        const sensor = new AbsoluteOrientationSensor({ frequency: sensorfreq });
+        const sensor = new RelativeOrientationSensor({ frequency: sensorfreq });
         const mat4 = new Float32Array(16);
         const euler = new Float32Array(3);
         sensor.onreading = () => {
@@ -287,7 +287,7 @@ function startRecording(stream) {
                 gyroscope.onactivate = () => {
                 };
                 gyroscope.start();
-                orientation_sensor = new AbsOriSensor({frequency: sensorfreq});
+                orientation_sensor = new OriSensor({frequency: sensorfreq});
                 //Low-pass filter the orientation data. Cannot initialize normally because undefined
                 const ori_filtered =  new LowPassFilterOrientation({"roll":null, "pitch":null, "yaw":null}, 0.9);
                 //console.log(ori_filtered);
