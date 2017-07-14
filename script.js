@@ -278,6 +278,7 @@ function startRecording(stream) {
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         console.log(orientation_sensor);
                         ori_filtered.update(orientation_sensor);
+                        console.log(ori_filtered);
                         //ori.roll = ori_filtered.roll;
                         //ori.pitch = ori_filtered.pitch;
                         //ori.yaw = ori_filtered.yaw;
