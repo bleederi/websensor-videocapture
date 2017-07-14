@@ -476,7 +476,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = 100*oriDiff.roll;
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
-                                angle = angle -oriDiff.yaw*Math.PI/180;
+                                angle = (oriDiff.yaw/Math.PI)*180;
                                 console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
