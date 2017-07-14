@@ -261,7 +261,7 @@ function startRecording(stream) {
                 gyroscope.onactivate = () => {
                 };
                 gyroscope.start();
-                orientation_sensor = new OriSensor({frequency: sensorfreq});
+                orientation_sensor = new RelativeOrientationSensor({frequency: sensorfreq});
                 //Low-pass filter the orientation data
                 const ori_filtered =  new LowPassFilterOrientation(orientation_sensor, 0.8);
                 orientation_sensor.onreading = () => {
