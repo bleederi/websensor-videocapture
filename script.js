@@ -350,6 +350,7 @@ function startRecording(stream) {
 videoElement.addEventListener('loadedmetadata', function() {
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
+        ctx.save();     //save canvas state for later restoration
         //duration = videoElement.duration;
 });
 /*
@@ -474,7 +475,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //TODO: The stabilization box needs to have an angle
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
-                                angle = oriDiff.yaw*Math.PI/180;
+                                angle = -oriDiff.yaw*Math.PI/180;
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
         //canvas.height = videoElement.videoHeight;
@@ -548,7 +549,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.src = videoURL;
         //videoElement.load();
         //videoElement.play();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();  //restore to default
+        //ctx.rotate(-angle);     //cancel rotation for when we clear and draw the video
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
