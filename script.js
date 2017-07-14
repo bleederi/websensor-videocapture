@@ -52,6 +52,8 @@ var dataArray2 = [];     //array to store all the combined data
 
 var velocity = {"x": 0, "y": 0, "z": 0};
 
+var alpha = beta = gamma = 0;
+
 var time = null;
 var timestamps = [];
 var timeAtStart = null;
@@ -238,7 +240,6 @@ function startRecording(stream) {
 
                 try {
                 let timestamp = null;
-                var alpha = beta = gamma = 0;
                 const bias = 0.98;
                 //Initialize sensors
                 accel_sensor = new LinearAccelerationSensor({frequency: sensorfreq});
