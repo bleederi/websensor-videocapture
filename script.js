@@ -543,6 +543,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
+        let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         //let xRect = x*Math.cos(angle) - y*Math.sin(angle);
         //let videoURL = videoURLBase + "#xywh=pixel:0,0,320,240";
         //videoElement.currentTime = timeFromStart/1000;        //TODO: fix currentTime
@@ -555,7 +556,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
-        ctx.translate(x+0.1*canvas.width, y+0.1*canvas.height);
+        ctx.translate(trans.x, trans.y);
         ctx.rotate(-angle);
         console.log(angle);
         ctx.beginPath();
@@ -564,7 +565,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //ctx.rect((x+0.1*canvas.width)+(x*Math.cos(angle) - y*Math.sin(angle)),y+0.1*canvas.height,widthR,heightR);        //rotated and translated rect
         ctx.stroke();
         ctx.rotate(angle);
-        ctx.translate(-(x+0.1*canvas.width), -(y+0.1*canvas.height));
+        ctx.translate(-trans.x, -trans.y);
         }
         if(videoElement.ended)
         {
