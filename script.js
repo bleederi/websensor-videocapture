@@ -601,8 +601,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //ctx.drawImage(videoElement,-widthR/2, -heightR/2, widthR, heightR, 0, 0, canvas.width, canvas.height);
         //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, -trans.x, -trans.y, 1.1*canvas.width, 1.1*canvas.height);
         ctx.rotate(angle);
-        ctx.translate(-trans.x, -trans.y);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.translate(-trans.x, -trans.y);
         }
         if(videoElement.ended)
         {
