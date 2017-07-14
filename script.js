@@ -549,10 +549,10 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.load();
         //videoElement.play();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.rotate(angle);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
+        ctx.rotate(angle);        
         ctx.beginPath();
         ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         ctx.stroke();
