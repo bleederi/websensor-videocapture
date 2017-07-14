@@ -41,6 +41,7 @@ var accelNoG = {"x": null, "y": null, "z": null};
 var accel_filtered = null;
 var aVel = {"x": null, "y": null, "z": null};
 var ori = {"roll": null, "pitch": null, "yaw": null, "time": null};
+var ori_filtered = null;
 var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
@@ -103,6 +104,18 @@ class LowPassFilterData {       //https://w3c.github.io/motion-sensors/#pass-fil
                 this.x = this.x * this.bias + reading.x * (1 - this.bias);
                 this.y = this.y * this.bias + reading.y * (1 - this.bias);
                 this.z = this.z * this.bias + reading.z * (1 - this.bias);
+        }
+};
+
+class LowPassFilterOrientation {
+  constructor(reading, bias) {
+    Object.assign(this, { roll: reading.roll, pitch: reading.pitch, yaw: reading.yaw });
+    this.bias = bias;
+  }
+        update(reading) {
+                this.roll = this.roll * this.bias + reading.roll * (1 - this.bias);
+                this.pitch = this.pitch * this.bias + reading.pitch * (1 - this.bias);
+                this.yaw = this.yaw * this.bias + reading.yaw * (1 - this.bias);
         }
 };
 
@@ -249,6 +262,8 @@ function startRecording(stream) {
                 };
                 gyroscope.start();
                 orientation_sensor = new OriSensor({frequency: sensorfreq});
+                //Low-pass filter the orientation data
+                //const accel_filtered =  new LowPassFilterOrientation(orientation_sensor, 0.8);
                 orientation_sensor.onreading = () => {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
@@ -261,6 +276,7 @@ function startRecording(stream) {
                                 initialoriobtained = true;
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                        ori_filtered.update(orientation_sensor);
                 };
                 orientation_sensor.onactivate = () => {
                 };
