@@ -447,7 +447,7 @@ function stopRecording(){
 function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
         //TODO: sensor readings and frame data in desync - frame data too late/sensor data ahead
         //console.log("frame");
-        nFrame = videoElement.webkitDecodedFrameCount - videoElement.webkitDroppedFrameCount - extraFrames;
+        nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
         //console.log(prevFrame, nFrame);
         //let x = 0;
         //let y = 0;
