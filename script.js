@@ -348,6 +348,7 @@ function startRecording(stream) {
                         
                         //resize canvas
 videoElement.addEventListener('loadedmetadata', function() {
+        console.log("Loaded metadata");
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
         ctx.save();     //save canvas state for later restoration
