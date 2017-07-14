@@ -560,6 +560,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.beginPath();
         ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         ctx.stroke();
+        ctx.rotate(-angle);
         if(videoElement.ended)
         {
                 //x = 0;
