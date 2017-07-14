@@ -540,7 +540,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         console.log(dataArray2);
                         stabilize(dataArray2);
                 } */ 
-        }
         //render video and rect
         let widthR = 0.8*canvas.width;
         let heightR = 0.8*canvas.height;
@@ -566,6 +565,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.stroke();
         ctx.rotate(-angle);
         ctx.translate(-(x+0.1*canvas.width), -(y+0.1*canvas.height));
+        }
         if(videoElement.ended)
         {
                 //x = 0;
