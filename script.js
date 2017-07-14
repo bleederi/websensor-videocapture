@@ -55,6 +55,7 @@ var velocity = {"x": 0, "y": 0, "z": 0};
 var alpha = 0;
 var beta = 0;
 var gamma = 0;
+var accl = null;
 
 var time = null;
 var timestamp = null;
@@ -260,7 +261,7 @@ function startRecording(stream) {
                 };
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
-                const accl = new Accelerometer({frequency: sensorfreq});
+                accl = new Accelerometer({frequency: sensorfreq});
                 //const gyro_data = new HighPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
                         //gyro_data.update(gyroscope);
