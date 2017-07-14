@@ -299,11 +299,13 @@ function startRecording(stream) {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
-                        time = orientation_sensor.timestamp;
+                        //time = orientation_sensor.timestamp;
+                        time = Date.now();
                         if(!initialoriobtained) //obtain initial orientation
                         {
-                                oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                                timeAtStart = orientation_sensor.timestamp;
+                                oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": Date.now()};
+                                //timeAtStart = orientation_sensor.timestamp;
+                                timeAtStart = Date.now();
                                 initialoriobtained = true;
                                 console.log(timeInitial, timeAtStart);
                         }
