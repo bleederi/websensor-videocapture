@@ -266,7 +266,7 @@ function startRecording(stream) {
                 gyroscope.onreading = () => {
                         //gyro_data.update(gyroscope);
                         //aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
-                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z};
+                        //aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
                         //Determine orientation with accelerometer and gyroscope. Below from https://w3c.github.io/motion-sensors/#complementary-filters
                         let dt = timestamp ? (gyroscope.timestamp - timestamp) / 1000 : 0;
                         timestamp = gyroscope.timestamp;
@@ -284,6 +284,7 @@ function startRecording(stream) {
                         alpha = alpha + gyroscope.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accl.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accl.y * -scale / norm);
+                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
                 };
                 gyroscope.onactivate = () => {
                 };
@@ -502,7 +503,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
                                 //angle = oriDiff.yaw;
-                                angle = alpha;
+                                angle = frameDataL.aVel.alpha;
                                 //console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
