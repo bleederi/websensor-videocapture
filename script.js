@@ -275,8 +275,9 @@ function startRecording(stream) {
                                 timeAtStart = orientation_sensor.timestamp;
                                 initialoriobtained = true;
                         }
-                        ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                        //ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         ori_filtered.update(orientation_sensor);
+                        ori = ori_filtered;
                 };
                 orientation_sensor.onactivate = () => {
                 };
