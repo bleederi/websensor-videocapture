@@ -275,13 +275,13 @@ function startRecording(stream) {
                                 timeAtStart = orientation_sensor.timestamp;
                                 initialoriobtained = true;
                         }
-                        //ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                        ori_filtered.update(orientation_sensor);
-                        ori.roll = ori_filtered.roll;
-                        ori.pitch = ori_filtered.pitch;
-                        ori.yaw = ori_filtered.yaw;
-                        ori.time = orientation_sensor.timestamp;
-                        console.log(ori_filtered);
+                        ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
+                        //ori_filtered.update(orientation_sensor);
+                        //ori.roll = ori_filtered.roll;
+                        //ori.pitch = ori_filtered.pitch;
+                        //ori.yaw = ori_filtered.yaw;
+                        //ori.time = orientation_sensor.timestamp;
+                        //console.log(ori_filtered);
                 };
                 orientation_sensor.onactivate = () => {
                 };
