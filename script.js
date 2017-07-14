@@ -52,7 +52,9 @@ var dataArray2 = [];     //array to store all the combined data
 
 var velocity = {"x": 0, "y": 0, "z": 0};
 
-var alpha = beta = gamma = 0;
+var alpha = 0;
+var beta = 0;
+var gamma = 0;
 
 var time = null;
 var timestamps = [];
