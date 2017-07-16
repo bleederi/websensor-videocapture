@@ -67,9 +67,10 @@ var prevFrame = null;      //previous frame
 
 //canvas
 var canvas = document.querySelector('canvas');
-//var canvas = document.createElement('canvas');
+var canvas2 = document.createElement('canvas');
 //CSS.elementSources.set("pfcanvas", canvas);
 var ctx = canvas.getContext('2d');
+var ctx2 = canvas2.getContext('2d');
 //var ctx = document.getCSSCanvasContext("2d", "name_of_canvas", 100, 100); - polyfill from https://css-tricks.com/media-fragments-uri-spatial-dimension/
 
 //video element
@@ -596,12 +597,12 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.beginPath();
         ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
         console.log(-widthR/2, -heightR/2, widthR, heightR);
-        //var imgData=ctx.getImageData(-widthR/2, -heightR/2, widthR, heightR);
+        var imgData=ctx.getImageData(-widthR/2, -heightR/2, widthR, heightR);
         //ctx.clip();
         //ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         //ctx.rect((x+0.1*canvas.width)+(x*Math.cos(angle) - y*Math.sin(angle)),y+0.1*canvas.height,widthR,heightR);        //rotated and translated rect
         ctx.stroke();
-        //ctx.putImageData(imgData,0,0);
+        ctx2.putImageData(imgData,0,0);
         ctx.rotate(angle);
         ctx.translate(-trans.x, -trans.y);
         //ctx.clearRect(0, 0, canvas.width, canvas.height);
