@@ -66,7 +66,7 @@ var nFrame = 0; //frame number with which we can combine timestamp and frame dat
 var prevFrame = null;      //previous frame
 
 //canvas
-var canvas = document.querySelector('myCanvas');
+var canvas = document.getElementById('myCanvas');
 var canvas2 = document.getElementById('myCanvas2');
 //CSS.elementSources.set("pfcanvas", canvas);
 var ctx = canvas.getContext('2d');
