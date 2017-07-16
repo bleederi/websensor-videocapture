@@ -458,15 +458,15 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let frameDataL = nFrame-delay >=0 ? dataArray[nFrame - delay] : dataArray[nFrame];
         if(nFrame === 0)
         {
-                console.log(dataArray);
+                //console.log(dataArray);
                 //timeAtStart = frameDataL.ori.time;
         }
         else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
         {
-                console.log(nFrame);
+                //console.log(nFrame);
                 //console.log(dataL);
                 timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms)
-                console.log(timeFromStart);
+                //console.log(timeFromStart);
                 //console.log(frameDataL);
                 //console.log(nFrame);
                 //console.log(videoElement.webkitDecodedFrameCount);      //only works in webkit browsers
@@ -540,7 +540,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         }       
     }, 50);*/
                         //console.log(videoElement.currentTime);                        
-                        //}          
+                               //}          
                         //console.log(x, y);
 
                         //ctx.drawImage(videoElement, 0, 0);
@@ -594,6 +594,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //console.log(angle);
         ctx.beginPath();
         ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
+        console.log(-widthR/2, -heightR/2, widthR, heightR);
         var imgData=ctx.getImageData(-widthR/2, -heightR/2, widthR, heightR);
         //ctx.clip();
         //ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
