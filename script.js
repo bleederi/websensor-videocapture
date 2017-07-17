@@ -65,6 +65,7 @@ var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 var delay = 5;
+var sensorframeTimeDiff = 0;
 
 //canvas
 var canvas = document.getElementById('myCanvas');
@@ -320,7 +321,8 @@ function startRecording(stream) {
                                 //timeAtStart = orientation_sensor.timestamp;
                                 timeAtStart = Date.now();
                                 initialoriobtained = true;
-                                console.log(timeInitial, timeAtStart);
+                                sensorframeTimeDiff = timeInitial - timeAtStart;
+                                console.log(sensorframeTimeDiff);
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         //console.log(orientation_sensor);
