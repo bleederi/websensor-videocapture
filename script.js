@@ -294,7 +294,9 @@ function startRecording(stream) {
                         // the unit vector with values from [-1, 1] with PI/2, covering [-PI/2, PI/2].
                         const scale = Math.PI / 2;
 
-                        alpha = alpha + gyroscope.z * dt;
+                        const zeroBias = 0.02;
+                        alpha = (1 - zeroBias) * (alpha + gyro.z * dt);                        
+                        //alpha = alpha + gyroscope.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
