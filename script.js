@@ -287,7 +287,7 @@ function startRecording(stream) {
                         alpha = alpha + gyroscope.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
-                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
+                        aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
                 };
                 gyroscope.onactivate = () => {
                 };
@@ -516,7 +516,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
                                 //angle = oriDiff.yaw;
-                                angle = frameDataL.aVel.alpha;
+                                angle = {"alpha":frameDataL.aVel.alpha, "beta":frameDataL.aVel.beta, "gamma":frameDataL.aVel.gamma};
                                 //console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
@@ -585,11 +585,11 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let heightR = 0.8*canvas.height;
         let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.translate(videoElement.videoWidth/2, videoElement.videoHeight/2);
-        ctx.rotate(angle);
+        ctx.translate(videoElement.videoWidth/2 + angle.gamma, videoElement.videoHeight/2);
+        ctx.rotate(angle.alpha);
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
-        ctx.rotate(-angle);
-        ctx.translate(-videoElement.videoWidth/2, -videoElement.videoHeight/2);
+        ctx.rotate(-angle.alpha);
+        ctx.translate(-videoElement.videoWidth/2 - angle.gamma, -videoElement.videoHeight/2);
         ctx.beginPath();
         ctx.rect(0.1*canvas.width,0.1*canvas.height,widthR,heightR);
         var imgData=ctx.getImageData(0.1*canvas.width,0.1*canvas.height,widthR,heightR);
