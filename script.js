@@ -384,6 +384,8 @@ videoElement.addEventListener('loadedmetadata', function() {
         console.log("Loaded metadata");
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
+  canvas2.width = videoElement.videoWidth;
+  canvas2.height = videoElement.videoHeight;
         ctx.save();     //save canvas state for later restoration
         //duration = videoElement.duration;
 });
