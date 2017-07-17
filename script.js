@@ -275,9 +275,9 @@ function startRecording(stream) {
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
                 //accl = new Accelerometer({frequency: sensorfreq});
-                //const gyro_data = new HighPassFilterData(gyroscope, 0.8);
+                const gyro_filtered = new HighPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
-                        //gyro_data.update(gyroscope);
+                        gyro_filtered.update(gyroscope);
                         //aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
                         //aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
                         //Determine orientation with accelerometer and gyroscope. Below from https://w3c.github.io/motion-sensors/#complementary-filters
@@ -295,8 +295,8 @@ function startRecording(stream) {
                         const scale = Math.PI / 2;
 
                         const zeroBias = 0.02;
-                        alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
-                        //alpha = alpha + gyroscope.z * dt;
+                        //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
+                        alpha = alpha + gyro_filtered.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
