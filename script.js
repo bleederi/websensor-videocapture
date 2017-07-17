@@ -414,7 +414,7 @@ videoElement.addEventListener('durationchange', function() {
 videoElement.addEventListener('play', function() { 
         videoElement.play();
         nFrame = 0;
-        delay = sensorframeTimeDiff/30;
+        delay = Math.floor(sensorframeTimeDiff/30);
         readFrameData(blob, orientationData);    //reads the video into dataArray2
 }, false);
 
