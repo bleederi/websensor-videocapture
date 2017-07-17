@@ -264,7 +264,7 @@ function startRecording(stream) {
                 };
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
-                accl = new Accelerometer({frequency: sensorfreq});
+                //accl = new Accelerometer({frequency: sensorfreq});
                 //const gyro_data = new HighPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
                         //gyro_data.update(gyroscope);
@@ -278,15 +278,15 @@ function startRecording(stream) {
                         // Keep in mind that the if the device is flipped, the vector will just be
                         // pointing in the other direction, so we have no way to know from the
                         // accelerometer data which way the device is oriented.
-                        const norm = Math.sqrt(accl.x ** 2 + accl.y ** 2 + accl.z ** 2);
+                        const norm = Math.sqrt(accel_sensor.x ** 2 + accel_sensor.y ** 2 + accel_sensor.z ** 2);
 
                         // As we only can cover half (PI rad) of the full spectrum (2*PI rad) we multiply
                         // the unit vector with values from [-1, 1] with PI/2, covering [-PI/2, PI/2].
                         const scale = Math.PI / 2;
 
                         alpha = alpha + gyroscope.z * dt;
-                        beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accl.x * scale / norm);
-                        gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accl.y * -scale / norm);
+                        beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
+                        gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
                 };
                 gyroscope.onactivate = () => {
