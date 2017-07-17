@@ -593,22 +593,22 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
-        ctx.translate(trans.x, trans.y);
-        ctx.rotate(-angle);
+        //ctx.translate(trans.x, trans.y);
+        ctx.rotate(angle);
         //console.log(angle);
         ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx2.putImageData(imgData,0,0);
+        ctx2.rect(0, 0, 100, 100);
+        ctx.rotate(-angle);
+        ctx.translate(-trans.x, -trans.y);
         ctx.beginPath();
         ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
         console.log(-widthR/2, -heightR/2, widthR, heightR);
-        var imgData=ctx.getImageData(-widthR/2, -heightR/2, widthR, heightR);
         //ctx.clip();
         //ctx.rect(x+0.1*canvas.width,y+0.1*canvas.height,widthR,heightR);
         //ctx.rect((x+0.1*canvas.width)+(x*Math.cos(angle) - y*Math.sin(angle)),y+0.1*canvas.height,widthR,heightR);        //rotated and translated rect
         ctx.stroke();
-        ctx2.putImageData(imgData,0,0);
-        ctx2.rect(0, 0, 100, 100);
-        ctx.rotate(angle);
-        ctx.translate(-trans.x, -trans.y);
+        var imgData=ctx.getImageData(-widthR/2, -heightR/2, widthR, heightR);
         //ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
         if(videoElement.ended)
