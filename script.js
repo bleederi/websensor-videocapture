@@ -594,8 +594,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.rect(0.1*canvas.width,0.1*canvas.height,widthR,heightR);
         var imgData=ctx.getImageData(0.1*canvas.width,0.1*canvas.height,widthR,heightR);
         ctx.stroke();
-        ctx2.scale(1/0.8, 1/0.8);
-        ctx2.putImageData(imgData,0,0);
+        //ctx2.scale(1/0.8, 1/0.8);
+        ctx2.putImageData(imgData,0,0, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
         }
         if(videoElement.ended)
         {
