@@ -588,7 +588,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //videoElement.src = videoURL;
         //videoElement.load();
         //videoElement.play();
-        angle = Math.PI/4;  //no sensors test
+        angle = Math.PI/8;  //no sensors test
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 //ctx.drawImage(videoElement,x+0.1*canvas.width,y+0.1*canvas.height, widthR, heightR, 0, 0, 1.1*canvas.width, 1.1*canvas.height);
 //ctx.drawImage(videoElement,0,0, widthR, heightR, x+0.1*canvas.width, 1.1*canvas.width, y+0.1*canvas.height, 1.1*canvas.height);
@@ -611,8 +611,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //ctx2.rotate(angle);
         //ctx2.translate(-videoElement.videoWidth/2, -videoElement.videoHeight/2);
         ctx2.putImageData(imgData,0,0);
-        ctx2.rect(0, 0, 100, 100);
-        ctx2.stroke();  
+        //ctx2.rect(0, 0, 100, 100);
+        //ctx2.stroke();  
         }
         if(videoElement.ended)
         {
