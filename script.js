@@ -595,7 +595,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.translate(videoElement.videoWidth/2, videoElement.videoHeight/2);
         ctx.rotate(-angle);
         //console.log(angle);
-        ctx.drawImage(videoElement,0,0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
         ctx.rect(-widthR/2, -heightR/2, widthR, heightR);
         console.log(-widthR/2, -heightR/2, widthR, heightR);
