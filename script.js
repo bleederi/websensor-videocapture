@@ -503,7 +503,10 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         //ori = dataArrayL[nFrame].ori;
                         let aVel = frameDataL.aVel;
                         //console.log(nFrame, ori, aVel);
-                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                        if(ori !== undefined)
+                        {
+                                oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                       }
                         //accelerometer not taken into account atm
                                 //dx = -(videoElement.videoWidth*(aVel.y/(2)) + 0*videoElement.videoWidth*velocity.x)*deltaT/1000;
                                 //dy = (-videoElement.videoHeight*(aVel.x/(2)) + 0*videoElement.videoHeight*velocity.y)*deltaT/1000;
