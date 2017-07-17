@@ -295,7 +295,7 @@ function startRecording(stream) {
                         const scale = Math.PI / 2;
 
                         const zeroBias = 0.02;
-                        alpha = (1 - zeroBias) * (alpha + gyro.z * dt);                        
+                        alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
                         //alpha = alpha + gyroscope.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
