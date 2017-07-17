@@ -65,7 +65,7 @@ var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 var delay = 5;
-var sensorframeTimeDiff = 0;
+var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms
 
 //canvas
 var canvas = document.getElementById('myCanvas');
@@ -276,7 +276,7 @@ function startRecording(stream) {
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
                 //accl = new Accelerometer({frequency: sensorfreq});
-                const gyro_filtered = new HighPassFilterData(gyroscope, 0.8);
+                const gyro_filtered = new LowPassFilterData(gyroscope, 0.8);
                 gyroscope.onreading = () => {
                         gyro_filtered.update(gyroscope);
                         //aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
@@ -297,7 +297,7 @@ function startRecording(stream) {
 
                         const zeroBias = 0.02;
                         //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
-                        alpha = alpha + gyroscope.z * dt;
+                        alpha = alpha + gyro_filtered.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
@@ -321,7 +321,7 @@ function startRecording(stream) {
                                 //timeAtStart = orientation_sensor.timestamp;
                                 timeAtStart = Date.now();
                                 initialoriobtained = true;
-                                sensorframeTimeDiff = timeInitial - timeAtStart;
+                                sensorframeTimeDiff = timeAtStart - timeInitial;
                                 console.log(sensorframeTimeDiff);
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
