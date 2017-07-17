@@ -65,7 +65,7 @@ var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 var delay = 5;
-var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms
+var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms - this is how much the timestamps differ
 
 //canvas
 var canvas = document.getElementById('myCanvas');
@@ -414,6 +414,7 @@ videoElement.addEventListener('durationchange', function() {
 videoElement.addEventListener('play', function() { 
         videoElement.play();
         nFrame = 0;
+        delay = sensorframeTimeDiff/30;
         readFrameData(blob, orientationData);    //reads the video into dataArray2
 }, false);
 
