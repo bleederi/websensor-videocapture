@@ -64,7 +64,7 @@ var timestamps = [];
 var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
-var delay = 8;
+var delay = 5;
 
 //canvas
 var canvas = document.getElementById('myCanvas');
