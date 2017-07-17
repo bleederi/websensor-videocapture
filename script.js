@@ -387,6 +387,7 @@ videoElement.addEventListener('loadedmetadata', function() {
 canvas.style.display="none";
   canvas2.width = videoElement.videoWidth;
   canvas2.height = videoElement.videoHeight;
+        ctx.scale(1/0.8, 1/0.8);
         ctx.save();     //save canvas state for later restoration
         //duration = videoElement.duration;
 });
@@ -595,7 +596,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         var imgData=ctx.getImageData(0.1*canvas.width,0.1*canvas.height,widthR,heightR);
         ctx.stroke();
         //ctx2.scale(1/0.8, 1/0.8);
-        ctx2.putImageData(imgData,0,0, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
+        ctx2.putImageData(imgData,0,0);
         }
         if(videoElement.ended)
         {
