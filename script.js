@@ -297,7 +297,7 @@ function startRecording(stream) {
 
                         const zeroBias = 0.02;
                         //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
-                        alpha = alpha + gyro_filtered.z * dt;
+                        alpha = alpha + gyroscope.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
