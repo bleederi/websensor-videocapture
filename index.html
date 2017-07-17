@@ -66,7 +66,10 @@ limitations under the License.
   <option value="orientation">Orientation sensor</option>
   <option value="acceleration">Accelerometer</option>
   <option value="gyro">Gyroscope</option>
-</select> 
+</select>
+                <input id="slider_delay" type="range" min="0" max="20" step="1" value="5">
+
+                Frame-sensor delay: <div id="slider_delay_amount"></div>
 </div>
                 <video controls autoplay></video><br>
                 <canvas id="myCanvas" width="100vh" height="100vw" overflow:hidden" style="border:1px solid #000000;">

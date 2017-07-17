@@ -64,6 +64,7 @@ var timestamps = [];
 var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
+var delay = 8;
 
 //canvas
 var canvas = document.getElementById('myCanvas');
@@ -84,6 +85,15 @@ var extraFrames = 0;
 var x = 0;
 var y = 0;      //position for the square
 var angle = 0;
+
+//Sliders
+var slider_delay = document.getElementById("slider_delay");
+var slider_delay_div = document.getElementById("slider_delay_amount");
+slider_delay.onchange = () => {
+        delay = slider_delay.value;
+        slider_delay_div.innerHTML = delay;
+        console.log("Delay:", delay);
+};
 
 class HighPassFilterData {      //https://w3c.github.io/motion-sensors/#pass-filters
   constructor(reading, cutoffFrequency) {
@@ -457,7 +467,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //let y = 0;
         let dx = 0;
         let dy = 0;
-        let delay = 0;
+        //let delay = 8;
         var timeFromStart = null;
         let frameDataL = nFrame-delay >=0 ? dataArray[nFrame - delay] : dataArray[nFrame];
         if(nFrame === 0)
