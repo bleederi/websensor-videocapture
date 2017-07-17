@@ -384,8 +384,10 @@ videoElement.addEventListener('loadedmetadata', function() {
         console.log("Loaded metadata");
   canvas.width = videoElement.videoWidth;
   canvas.height = videoElement.videoHeight;
+canvas.style.display="none";
   canvas2.width = videoElement.videoWidth;
   canvas2.height = videoElement.videoHeight;
+        ctx2.scale(1/0.8, 1/0.8);
         ctx.save();     //save canvas state for later restoration
         //duration = videoElement.duration;
 });
@@ -611,7 +613,6 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //ctx2.rotate(angle);
         //ctx2.translate(-videoElement.videoWidth/2, -videoElement.videoHeight/2);
         ctx2.putImageData(imgData,0,0);
-        ctx2.scale(1/0.8, 1/0.8);
         //ctx2.rect(0, 0, 100, 100);
         //ctx2.stroke();  
         }
