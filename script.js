@@ -584,9 +584,9 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.translate(videoElement.videoWidth/2, videoElement.videoHeight/2);
-        ctx.rotate(-angle);
-        ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
         ctx.rotate(angle);
+        ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
+        ctx.rotate(-angle);
         ctx.translate(-videoElement.videoWidth/2, -videoElement.videoHeight/2);
         ctx.beginPath();
         ctx.rect(0.1*canvas.width,0.1*canvas.height,widthR,heightR);
