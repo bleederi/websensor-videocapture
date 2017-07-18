@@ -635,8 +635,6 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                         console.log(dataArray2);
                         stabilize(dataArray2);
                 } */ 
-                        cameraPos = {"x": cameraPath[nFrame].x, "y": cameraPath[nFrame].y}
-                        console.log(cameraPos.x, cameraPos.y);
         //render video and rect
         let widthR = 0.6*videoElement.videoWidth;
         let heightR = 0.6*videoElement.videoHeight;
