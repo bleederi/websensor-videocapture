@@ -29,7 +29,7 @@ var interval = null;
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
-var sensorfreq = 120;
+var sensorfreq = 60;
 var selectedSensor = null;
 
 //var roll = null;
@@ -229,6 +229,7 @@ function selectSensor() {
 
 function buildCameraPath() {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
         let ori = dataArray[0].ori;
+        let oriDiff = null;
         if(ori !== undefined)
         {
                 oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
