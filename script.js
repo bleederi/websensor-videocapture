@@ -226,7 +226,7 @@ function selectSensor() {
         selectedSensor = document.getElementById("selectSensor").value;
         console.log(selectedSensor, "selected");
 }
-/*
+
 function buildCameraPath(dataArray) {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
         for (let i=0; i<dataArray.length; i++)
         {
@@ -243,7 +243,7 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                 }
         }
         return cameraPath;
-}*/
+}
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
 function toEulerianAngle(quat, out)
