@@ -643,7 +643,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         ctx.beginPath();
         for(let i=0; i<cameraPath.length; i++)
         {
-                ctx.fillRect(cameraPath[i].x,cameraPath[i].y,1,1);
+                ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
         }
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
