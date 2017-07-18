@@ -648,7 +648,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         ctx.translate(-(videoElement.videoWidth/2 + (1/4) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
         ctx.beginPath();
-        //if(cameraPath !== undefined) {
+        if(cameraPath !== undefined) {
         //console.log(cameraPath);
         for(let i=0; i<cameraPath.length; i++)
         {
