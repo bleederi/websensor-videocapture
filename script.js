@@ -449,6 +449,7 @@ videoElement.addEventListener('play', function() {
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
+        buildCameraPath(dataArray);     //build camera path
         readFrameData(blob, orientationData);    //reads the video into dataArray2
 }, false);
 
@@ -494,7 +495,6 @@ console.log(x.open('get', blobUrl));*/
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
-        buildCameraPath(dataArray);
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
