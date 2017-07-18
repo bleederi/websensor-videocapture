@@ -420,7 +420,7 @@ videoElement.addEventListener('durationchange', function() {
 videoElement.addEventListener('play', function() { 
         videoElement.play();
         nFrame = 0;
-        let durationPerFrame = duration/dataArray.length;   //frame duration in ms
+        let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         console.log("Delay", delay);
         readFrameData(blob, orientationData);    //reads the video into dataArray2
