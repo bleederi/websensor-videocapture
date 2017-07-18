@@ -298,7 +298,7 @@ function startSensors() {
                         const zeroBias = 0.02;
                         
                         console.log(accel_sensor.timestamp, gyroscope.timestamp, accel_sensor.timestamp - gyroscope.timestamp);
-                        if(accel_sensor.timestamp - gyroscope.timestamp === 0)
+                        if(accel_sensor.timestamp - gyroscope.timestamp !== 0)
                         {
                         //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
                         alpha = alpha + gyro_filtered.z * dt;
