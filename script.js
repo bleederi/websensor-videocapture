@@ -299,7 +299,7 @@ function startRecording(stream) {
                         //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
                         alpha = alpha + gyro_filtered.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
-                        gamma = bias * (gamma + gyroscope.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
+                        gamma = bias * (gamma + gyro_filtered.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
                 };
                 gyroscope.onactivate = () => {
@@ -601,12 +601,12 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
-        ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * Math.sin((2/2)*oriDiff.yaw), videoElement.videoHeight/2);
+        ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
         ctx.rotate(angle.alpha);
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
         ctx.rotate(-angle.alpha);
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI))), -videoElement.videoHeight/2);
-        ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * Math.sin((2/2)*oriDiff.yaw)), -videoElement.videoHeight/2);
+        ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * Math.sin(angle.gamma), -videoElement.videoHeight/2);
         ctx.beginPath();
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
