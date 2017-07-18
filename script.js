@@ -277,6 +277,7 @@ function startSensors() {
                 //accl = new Accelerometer({frequency: sensorfreq});
                 const gyro_filtered = new LowPassFilterData(gyroscope, 0.1);
                 gyroscope.onreading = () => {
+                        console.log(Date.now());
                         gyro_filtered.update(gyroscope);
                         //aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
                         //aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
@@ -300,6 +301,7 @@ function startSensors() {
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyro_filtered.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
+console.log(Date.now());
                 };
                 gyroscope.onactivate = () => {
                 };
