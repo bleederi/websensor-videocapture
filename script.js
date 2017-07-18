@@ -227,15 +227,18 @@ function selectSensor() {
         console.log(selectedSensor, "selected");
 }
 
-function buildCameraPath() {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
-        let ori = frameData.ori;
-        let oriDiff = null;
-        if(ori !== undefined)
+function buildCameraPath(dataArray) {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
+        for (let i=0; i<dataArray.length; i++)
         {
-                oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                let ori = dataArray[i].ori;
+                let oriDiff = null;
+                if(ori !== undefined)
+                {
+                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                }
+                cameraCoord.x = canvas.width - videoElement.videoWidth * (oriDiff.yaw/Math.PI);
+                console.log(cameraCoord.x);
         }
-        cameraCoord.x = canvas.width - videoElement.videoWidth * (oriDiff.yaw/Math.PI);
-        console.log(cameraCoord.x);
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
@@ -398,7 +401,6 @@ function startRecording(stream) {
                         Object.assign(b, frameData);
                         dataArray.push(b);
                         frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null};
-                        buildCameraPath();
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -488,6 +490,7 @@ console.log(x.open('get', blobUrl));*/
 function stopRecording(){
 	mediaRecorder.stop();
         //Now stabilize
+        buildCameraPath(dataArray);
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
