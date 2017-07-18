@@ -603,8 +603,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                         stabilize(dataArray2);
                 } */ 
         //render video and rect
-        let widthR = 0.6*canvas.width;
-        let heightR = 0.6*canvas.height;
+        let widthR = 0.6*videoElement.videoWidth;
+        let heightR = 0.6*videoElement.videoHeight;
         let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
