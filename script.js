@@ -242,6 +242,7 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                         cameraPath.push(b);
                 }
         }
+        return cameraPath;
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
@@ -448,7 +449,8 @@ videoElement.addEventListener('play', function() {
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
-        buildCameraPath(dataArray);     //build camera path
+        cameraPath = buildCameraPath(dataArray);     //build camera path
+        console.log(cameraPath);
         readFrameData(blob, orientationData, cameraPath);    //reads the video into dataArray2
 }, false);
 
@@ -649,7 +651,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         ctx.translate(-(videoElement.videoWidth/2 + (1/4) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
         ctx.beginPath();
         if(cameraPath !== undefined) {
-        console.log(cameraPath);
+        //console.log(cameraPath);
         for(let i=0; i<cameraPath.length; i++)
         {
                 ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
