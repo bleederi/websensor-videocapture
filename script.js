@@ -253,8 +253,7 @@ function startDemo () {
 		navigator.getUserMedia(constraints, startRecording, errorCallback);
 }
 
-function startRecording(stream) {
-
+function startSensors() {
                 try {
                 timeInitial = Date.now();
                 const bias = 0.98;
@@ -344,7 +343,14 @@ function startRecording(stream) {
                         console.log("Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags.");
                         //this.innerHTML = "Your browser doesn't seem to support generic sensors. If you are running Chrome, please enable it in about:flags";
                 }
-                        interval=window.setInterval(update_debug,100);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    startSensors();     //start sensors instantly to avoid gyro drift
+}, false);
+
+function startRecording(stream) {
+                interval=window.setInterval(update_debug,100);
 	        //var options = {mimeType: 'video/webm;codecs=vp9'};
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
