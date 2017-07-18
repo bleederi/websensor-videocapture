@@ -509,6 +509,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         let dy = 0;
         //let delay = -10;
         var timeFromStart = null;
+        var cameraPos = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
         if(nFrame === 0)
         {
