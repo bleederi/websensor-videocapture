@@ -29,7 +29,7 @@ var interval = null;
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
-var sensorfreq = 30;
+var sensorfreq = 20;
 var selectedSensor = null;
 
 //var roll = null;
