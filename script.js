@@ -528,7 +528,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                 //while(!videoElement.ended)
                 //{
                 let cameraPos = null;
-                if(cameraPath[nFrame] !== undefined)
+                if(cameraPath !== undefined)
                 {
                         cameraPos = {"x": cameraPath[nFrame].x, "y": cameraPath[nFrame].y}
                         console.log(cameraPos.x, cameraPos.y);
