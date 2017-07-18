@@ -263,7 +263,7 @@ function startSensors() {
                 const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
                 //console.log(accel_filtered);  //null, null, null
                 accel_sensor.onreading = () => {
-                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z};
+                        accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z, "time": accel_sensor.timestamp};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
                         //accel_last = accel;     //for smoothing the data
                         //accel_filtered.update(accel_sensor);                   
@@ -296,6 +296,8 @@ function startSensors() {
                         const scale = Math.PI / 2;
 
                         const zeroBias = 0.02;
+                        
+                        console.log(accel_sensor.timestamp - gyroscope.timestamp);
                         //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
                         alpha = alpha + gyro_filtered.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
