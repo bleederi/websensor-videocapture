@@ -449,8 +449,8 @@ videoElement.addEventListener('play', function() {
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
-        cameraPath = buildCameraPath(dataArray);     //build camera path
-        console.log(cameraPath);
+        //cameraPath = buildCameraPath(dataArray);     //build camera path
+        //console.log(cameraPath);
         readFrameData(blob, orientationData, cameraPath);    //reads the video into dataArray2
 }, false);
 
@@ -635,6 +635,8 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                         console.log(dataArray2);
                         stabilize(dataArray2);
                 } */ 
+                        cameraPos = {"x": cameraPath[nFrame].x, "y": cameraPath[nFrame].y}
+                        console.log(cameraPos.x, cameraPos.y);
         //render video and rect
         let widthR = 0.6*videoElement.videoWidth;
         let heightR = 0.6*videoElement.videoHeight;
@@ -647,7 +649,15 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         ctx.rotate(-angle.alpha);
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         ctx.translate(-(videoElement.videoWidth/2 + (1/4) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
-        ctx.beginPath();
+        ctx.beginPath();/*
+        if(cameraPath !== undefined) {
+        //console.log(cameraPath);
+        for(let i=0; i<cameraPath.length; i++)
+        {
+                ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
+                        //console.log(cameraPath[i].x, cameraPath[i].y);
+        }
+        }
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         ctx.stroke();
