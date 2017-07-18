@@ -536,8 +536,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
                                 //y = y + dy;
                                 //x = 100*oriDiff.yaw;
                                 //y = 100*oriDiff.roll;
-                                x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
-                                y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
+                                //x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
+                                //y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
                                 //angle = oriDiff.yaw;
                                 angle = {"alpha":frameDataL.aVel.alpha - dataArray[0].aVel.alpha, "beta":frameDataL.aVel.beta, "gamma":frameDataL.aVel.gamma - dataArray[0].aVel.gamma};
                                 //console.log(x, y, angle);
@@ -606,7 +606,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //render video and rect
         let widthR = 0.6*videoElement.videoWidth;
         let heightR = 0.6*videoElement.videoHeight;
-        let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
+        //let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
         ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
