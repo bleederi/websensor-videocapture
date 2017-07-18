@@ -482,7 +482,7 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //let y = 0;
         let dx = 0;
         let dy = 0;
-        let delay = -5;
+        let delay = -10;
         var timeFromStart = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
         if(nFrame === 0)
