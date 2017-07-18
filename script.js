@@ -87,6 +87,9 @@ var x = 0;
 var y = 0;      //position for the square
 var angle = 0;
 
+var cameraPath = [];    //array of canvas coordinates describing the camera path
+var cameraCoord = {"x": null, "y": null, "time": null};
+
 //Sliders
 var slider_delay = document.getElementById("slider_delay");
 var slider_delay_div = document.getElementById("slider_delay_amount");
@@ -224,6 +227,17 @@ function selectSensor() {
         console.log(selectedSensor, "selected");
 }
 
+function buildCameraPath() {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
+        let ori = dataArray[0].ori;
+        if(ori !== undefined)
+        {
+                oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+        }
+        cameraCoord.x = canvas.width - videoElement.videoWidth * (oriDiff.yaw/Math.PI);
+        console.log(cameraCoord.x);`
+
+}
+
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
 function toEulerianAngle(quat, out)
 {
@@ -297,15 +311,12 @@ function startSensors() {
 
                         const zeroBias = 0.02;
                         
-                        console.log(accel_sensor.timestamp, gyroscope.timestamp, accel_sensor.timestamp - gyroscope.timestamp);
-                        if(accel_sensor.timestamp - gyroscope.timestamp !== 0)
-                        {
+                        //console.log(accel_sensor.timestamp, gyroscope.timestamp, accel_sensor.timestamp - gyroscope.timestamp);
                         //alpha = (1 - zeroBias) * (alpha + gyroscope.z * dt);                        
                         alpha = alpha + gyro_filtered.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         gamma = bias * (gamma + gyro_filtered.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
 //gamma = (gamma + gyro_filtered.y * dt);
-                        }
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
 //console.log(Date.now());
                 };
@@ -387,6 +398,7 @@ function startRecording(stream) {
                         Object.assign(b, frameData);
                         dataArray.push(b);
                         frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null};
+                        buildCameraPath();
 	        };
 
 	        mediaRecorder.onerror = function(e){
