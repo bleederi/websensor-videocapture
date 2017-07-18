@@ -228,7 +228,7 @@ function selectSensor() {
 }
 
 function buildCameraPath() {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
-        let ori = dataArray[0].ori;
+        let ori = frameData.ori;
         let oriDiff = null;
         if(ori !== undefined)
         {
@@ -236,7 +236,6 @@ function buildCameraPath() {    //Build the shaky camera path from the sensor me
         }
         cameraCoord.x = canvas.width - videoElement.videoWidth * (oriDiff.yaw/Math.PI);
         console.log(cameraCoord.x);
-
 }
 
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
