@@ -242,7 +242,6 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                         Object.assign(b, cameraCoord);
                         cameraPath.push(b);
                 }
-                console.log(cameraCoord.x, cameraCoord.y);
         }
 }
 
@@ -451,7 +450,7 @@ videoElement.addEventListener('play', function() {
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
         buildCameraPath(dataArray);     //build camera path
-        readFrameData(blob, orientationData);    //reads the video into dataArray2
+        readFrameData(blob, orientationData, cameraPath);    //reads the video into dataArray2
 }, false);
 
                         /*//Read blob data so we can stabilize the video                        
@@ -499,7 +498,7 @@ function stopRecording(){
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
-function readFrameData(blob, oriArray) {     //Read video data from blob to object form with pixel data we can operate on
+function readFrameData(blob, oriArray, cameraPath) {     //Read video data from blob to object form with pixel data we can operate on
         //TODO: sensor readings and frame data in desync - frame data too late/sensor data ahead
         //console.log("frame");
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
@@ -511,6 +510,8 @@ function readFrameData(blob, oriArray) {     //Read video data from blob to obje
         //let delay = -10;
         var timeFromStart = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
+        let cameraPos = {"x": cameraPath[nFrame].x, "y": cameraPath[nFrame].y}
+        console.log(cameraPos.x, cameraPos.y);
         if(nFrame === 0)
         {
                 //console.log(dataArray);
