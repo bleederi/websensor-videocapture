@@ -300,7 +300,7 @@ function startSensors() {
                         alpha = alpha + gyro_filtered.z * dt;
                         beta = bias * (beta + gyroscope.x * dt) + (1.0 - bias) * (accel_sensor.x * scale / norm);
                         //gamma = bias * (gamma + gyro_filtered.y * dt) + (1.0 - bias) * (accel_sensor.y * -scale / norm);
-gamma = bias * (gamma + gyro_filtered.y * dt);
+gamma = (gamma + gyro_filtered.y * dt);
                         aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha, beta: beta, gamma: gamma};
 console.log(Date.now());
                 };
