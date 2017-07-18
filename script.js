@@ -515,7 +515,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                 //console.log(dataArray);
                 //timeAtStart = frameDataL.ori.time;
         }
-        else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
+        else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined && cameraPath !== undefined)    //all subsequent frames
         {
                 //console.log(nFrame);
                 //console.log(dataL);
@@ -528,11 +528,11 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                 //while(!videoElement.ended)
                 //{
                 let cameraPos = null;
-                if(cameraPath !== undefined)
-                {
+                //if(cameraPath !== undefined)
+                //{
                         cameraPos = {"x": cameraPath[nFrame].x, "y": cameraPath[nFrame].y}
                         console.log(cameraPos.x, cameraPos.y);
-                }                
+                //}                
                 let oriDiff = null;
                 let deltaT = frameDataL.time - dataArray[nFrame-1].time;
                 //console.log(deltaT);
