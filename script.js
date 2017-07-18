@@ -235,7 +235,6 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                        console.log(canvas.width, canvas.height);
                         cameraCoord.x = (1/2) * canvas.width + (1/2)*Math.sin(oriDiff.yaw) * canvas.width;
                         cameraCoord.y = (1/2) * canvas.height + (1/2)*Math.sin(oriDiff.roll) * canvas.height;
                         var b = new Object;     //need to push by value
@@ -649,10 +648,12 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         ctx.translate(-(videoElement.videoWidth/2 + (1/4) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
         ctx.beginPath();
-        for(let i=0; i<nFrame; i++)
+        if(cameraPath !== undefined) {
+        for(let i=0; i<cameraPath.length; i++)
         {
                 ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
-                        console.log(cameraPath.x, cameraPath.y);
+                        console.log(cameraPath[i].x, cameraPath[i].y);
+        }
         }
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
