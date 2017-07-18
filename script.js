@@ -527,7 +527,6 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                 //console.log(timestamps[nFrame] - timestamps[0], videoElement.currentTime);
                 //while(!videoElement.ended)
                 //{
-                let cameraPos = null;
                 //if(cameraPath !== undefined)
                 //{
                         cameraPos = {"x": cameraPath[nFrame].x, "y": cameraPath[nFrame].y}
