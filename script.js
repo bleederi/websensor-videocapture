@@ -503,7 +503,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         //TODO: sensor readings and frame data in desync - frame data too late/sensor data ahead
         //console.log("frame");
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
-        console.log(prevFrame, nFrame);
+        //console.log(prevFrame, nFrame);
         //let x = 0;
         //let y = 0;
         let dx = 0;
