@@ -471,7 +471,7 @@ videoElement.addEventListener('play', function() {
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
-        cameraPath = smooth(cameraPath, 0.85);       //smoothen the path
+        //cameraPath = smooth(cameraPath, 0.85);       //smoothen the path
         //console.log(cameraPath);
         readFrameData();    //reads the video into dataArray2
 }, false);
