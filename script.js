@@ -213,6 +213,27 @@ function magnitude(vector)      //Calculate the magnitude of a vector
 return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
+function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
+    var weighted = average(values) * alpha;
+    var smoothed = [];
+    for (var i in values) {
+        var curr = values[i];
+        var prev = smoothed[i - 1] || values[values.length - 1];
+        var next = curr || values[0];
+        var improved = Number(this.average([weighted, prev, curr, next]).toFixed(2));
+        smoothed.push(improved);
+    }
+    return smoothed;
+}
+
+function average(data) {
+    var sum = data.reduce(function(sum, value) {
+        return sum + value;
+    }, 0);
+    var avg = sum / data.length;
+    return avg;
+}
+
 function update_debug()
 {
                         document.getElementById("ori").textContent = `Orientation: ${ori.roll} ${ori.pitch} ${ori.yaw}`;
@@ -662,6 +683,7 @@ function readFrameData() {     //Read video data from blob to object form with p
                 console.log("ended");
                 cancelAnimationFrame(ref);
         if(cameraPath !== undefined) {
+        smooth(cameraPath, 0.85);       //smoothen the path
         //console.log(cameraPath);
         for(let i=0; i<nFrame; i++)
         {
