@@ -264,6 +264,7 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                         cameraPath.push(b);
                 }
         }
+        console.log(cameraPath);
         return cameraPath;
 }
 
