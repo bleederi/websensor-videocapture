@@ -650,10 +650,10 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
         ctx.beginPath();
         if(cameraPath !== undefined) {
         //console.log(cameraPath);
-        for(let i=0; i<cameraPath.length; i++)
+        for(let i=0; i<nFrame; i++)
         {
                 ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
-                        //console.log(cameraPath[i].x, cameraPath[i].y);
+                console.log(cameraPath[i].x, cameraPath[i].y);
         }
 console.log(cameraPath.length, nFrame);
         }
