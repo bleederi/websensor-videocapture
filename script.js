@@ -220,7 +220,7 @@ function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
         var curr = values[i];
         var prev = smoothed[i - 1] || values[values.length - 1];
         var next = curr || values[0];
-        var improved = Number(this.average([weighted, prev, curr, next]).toFixed(2));
+        var improved = Number(average([weighted, prev, curr, next]).toFixed(2));
         smoothed.push(improved);
     }
     return smoothed;
