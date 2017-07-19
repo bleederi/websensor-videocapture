@@ -671,7 +671,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
 //console.log(cameraPath.length, nFrame);
         }
         }
-        if(nFrame >= orientationData.length-1)
+        else if(nFrame >= orientationData.length-1)
         {
                 //x = 0;
                 //y = 0;
@@ -680,9 +680,12 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                 nFrame = 0;
                 cancelAnimationFrame(ref);
         }
-        prevFrame = nFrame;
-        //nFrame = nFrame + 1;
-        ref = requestAnimationFrame(readFrameData);
+        else
+        {
+                prevFrame = nFrame;
+                //nFrame = nFrame + 1;
+                ref = requestAnimationFrame(readFrameData);
+        }
 }
 
 function stabilize(dataArrayArg) { //Create a stabilized video from the pixel data given as input
