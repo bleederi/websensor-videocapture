@@ -679,7 +679,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         //ctx2.translate(-videoElement.videoWidth/2 - videoElement.videoWidth * (1.5*angle.gamma/(Math.PI)), 0);
         ctx2.putImageData(imgData, 0, 0, 0, 0, canvas2.width, canvas2.height);
         }
-        if(videoElement.ended || prevFrame = nFrame)
+        if(videoElement.ended || prevFrame == nFrame)
         {
                 //x = 0;
                 //y = 0;
