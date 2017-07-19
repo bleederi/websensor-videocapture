@@ -404,7 +404,7 @@ function startRecording(stream) {
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
 
-	        mediaRecorder.start(10);
+	        mediaRecorder.start();  //argument blob length in ms
 
 	        var url = window.URL;
 	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
