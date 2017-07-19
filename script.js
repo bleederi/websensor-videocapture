@@ -471,6 +471,7 @@ videoElement.addEventListener('play', function() {
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
+        cameraPath = smooth(cameraPath, 0.85);       //smoothen the path
         //console.log(cameraPath);
         readFrameData();    //reads the video into dataArray2
 }, false);
@@ -683,7 +684,6 @@ function readFrameData() {     //Read video data from blob to object form with p
                 console.log("ended");
                 cancelAnimationFrame(ref);
         if(cameraPath !== undefined) {
-        smooth(cameraPath, 0.85);       //smoothen the path
         //console.log(cameraPath);
         for(let i=0; i<nFrame; i++)
         {
