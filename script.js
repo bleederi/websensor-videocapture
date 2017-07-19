@@ -87,7 +87,7 @@ var x = 0;
 var y = 0;      //position for the square
 var angle = 0;
 
-var cameraPath = [];    //array of canvas coordinates describing the camera path
+var cameraPath2 = [];    //array of canvas coordinates describing the camera path
 var cameraCoord = {"x": null, "y": null, "time": null};
 
 //Sliders
@@ -249,6 +249,7 @@ function selectSensor() {
 }
 
 function buildCameraPath(dataArray) {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
+        let cameraPath = [];
         for (let i=0; i<dataArray.length; i++)
         {
                 let ori = dataArray[i].ori;
@@ -470,7 +471,7 @@ videoElement.addEventListener('play', function() {
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
-        cameraPath = buildCameraPath(dataArray);     //build camera path
+        cameraPath2 = buildCameraPath(dataArray);     //build camera path
         //cameraPath = smooth(cameraPath, 0.85);       //smoothen the path
         //console.log(cameraPath);
         readFrameData();    //reads the video into dataArray2
@@ -683,12 +684,12 @@ function readFrameData() {     //Read video data from blob to object form with p
                 //y = 0;
                 console.log("ended");
                 cancelAnimationFrame(ref);
-        if(cameraPath !== undefined) {
+        if(cameraPath2 !== undefined) {
         //console.log(cameraPath);
         for(let i=0; i<nFrame; i++)
         {
-                ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
-                //console.log(cameraPath[i].x, cameraPath[i].y);
+                ctx.fillRect(cameraPath2[i].x,cameraPath2[i].y,3,3);
+                //console.log(cameraPath2[i].x, cameraPath2[i].y);
         }
 //console.log(cameraPath.length, nFrame);
         }
