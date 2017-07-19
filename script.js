@@ -473,7 +473,7 @@ videoElement.addEventListener('play', function() {
         cameraPath = buildCameraPath(dataArray);     //build camera path
         //cameraPath = smooth(cameraPath, 0.85);       //smoothen the path
         //console.log(cameraPath);
-        readFrameData(cameraPath);    //reads the video into dataArray2
+        readFrameData();    //reads the video into dataArray2
 }, false);
 
                         /*//Read blob data so we can stabilize the video                        
@@ -521,7 +521,7 @@ function stopRecording(){
 	videoElement.controls = true;
 }
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
-function readFrameData(cameraPath) {     //Read video data from blob to object form with pixel data we can operate on
+function readFrameData() {     //Read video data from blob to object form with pixel data we can operate on
         //TODO: sensor readings and frame data in desync - frame data too late/sensor data ahead
         //console.log("frame");
         nFrame = videoElement.webkitDecodedFrameCount - extraFrames;
@@ -706,7 +706,7 @@ function readFrameData(cameraPath) {     //Read video data from blob to object f
         {
                 prevFrame = nFrame;
                 //nFrame = nFrame + 1;
-                ref = requestAnimationFrame(readFrameData.bind(null, cameraPath));
+                ref = requestAnimationFrame(readFrameData);
         }
 }
 
