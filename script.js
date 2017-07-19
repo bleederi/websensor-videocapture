@@ -655,6 +655,7 @@ function readFrameData(blob, oriArray, cameraPath) {     //Read video data from 
                 ctx.fillRect(cameraPath[i].x,cameraPath[i].y,3,3);
                         //console.log(cameraPath[i].x, cameraPath[i].y);
         }
+console.log(cameraPath.length, nFrame);
         }
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
