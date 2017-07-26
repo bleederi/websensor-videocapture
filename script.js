@@ -95,6 +95,8 @@ var angle = 0;
 var cameraPath2 = [];    //array of canvas coordinates describing the camera path
 var cameraCoord = {"x": null, "y": null, "time": null};
 
+recordingStarted = false;
+
 //Sliders
 var slider_delay = document.getElementById("slider_delay");
 var slider_delay_div = document.getElementById("slider_delay_amount");
@@ -377,7 +379,7 @@ function startSensors() {
                         let yaw = orientation_sensor.yaw;
                         //time = orientation_sensor.timestamp;
                         //time = Date.now();
-                        if(!initialoriobtained) //obtain initial orientation
+                        if(!initialoriobtained && recordingStarted) //obtain initial orientation
                         {
                                 oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 //timeAtStart = orientation_sensor.timestamp;
@@ -413,6 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
 function startRecording(stream) {
+                recordingStarted = true;
                 interval=window.setInterval(update_debug,100);
 	        //var options = {mimeType: 'video/webm;codecs=vp9'};
 		//mediaRecorder = new MediaRecorder(stream, options);
