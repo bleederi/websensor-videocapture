@@ -282,7 +282,7 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                 if(ori !== undefined)
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
-                        console.log(oriDiff.yaw);
+                        //console.log(oriDiff.yaw);
                         cameraCoord.x = (1/2)* Math.sin(oriDiff.yaw) * canvas.width;
                         cameraCoord.y = (1/2)* Math.sin(oriDiff.roll) * canvas.height;
                         var b = new Object;     //need to push by value
