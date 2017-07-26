@@ -537,7 +537,8 @@ function readFrameData() {     //Read video data from blob to object form with p
         //TODO: sensor readings and frame data in desync - frame data too late/sensor data ahead
         //console.log("frame");
         //nFrame = videoElement.webkitDecodedFrameCount + videoElement.webkitDroppedFrameCount - extraFrames;
-        nFrame = videoElement.currentTime*fps;
+        nFrame = Math.floor(videoElement.currentTime*fps);
+        console.log(nFrame);
         //console.log(prevFrame, nFrame);
         //let x = 0;
         //let y = 0;
