@@ -709,16 +709,18 @@ function readFrameData() {     //Read video data from blob to object form with p
         //render video and rect
         let widthR = 0.6*videoElement.videoWidth;
         let heightR = 0.6*videoElement.videoHeight;
-        //let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
+        let dx = -cameraPath2[nFrame].x;
+        let dy = -cameraPath2[nFrame].y;
+        //let trans = {"x": videoElement.videoWidth/2 + dx, "y": videoElement.videoHeight/2 + dy};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
 
         //NOTE: Direction of translations and rotations depend on camera used (front or back)
-        ctx.translate(videoElement.videoWidth/2 - cameraPath2[nFrame].x, videoElement.videoHeight/2 - cameraPath2[nFrame].y);
+        ctx.translate(videoElement.videoWidth/2 + dx, videoElement.videoHeight/2 + dy);
         ctx.rotate(-angle.alpha);       //negative if rear camera, positive if front camera
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
         ctx.rotate(angle.alpha); //positive if rear camera, negative if front camera
-        ctx.translate(-(videoElement.videoWidth/2 - cameraPath2[nFrame].x), -(videoElement.videoHeight/2 - cameraPath2[nFrame].y));
+        ctx.translate(-(videoElement.videoWidth/2 + dx), -(videoElement.videoHeight/2 + dy));
         ctx.restore();
         ctx.beginPath();
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
