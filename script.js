@@ -504,9 +504,10 @@ videoElement.addEventListener('play', function() {
         cameraPath = buildCameraPath(dataArray);     //build camera path
         tempCameraPath.x = smooth(cameraPath.map(a => a.x), 0.85);       //smoothen the path
         tempCameraPath.y = smooth(cameraPath.map(a => a.y), 0.85);       //smoothen the path
-        for(let i=0; i<tempCameraPath.length; i++)
+        console.log(tempCameraPath);
+        for(let i=0; i<tempCameraPath.x.length; i++)
         {
-                let xy = {"x": tempCameraPath[i].x, "y": tempCameraPath[i].y};
+                let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
                 cameraPath2.push(xy);
         }        
         console.log(cameraPath2);
