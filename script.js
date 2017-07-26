@@ -95,7 +95,7 @@ var angle = 0;
 var cameraPath2 = [];    //array of canvas coordinates describing the camera path
 var cameraCoord = {"x": null, "y": null, "time": null};
 
-recordingStarted = false;
+var recordingStarted = false;
 
 //Sliders
 var slider_delay = document.getElementById("slider_delay");
