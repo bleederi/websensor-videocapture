@@ -703,7 +703,7 @@ function readFrameData() {     //Read video data from blob to object form with p
 //console.log(cameraPath.length, nFrame);
         }
         }
-        else if(nFrame >= orientationData.length-1)
+        /*else if(nFrame >= orientationData.length-1)
         {
                 //x = 0;
                 //y = 0;
@@ -711,7 +711,7 @@ function readFrameData() {     //Read video data from blob to object form with p
                 prevFrame = null;
                 nFrame = 0;
                 cancelAnimationFrame(ref);
-        }
+        }*/
         else
         {
                 prevFrame = nFrame;
