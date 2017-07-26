@@ -641,8 +641,8 @@ function readFrameData() {     //Read video data from blob to object form with p
                                 //y = 100*oriDiff.roll;
                                 //x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 //y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
-                                //angle = oriDiff.yaw;
-                                angle = {"alpha":frameDataL.aVel.alpha - dataArray[0].aVel.alpha, "beta":frameDataL.aVel.beta, "gamma":frameDataL.aVel.gamma - dataArray[0].aVel.gamma};
+                                angle = {"alpha":oriDiff.roll, "beta":oriDiff.pitch, "gamma":oriDiff.yaw};  //angle from ori sensor
+                                //angle = {"alpha":frameDataL.aVel.alpha - dataArray[0].aVel.alpha, "beta":frameDataL.aVel.beta, "gamma":frameDataL.aVel.gamma - dataArray[0].aVel.gamma};        //angle from gyro
                                 //console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
