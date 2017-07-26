@@ -693,6 +693,8 @@ function readFrameData() {     //Read video data from blob to object form with p
         let heightR = 0.6*videoElement.videoHeight;
         //let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        //NOTE: Direction of translations and rotations depend on camera used (front or back)
         //ctx.translate(videoElement.videoWidth/2, videoElement.videoHeight/2);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
         //ctx.translate(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
