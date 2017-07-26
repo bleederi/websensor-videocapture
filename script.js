@@ -365,7 +365,7 @@ function startSensors() {
                         time = Date.now();
                         if(!initialoriobtained) //obtain initial orientation
                         {
-                                oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": Date.now()};
+                                oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 //timeAtStart = orientation_sensor.timestamp;
                                 timeAtStart = Date.now();
                                 initialoriobtained = true;
