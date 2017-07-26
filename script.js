@@ -20,7 +20,7 @@
 
 'use strict';
 
-var constraints = {audio: true,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }}, facingMode: { ideal: "environment" }};
+var constraints = {audio: false,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }, facingMode: { ideal: "environment" }}};
 var mediaRecorder = null;
 var chunks = [];
 var videoData = null;
