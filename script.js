@@ -69,6 +69,7 @@ var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 var delay = 0;
+var rco = 1;    //determines canvas rotation amount
 var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms - this is how much the timestamps differ
 
 //canvas
@@ -101,6 +102,14 @@ slider_delay.onchange = () => {
         delay = slider_delay.value;
         slider_delay_div.innerHTML = delay;
         console.log("Delay:", delay);
+};
+
+var slider_rco = document.getElementById("slider_delay");
+var slider_rco_div = document.getElementById("slider_delay_amount");
+slider_rco.onchange = () => {
+        rco = slider_rco.value;
+        slider_rco_div.innerHTML = rco;
+        console.log("Rotation coefficient:", rco);
 };
 
 class HighPassFilterData {      //https://w3c.github.io/motion-sensors/#pass-filters
