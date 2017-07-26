@@ -290,7 +290,6 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                         cameraPath.push(b);
                 }
         }
-        console.log(cameraPath);
         return cameraPath;
 }
 
@@ -507,9 +506,9 @@ videoElement.addEventListener('play', function() {
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
+        console.log(cameraPath);
         tempCameraPath.x = smooth(cameraPath.map(a => a.x), smoothing);       //smoothen the path
         tempCameraPath.y = smooth(cameraPath.map(a => a.y), smoothing);       //smoothen the path
-        console.log(tempCameraPath);
         for(let i=0; i<tempCameraPath.x.length; i++)
         {
                 let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
