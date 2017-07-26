@@ -611,7 +611,7 @@ function readFrameData() {     //Read video data from blob to object form with p
                                 //x = videoElement.videoWidth*(oriDiff.yaw/(Math.PI));
                                 //y = -videoElement.videoHeight*(oriDiff.roll/(Math.PI));     //each 2pi means 1 video height
                                 //angle = oriDiff.yaw;
-                                angle = {"alpha":1.5*(frameDataL.aVel.alpha - dataArray[0].aVel.alpha), "beta":frameDataL.aVel.beta, "gamma":frameDataL.aVel.gamma - dataArray[0].aVel.gamma};
+                                angle = {"alpha":frameDataL.aVel.alpha - dataArray[0].aVel.alpha, "beta":frameDataL.aVel.beta, "gamma":frameDataL.aVel.gamma - dataArray[0].aVel.gamma};
                                 //console.log(x, y, angle);
         //Modifying canvas size, we can show only the desired part of the video TODO: modify according to stabilization box
         //canvas.width = videoElement.videoWidth;
@@ -681,12 +681,12 @@ function readFrameData() {     //Read video data from blob to object form with p
         //let trans = {"x": x+0.1*canvas.width + widthR/2, "y": y+0.1*canvas.height + heightR/2};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
-        ctx.translate(videoElement.videoWidth/2 + (1/4) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
+        ctx.translate(videoElement.videoWidth/2 + (1/2) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
         ctx.rotate(angle.alpha);
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
         ctx.rotate(-angle.alpha);
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
-        ctx.translate(-(videoElement.videoWidth/2 + (1/4) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
+        ctx.translate(-(videoElement.videoWidth/2 + (1/2) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
         ctx.beginPath();
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
