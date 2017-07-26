@@ -230,9 +230,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 }
 
 function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
-        console.log(values);
     var weighted = average(values) * alpha;
-        console.log(weighted);
     var smoothed = [];
     for (var i in values) {
         var curr = values[i];
@@ -240,9 +238,7 @@ function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
         var next = curr || values[0];
         var improved = Number(average([weighted, prev, curr, next]).toFixed(2));
         smoothed.push(improved);
-        console.log(improved);
     }
-        console.log(smoothed);
     return smoothed;
 }
 
