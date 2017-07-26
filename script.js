@@ -29,7 +29,7 @@ var interval = null;
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
-var sensorfreq = 30;
+var sensorfreq = 60;
 var selectedSensor = null;
 
 //var roll = null;
@@ -405,7 +405,7 @@ function startRecording(stream) {
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
 
-	        mediaRecorder.start(1000/sensorfreq);  //argument blob length in ms
+	        mediaRecorder.start(1000/(sensorfreq/2));  //argument blob length in ms
 
 	        var url = window.URL;
 	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
