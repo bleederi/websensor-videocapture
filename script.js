@@ -69,6 +69,7 @@ var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 var delay = 0;
+var smoothing = 0.85;
 var rco = 1;    //determines canvas rotation amount
 var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms - this is how much the timestamps differ
 
@@ -105,6 +106,14 @@ slider_delay.onchange = () => {
         delay = slider_delay.value;
         slider_delay_div.innerHTML = delay;
         console.log("Delay:", delay);
+};
+
+var slider_smoothing = document.getElementById("slider_smoothing");
+var slider_smoothing_div = document.getElementById("slider_smoothing_amount");
+slider_smoothing.onchange = () => {
+        smoothing = slider_smoothing.value;
+        slider_smoothing_div.innerHTML = smoothing;
+        console.log("Smoothing:", smoothing);
 };
 
 /*var slider_rco = document.getElementById("slider_delay");
@@ -498,8 +507,8 @@ videoElement.addEventListener('play', function() {
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
-        tempCameraPath.x = smooth(cameraPath.map(a => a.x), 0.85);       //smoothen the path
-        tempCameraPath.y = smooth(cameraPath.map(a => a.y), 0.85);       //smoothen the path
+        tempCameraPath.x = smooth(cameraPath.map(a => a.x), smoothing);       //smoothen the path
+        tempCameraPath.y = smooth(cameraPath.map(a => a.y), smoothing);       //smoothen the path
         console.log(tempCameraPath);
         for(let i=0; i<tempCameraPath.x.length; i++)
         {
