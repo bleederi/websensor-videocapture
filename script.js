@@ -560,7 +560,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         //console.log("frame");
         //nFrame = videoElement.webkitDecodedFrameCount + videoElement.webkitDroppedFrameCount - extraFrames;
         nFrame = Math.floor(videoElement.currentTime*fps);
-        console.log(nFrame);
+        //console.log(nFrame);
         //console.log(prevFrame, nFrame);
         //let x = 0;
         //let y = 0;
@@ -579,7 +579,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined && nFrame < videoElement.duration * fps)    //all subsequent frames
         {
                 let frame = frameDataL.frame;
-                console.log(frame, nFrame);
+                //console.log(frame, nFrame);
                 //console.log(nFrame);
                 //console.log(dataL);
                 timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms)
