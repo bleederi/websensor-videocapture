@@ -574,6 +574,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         //let y = 0;
         let dx = 0;
         let dy = 0;
+        let trans = {"x": null, "y": null};
         //let delay = -10;
         var timeFromStart = null;
         //var cameraPos = null;
@@ -708,9 +709,9 @@ function readFrameData() {     //Read video data from blob to object form with p
         //render video and rect
         let widthR = 0.6*videoElement.videoWidth;
         let heightR = 0.6*videoElement.videoHeight;
-        let dx = -cameraPath2[nFrame].x;
-        let dy = -cameraPath2[nFrame].y;
-        let trans = {"x": videoElement.videoWidth/2 + dx, "y": videoElement.videoHeight/2 + dy};
+        dx = -cameraPath2[nFrame].x;
+        dy = -cameraPath2[nFrame].y;
+        trans = {"x": videoElement.videoWidth/2 + dx, "y": videoElement.videoHeight/2 + dy};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
 
