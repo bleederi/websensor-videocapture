@@ -583,7 +583,8 @@ function readFrameData() {     //Read video data from blob to object form with p
                 }*/
                 //console.log(dataL);
                         //videoElement.playbackRate = 0.5;        //fix playback being too fast
-                        let ori = orientationData[nFrame];
+                        //let ori = orientationData[nFrame];
+                        let ori = frameDataL.ori;
                         //ori = dataArrayL[nFrame].ori;
                         let aVel = frameDataL.aVel;
                         //console.log(nFrame, ori, aVel);
