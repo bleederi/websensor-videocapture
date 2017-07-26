@@ -553,7 +553,7 @@ function readFrameData() {     //Read video data from blob to object form with p
                 //console.log(dataArray);
                 //timeAtStart = frameDataL.ori.time;
         }
-        else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
+        else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined && nFrame < videoElement.duration * fps)    //all subsequent frames
         {
                 let frame = frameDataL.frame;
                 console.log(frame, nFrame);
