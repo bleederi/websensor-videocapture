@@ -64,7 +64,7 @@ var timestamps = [];
 var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
-var delay = 5;
+var delay = 0;
 var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms - this is how much the timestamps differ
 
 //canvas
