@@ -271,8 +271,8 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         console.log(oriDiff.yaw);
-                        cameraCoord.x = 2* Math.sin(oriDiff.yaw) * canvas.width;
-                        cameraCoord.y = 2* Math.sin(oriDiff.roll) * canvas.height;
+                        cameraCoord.x = (1/2)* Math.sin(oriDiff.yaw) * canvas.width;
+                        cameraCoord.y = (1/2)* Math.sin(oriDiff.roll) * canvas.height;
                         var b = new Object;     //need to push by value
                         Object.assign(b, cameraCoord);
                         cameraPath.push(b);
@@ -692,13 +692,13 @@ function readFrameData() {     //Read video data from blob to object form with p
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
         //ctx.translate(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
-        ctx.translate(videoElement.videoWidth/2 - cameraPath2[nFrame].x, videoElement.videoHeight/2 + cameraPath2[nFrame].y);
+        ctx.translate(videoElement.videoWidth/2 + cameraPath2[nFrame].x, videoElement.videoHeight/2 + cameraPath2[nFrame].y);
         ctx.rotate(-angle.alpha);       //negative if rear camera, positive if front camera
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
         ctx.rotate(angle.alpha); //positive if rear camera, negative if front camera
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         //ctx.translate(-(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
-        ctx.translate(-(videoElement.videoWidth/2 - cameraPath2[nFrame].x), -(videoElement.videoHeight/2 + cameraPath2[nFrame].y));
+        ctx.translate(-(videoElement.videoWidth/2 + cameraPath2[nFrame].x), -(videoElement.videoHeight/2 + cameraPath2[nFrame].y));
         ctx.beginPath();
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
