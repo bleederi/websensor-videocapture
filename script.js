@@ -546,8 +546,6 @@ function readFrameData() {     //Read video data from blob to object form with p
         var timeFromStart = null;
         //var cameraPos = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
-        let frame = frameDataL.frame;
-        console.log(frame, nFrame);
         if(nFrame === 0 && !videoElement.ended)
         {
                 //console.log(dataArray);
@@ -555,6 +553,8 @@ function readFrameData() {     //Read video data from blob to object form with p
         }
         else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined)    //all subsequent frames
         {
+                let frame = frameDataL.frame;
+                console.log(frame, nFrame);
                 //console.log(nFrame);
                 //console.log(dataL);
                 timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms)
