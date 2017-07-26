@@ -46,7 +46,7 @@ var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
 var aVelData = [];
-var frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null};
+var frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
 var dataArray = [];     //array to store all the combined data
 var dataArray2 = [];     //array to store all the combined data
 
@@ -61,6 +61,7 @@ var timeInitial = null;
 var time = null;
 var timestamp = null;
 var timestamps = [];
+var timestampDiffs = [];
 var timeAtStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
@@ -362,7 +363,7 @@ function startSensors() {
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
                         //time = orientation_sensor.timestamp;
-                        time = Date.now();
+                        //time = Date.now();
                         if(!initialoriobtained) //obtain initial orientation
                         {
                                 oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
@@ -413,8 +414,10 @@ function startRecording(stream) {
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
                         //console.log(time);
+                        time = Date.now();
                         timestamps.push(time);
                         frameData.time = time;
+                        timestampDiffs.push(time-timeAtStart);
 		        chunks.push(e.data);
                         frameData.data = e.data;         
                         orientationData.push(ori);
@@ -422,12 +425,13 @@ function startRecording(stream) {
                         frameData.ori = ori;
                         frameData.aVel = aVel;
                         frameData.accel = accel;
+                        frameData.timeDiff = time-timeAtStart;
                         //frameData.accelnog = accelNoG;
                         //dataArray.push(frameData);
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
                         dataArray.push(b);
-                        frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null};
+                        frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
 	        };
 
 	        mediaRecorder.onerror = function(e){
