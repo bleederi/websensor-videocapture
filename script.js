@@ -231,6 +231,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 
 function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
     var weighted = average(values) * alpha;
+        console.log(weighted);
     var smoothed = [];
     for (var i in values) {
         var curr = values[i];
