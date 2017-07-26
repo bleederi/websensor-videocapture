@@ -25,9 +25,10 @@ var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
 var sensorfreq = 60;
+var fps = 30;
 var selectedSensor = null;
 
-var constraints = {audio: false,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }, facingMode: { ideal: "environment" }, frameRate: { ideal: 30, max: sensorfreq }}};
+var constraints = {audio: false,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }, facingMode: { ideal: "environment" }, frameRate: { ideal: fps, max: sensorfreq }}};
 var mediaRecorder = null;
 var chunks = [];
 var videoData = null;
@@ -406,7 +407,7 @@ function startRecording(stream) {
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
 
-	        mediaRecorder.start(Math.floor(1000/(sensorfreq/2)));  //argument blob length in ms
+	        mediaRecorder.start(1/fps);  //argument blob length in ms
 
 	        var url = window.URL;
 	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
