@@ -20,17 +20,18 @@
 
 'use strict';
 
-var constraints = {audio: false,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }, facingMode: { ideal: "environment" }}};
-var mediaRecorder = null;
-var chunks = [];
-var videoData = null;
-var interval = null;
 
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
 var sensorfreq = 60;
 var selectedSensor = null;
+
+var constraints = {audio: false,video: {  width: { min: 640, ideal: 640, max: 640 },  height: { min: 480, ideal: 480, max: 480 }, facingMode: { ideal: "environment" }, frameRate: { ideal: 30, max: sensorfreq }}};
+var mediaRecorder = null;
+var chunks = [];
+var videoData = null;
+var interval = null;
 
 //var roll = null;
 //var pitch = null;
