@@ -48,7 +48,7 @@ var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
 var aVelData = [];
-var frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
+var frameData = {"frame": null, "data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
 var dataArray = [];     //array to store all the combined data
 var dataArray2 = [];     //array to store all the combined data
 
@@ -59,6 +59,7 @@ var beta = 0;
 var gamma = 0;
 var accl = null;
 
+var frame = null;
 var timeInitial = null;
 var time = null;
 var timestamp = null;
@@ -408,6 +409,7 @@ function startRecording(stream) {
 		mediaRecorder = new MediaRecorder(stream);
 
 	        mediaRecorder.start(1000/fps);  //argument blob length in ms
+                frame = 0;
 
 	        var url = window.URL;
 	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
@@ -416,6 +418,7 @@ function startRecording(stream) {
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
                         //console.log(time);
+                        framedata.frame = frame;
                         time = Date.now();
                         timestamps.push(time);
                         frameData.time = time;
@@ -433,7 +436,8 @@ function startRecording(stream) {
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
                         dataArray.push(b);
-                        frameData = {"data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
+                        frameData = {"frame": null, "data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
+                        frame = frame + 1;
 	        };
 
 	        mediaRecorder.onerror = function(e){
@@ -542,6 +546,8 @@ function readFrameData() {     //Read video data from blob to object form with p
         var timeFromStart = null;
         //var cameraPos = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
+        let frame = frameDataL.frame;
+        console.log(frame);
         if(nFrame === 0 && !videoElement.ended)
         {
                 //console.log(dataArray);
