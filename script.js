@@ -240,12 +240,13 @@ function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
         var next = curr || values[0];
         var improved = Number(average([weighted, prev, curr, next]).toFixed(2));
         smoothed.push(improved);
+        console.log(improved);
     }
+        console.log(smoothed);
     return smoothed;
 }
 
 function average(data) {
-        console.log(data);
     var sum = data.reduce(function(sum, value) {
         return sum + value;
     }, 0);
