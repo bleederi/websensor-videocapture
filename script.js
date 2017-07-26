@@ -92,6 +92,7 @@ var x = 0;
 var y = 0;      //position for the square
 var angle = 0;
 
+var cameraPath = [];    //smoothed camera path
 var cameraPath2 = [];    //array of canvas coordinates describing the camera path
 var cameraCoord = {"x": null, "y": null, "time": null};
 
