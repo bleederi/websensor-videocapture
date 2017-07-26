@@ -230,6 +230,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 }
 
 function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
+        console.log(values);
     var weighted = average(values) * alpha;
         console.log(weighted);
     var smoothed = [];
@@ -244,6 +245,7 @@ function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
 }
 
 function average(data) {
+        console.log(data);
     var sum = data.reduce(function(sum, value) {
         return sum + value;
     }, 0);
