@@ -498,12 +498,18 @@ videoElement.addEventListener('play', function() {
         videoElement.play();
         nFrame = 0;
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
+        let tempCameraPath = [];
         //delay = Math.floor(sensorframeTimeDiff/durationPerFrame);
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
-        cameraPath2.x = smooth(cameraPath.map(function(a) {return a.x;}), 0.85);       //smoothen the path
-        cameraPath2.y = smooth(cameraPath.map(function(a) {return a.y;}), 0.85);       //smoothen the path
-        //console.log(cameraPath2);
+        tempCameraPath.x = smooth(cameraPath.map(function(a) {return a.x;}), 0.85);       //smoothen the path
+        tempCameraPath2.y = smooth(cameraPath.map(function(a) {return a.y;}), 0.85);       //smoothen the path
+        for(let i=0; i<tempCameraPath.length; i++)
+        {
+                let xy = {"x": tempCameraPath[i].x, "y": tempCameraPath[i].y};
+                cameraPath2.push(xy);
+        }        
+        console.log(cameraPath2);
         readFrameData();    //reads the video into dataArray2
 }, false);
 
