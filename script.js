@@ -696,14 +696,14 @@ function readFrameData() {     //Read video data from blob to object form with p
         //ctx.translate(videoElement.videoWidth/2, videoElement.videoHeight/2);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
         //ctx.translate(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
-        ctx.translate(-(videoElement.videoWidth/2 + cameraPath2[nFrame].x), videoElement.videoHeight/2 + cameraPath2[nFrame].y);
+        ctx.translate(videoElement.videoWidth/2 - cameraPath2[nFrame].x, videoElement.videoHeight/2 + cameraPath2[nFrame].y);
         ctx.rotate(-angle.alpha);       //negative if rear camera, positive if front camera
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
         ctx.rotate(angle.alpha); //positive if rear camera, negative if front camera
         //ctx.translate(-videoElement.videoWidth/2, -videoElement.videoHeight/2);        
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         //ctx.translate(-(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
-        ctx.translate(videoElement.videoWidth/2 + cameraPath2[nFrame].x, -(videoElement.videoHeight/2 + cameraPath2[nFrame].y));
+        ctx.translate(-(videoElement.videoWidth/2 - cameraPath2[nFrame].x), -(videoElement.videoHeight/2 + cameraPath2[nFrame].y));
         ctx.beginPath();
         ctx.rect((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);
