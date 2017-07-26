@@ -24,7 +24,7 @@
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
-var sensorfreq = 60;
+var sensorfreq = 30;
 var fps = 30;
 var selectedSensor = null;
 
