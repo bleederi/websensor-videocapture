@@ -503,7 +503,7 @@ videoElement.addEventListener('play', function() {
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         tempCameraPath.x = smooth(cameraPath.map(function(a) {return a.x;}), 0.85);       //smoothen the path
-        tempCameraPath2.y = smooth(cameraPath.map(function(a) {return a.y;}), 0.85);       //smoothen the path
+        tempCameraPath.y = smooth(cameraPath.map(function(a) {return a.y;}), 0.85);       //smoothen the path
         for(let i=0; i<tempCameraPath.length; i++)
         {
                 let xy = {"x": tempCameraPath[i].x, "y": tempCameraPath[i].y};
