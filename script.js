@@ -547,8 +547,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         //var cameraPos = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
         let frame = frameDataL.frame;
-        console.log(frame);
-        nFrame = frame;
+        console.log(frame, nFrame);
         if(nFrame === 0 && !videoElement.ended)
         {
                 //console.log(dataArray);
