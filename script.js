@@ -682,9 +682,9 @@ function readFrameData() {     //Read video data from blob to object form with p
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
         ctx.translate(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
-        ctx.rotate(2*angle.alpha);
+        ctx.rotate(-angle.alpha);
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
-        ctx.rotate(-2*angle.alpha);
+        ctx.rotate(angle.alpha);
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         ctx.translate(-(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
         ctx.beginPath();
