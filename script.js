@@ -408,7 +408,7 @@ function startRecording(stream) {
 		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
 
-	        mediaRecorder.start(1000/fps);  //argument blob length in ms
+	        mediaRecorder.start(1000/(2*fps));  //argument blob length in ms
                 frame = 0;
 
 	        var url = window.URL;
@@ -547,7 +547,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         //let delay = -10;
         var timeFromStart = null;
         //var cameraPos = null;
-        //let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
+        let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
         let frameDataL = dataArray[nFrame];
         if(nFrame === 0 && !videoElement.ended)
         {
