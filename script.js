@@ -701,11 +701,11 @@ function readFrameData() {     //Read video data from blob to object form with p
         console.log(cameraPath2);
         if(cameraPath2 !== undefined) {
         //console.log(cameraPath);
-        for(let i=0; i<nFrame; i++)
+        /*for(let i=0; i<nFrame; i++)
         {
                 ctx.fillRect(cameraPath2[i].x,cameraPath2[i].y,3,3);
                 //console.log(cameraPath2[i].x, cameraPath2[i].y);
-        }
+        }*/
 //console.log(cameraPath.length, nFrame);
         }
         }
