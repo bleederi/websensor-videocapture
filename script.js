@@ -418,7 +418,7 @@ function startRecording(stream) {
 	        mediaRecorder.ondataavailable = function(e) {
                         //console.log("Data available", e);
                         //console.log(time);
-                        framedata.frame = frame;
+                        frameData.frame = frame;
                         time = Date.now();
                         timestamps.push(time);
                         frameData.time = time;
