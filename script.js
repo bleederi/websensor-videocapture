@@ -104,13 +104,13 @@ slider_delay.onchange = () => {
         console.log("Delay:", delay);
 };
 
-var slider_rco = document.getElementById("slider_delay");
+/*var slider_rco = document.getElementById("slider_delay");
 var slider_rco_div = document.getElementById("slider_delay_amount");
 slider_rco.onchange = () => {
         rco = slider_rco.value;
         slider_rco_div.innerHTML = rco;
         console.log("Rotation coefficient:", rco);
-};
+};*/
 
 class HighPassFilterData {      //https://w3c.github.io/motion-sensors/#pass-filters
   constructor(reading, cutoffFrequency) {
@@ -691,9 +691,9 @@ function readFrameData() {     //Read video data from blob to object form with p
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.translate(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), videoElement.videoHeight/2);
         ctx.translate(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma), videoElement.videoHeight/2);
-        ctx.rotate(-angle.alpha);
+        ctx.rotate(-angle.alpha);       //negative if rear camera, positive if front camera
         ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);      
-        ctx.rotate(angle.alpha);
+        ctx.rotate(angle.alpha); //positive if rear camera, negative if front camera
         //ctx.translate(-(videoElement.videoWidth/2 + videoElement.videoWidth * (2*angle.gamma/(Math.PI)), -videoElement.videoHeight/2);
         ctx.translate(-(videoElement.videoWidth/2 + (1/1) * videoElement.videoWidth * Math.sin(angle.gamma)), -videoElement.videoHeight/2);
         ctx.beginPath();
@@ -704,7 +704,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         //ctx2.translate(-videoElement.videoWidth/2 - videoElement.videoWidth * (1.5*angle.gamma/(Math.PI)), 0);
         ctx2.putImageData(imgData, 0, 0, 0, 0, canvas2.width, canvas2.height);
         }
-        if(videoElement.ended || nFrame > videoElement.duration * fps)  //video ended
+        if(videoElement.ended || nFrame >= videoElement.duration * fps)  //video ended
         {
                 //x = 0;
                 //y = 0;
@@ -713,11 +713,11 @@ function readFrameData() {     //Read video data from blob to object form with p
         console.log(cameraPath2);
         if(cameraPath2 !== undefined) {
         //console.log(cameraPath);
-        /*for(let i=0; i<nFrame; i++)
+        for(let i=0; i<nFrame; i++)
         {
                 ctx.fillRect(cameraPath2[i].x,cameraPath2[i].y,3,3);
-                //console.log(cameraPath2[i].x, cameraPath2[i].y);
-        }*/
+                console.log(cameraPath2[i].x, cameraPath2[i].y);
+        }
 //console.log(cameraPath.length, nFrame);
         }
         }
