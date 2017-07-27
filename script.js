@@ -507,6 +507,7 @@ videoElement.addEventListener('play', function() {
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
+        /*
         tempCameraPath.x = smooth(cameraPath.map(a => a.x), smoothing);       //smoothen the path
         tempCameraPath.y = smooth(cameraPath.map(a => a.y), smoothing);       //smoothen the path
         for(let i=0; i<tempCameraPath.x.length; i++)
@@ -514,8 +515,8 @@ videoElement.addEventListener('play', function() {
                 let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
                 cameraPath2.push(xy);
         }        
-        console.log(cameraPath2);
-        //cameraPath2 = cameraPath;     //comment for smoothing
+        console.log(cameraPath2);*/
+        cameraPath2 = cameraPath;     //comment for smoothing
         readFrameData();    //reads the video into dataArray2
 }, false);
 
