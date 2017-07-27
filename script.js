@@ -720,7 +720,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         ctx.rotate(-angle.alpha);       //negative if rear camera, positive if front camera
         //ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);
         ctx.beginPath();
-        ctx.rect(-trans.x+(canvas.width-widthR)/2,-trans.y+(canvas.height-heightR)/2,widthR,heightR);
+        ctx.rect(trans.x+(canvas.width)/2,trans.y+(canvas.height)/2,widthR,heightR);
         ctx.stroke();
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);    
         ctx.rotate(angle.alpha); //positive if rear camera, negative if front camera
