@@ -395,7 +395,7 @@ function startSensors() {
                                 timeAtStart = Date.now();
                                 initialoriobtained = true;
                                 sensorframeTimeDiff = timeAtStart - timeInitial;
-                                console.log(sensorframeTimeDiff);
+                                console.log("Initial orientation obtained");
                         }
                         ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                         //console.log(orientation_sensor);
