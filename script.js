@@ -238,6 +238,18 @@ function magnitude(vector)      //Calculate the magnitude of a vector
 return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
+function doWMA( array, weightedPeriod ) {       //https://www.reddit.com/r/learnprogramming/comments/39cg7r/javascript_looking_for_sample_weighted_moving/cs3e08f/
+    var weightedArray = [];
+    for( var i = 0; i <= array.length - weightedPeriod; i++ ) {
+        var sum = 0;
+        for( var j = 0; j < weightedPeriod; j++ ) {
+            sum += array[ i + j ] * ( weightedPeriod - j );
+        }
+        weightedArray[i] = sum / (( weightedPeriod * ( weightedPeriod + 1 )) / 2 );
+    }
+    return weightedArray;
+}
+
 function smooth(values, alpha) {        //https://stackoverflow.com/q/32788836
     var weighted = average(values) * alpha;
     var smoothed = [];
@@ -507,16 +519,16 @@ videoElement.addEventListener('play', function() {
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
-        /*
-        tempCameraPath.x = smooth(cameraPath.map(a => a.x), smoothing);       //smoothen the path
-        tempCameraPath.y = smooth(cameraPath.map(a => a.y), smoothing);       //smoothen the path
+        
+        tempCameraPath.x = doWMA((cameraPath.map(a => a.x), 3);       //smoothen the path
+        tempCameraPath.y = doWMA((cameraPath.map(a => a.y), 3);      //smoothen the path
         for(let i=0; i<tempCameraPath.x.length; i++)
         {
                 let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
                 cameraPath2.push(xy);
         }        
-        console.log(cameraPath2);*/
-        cameraPath2 = cameraPath;     //comment for smoothing
+        console.log(cameraPath2);
+        //cameraPath2 = cameraPath;     //comment for smoothing
         readFrameData();    //reads the video into dataArray2
 }, false);
 
