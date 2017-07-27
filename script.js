@@ -524,7 +524,7 @@ videoElement.addEventListener('play', function() {
         tempCameraPath.y = doWMA(cameraPath.map(a => a.y), weightedIndex);      //smoothen the path
         console.log(tempCameraPath);
         //need to add first elements separately due to MA filter losing them
-        for(let i=0; i<tempCameraPath.x.length; i++)
+        for(let i=0; i<tempCameraPath.x.length+weightedIndex; i++)
         {
                 if(i<weightedIndex)
                 {
