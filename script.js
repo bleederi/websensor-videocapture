@@ -526,7 +526,7 @@ videoElement.addEventListener('play', function() {
         //need to add first elements separately due to MA filter losing them
         for(let i=0; i<weightedIndex; i++)
         {
-                let xy = {"x": cameraPath.x[i], "y": cameraPath.y[i]};
+                let xy = {"x": cameraPath[i].x, "y": cameraPath[i].y};
                 cameraPath2.push(xy);
         }
         for(let i=weightedIndex; i<tempCameraPath.x.length; i++)
