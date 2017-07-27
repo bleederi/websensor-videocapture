@@ -714,11 +714,10 @@ function readFrameData() {     //Read video data from blob to object form with p
         trans = {"x": videoElement.videoWidth/2 + dx, "y": videoElement.videoHeight/2 + dy};
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         //ctx.save();
-
+        ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);
         //NOTE: Direction of translations and rotations depend on camera used (front or back)
         ctx.translate(trans.x, trans.y);
         ctx.rotate(-angle.alpha);       //negative if rear camera, positive if front camera
-        ctx.drawImage(videoElement,-videoElement.videoWidth/2,-videoElement.videoHeight/2, videoElement.videoWidth, videoElement.videoHeight);
         var imgData=ctx.getImageData((canvas.width-widthR)/2,(canvas.height-heightR)/2,widthR,heightR);    
         ctx.rotate(angle.alpha); //positive if rear camera, negative if front camera
         ctx.translate(-trans.x, -trans.y);
