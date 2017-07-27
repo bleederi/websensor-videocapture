@@ -532,8 +532,11 @@ videoElement.addEventListener('play', function() {
                         let xy = {"x": cameraPath[i].x, "y": cameraPath[i].y};
                         cameraPath2.push(xy);
                 }
-                let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
-                cameraPath2.push(xy);
+                else
+                {
+                        let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
+                        cameraPath2.push(xy);
+                }
         }        
         console.log(cameraPath2);
         //cameraPath2 = cameraPath;     //comment for smoothing
