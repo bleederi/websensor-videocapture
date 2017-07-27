@@ -519,16 +519,15 @@ videoElement.addEventListener('play', function() {
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
-        let weightedIndex = 3;
+        let weightedIndex = 10;
         tempCameraPath.x = doWMA(cameraPath.map(a => a.x), weightedIndex);       //smoothen the path
         tempCameraPath.y = doWMA(cameraPath.map(a => a.y), weightedIndex);      //smoothen the path
-        console.log(tempCameraPath);
+        //console.log(tempCameraPath);
         //need to add first elements separately due to MA filter losing them
         for(let i=0; i<tempCameraPath.x.length+weightedIndex-1; i++)
         {
                 if(i<weightedIndex)
                 {
-                        console.log("x");
                         let xy = {"x": cameraPath[i].x, "y": cameraPath[i].y};
                         cameraPath2.push(xy);
                 }
