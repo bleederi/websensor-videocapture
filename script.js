@@ -240,12 +240,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 
 function doWMA( array, weightedPeriod ) {       //https://www.reddit.com/r/learnprogramming/comments/39cg7r/javascript_looking_for_sample_weighted_moving/cs3e08f/
     var weightedArray = [];
-        //first elements stay as they are
-        for(let i=0; i<weightedPeriod; i++)
-        {
-                weightedArray[i] = array[i];
-        }
-    for( var i = weightedPeriod-1; i <= array.length - weightedPeriod; i++ ) {
+    for( var i = 0; i <= array.length - weightedPeriod; i++ ) {
         var sum = 0;
         for( var j = 0; j < weightedPeriod; j++ ) {
             sum += array[ i + j ] * ( weightedPeriod - j );
@@ -524,11 +519,16 @@ videoElement.addEventListener('play', function() {
         //console.log("Delay", delay);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
-        
-        tempCameraPath.x = doWMA(cameraPath.map(a => a.x), 3);       //smoothen the path
-        tempCameraPath.y = doWMA(cameraPath.map(a => a.y), 3);      //smoothen the path
-        //add
-        for(let i=0; i<tempCameraPath.x.length; i++)
+        let weightedIndex = 3;
+        tempCameraPath.x = doWMA(cameraPath.map(a => a.x), weightedIndex);       //smoothen the path
+        tempCameraPath.y = doWMA(cameraPath.map(a => a.y), weightedIndex);      //smoothen the path
+        //need to add first elements separately due to MA filter losing them
+        for(let i=0; i<weightedIndex; i++)
+        {
+                let xy = {"x": cameraPath.x[i], "y": cameraPath.y[i]};
+                cameraPath2.push(xy);
+        }
+        for(let i=weightedIndex; i<tempCameraPath.x.length; i++)
         {
                 let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
                 cameraPath2.push(xy);
