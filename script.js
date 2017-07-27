@@ -344,7 +344,7 @@ function startSensors() {
                 accel_sensor.start();
                 gyroscope = new Gyroscope({frequency: sensorfreq});
                 //accl = new Accelerometer({frequency: sensorfreq});
-                const gyro_filtered = new LowPassFilterData(gyroscope, 0.1);
+                const gyro_filtered = new LowPassFilterData(gyroscope, 0.85);
                 gyroscope.onreading = () => {
                         //console.log(Date.now());
                         gyro_filtered.update(gyroscope);
