@@ -515,7 +515,7 @@ videoElement.addEventListener('play', function() {
                 cameraPath2.push(xy);
         }        
         console.log(cameraPath2);
-        cameraPath2 = cameraPath;
+        //cameraPath2 = cameraPath;     //comment for smoothing
         readFrameData();    //reads the video into dataArray2
 }, false);
 
