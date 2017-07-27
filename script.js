@@ -451,7 +451,7 @@ function startRecording(stream) {
                         aVelData.push(aVel);
                         frameData.ori = ori;
                         frameData.aVel = aVel;
-                        frameData.accel = accel;
+                        frameData.accel = accel;        //maybe should use filtered acceleration instead?
                         frameData.timeDiff = time-timeAtStart;
                         //frameData.accelnog = accelNoG;
                         //dataArray.push(frameData);
@@ -515,6 +515,7 @@ videoElement.addEventListener('play', function() {
                 cameraPath2.push(xy);
         }        
         console.log(cameraPath2);
+        cameraPath2 = cameraPath;
         readFrameData();    //reads the video into dataArray2
 }, false);
 
