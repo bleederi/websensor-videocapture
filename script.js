@@ -520,8 +520,8 @@ videoElement.addEventListener('play', function() {
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
         
-        tempCameraPath.x = doWMA((cameraPath.map(a => a.x), 3);       //smoothen the path
-        tempCameraPath.y = doWMA((cameraPath.map(a => a.y), 3);      //smoothen the path
+        tempCameraPath.x = doWMA(cameraPath.map(a => a.x), 3);       //smoothen the path
+        tempCameraPath.y = doWMA(cameraPath.map(a => a.y), 3);      //smoothen the path
         for(let i=0; i<tempCameraPath.x.length; i++)
         {
                 let xy = {"x": tempCameraPath.x[i], "y": tempCameraPath.y[i]};
