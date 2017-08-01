@@ -280,6 +280,12 @@ function update_debug()
                         document.getElementById("selectedSensor").textContent = `${selectedSensor}`;
 }
 
+function exportData() //https://stackoverflow.com/a/13405322
+{
+        var exportData = JSON.stringify(dataArray);
+        window.open('data:text/csv;charset=utf-8,' + escape(exportData));
+}
+
 function selectSensor() {
         selectedSensor = document.getElementById("selectSensor").value;
         console.log(selectedSensor, "selected");
