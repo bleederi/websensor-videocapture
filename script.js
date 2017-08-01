@@ -238,6 +238,13 @@ function magnitude(vector)      //Calculate the magnitude of a vector
 return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
+function hannWindow(dataIn) {   //Low-pass filter with Hanning window of length dataIn.length TODO: Should split into smaller lengths
+        for (let i = 0; i < dataIn.length; i++) {
+                let multiplier = 0.5 * (1 + Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
+                dataOut[i] = multiplier * dataIn[i];
+        }       
+}
+
 function doWMA( array, weightedPeriod ) {       //https://www.reddit.com/r/learnprogramming/comments/39cg7r/javascript_looking_for_sample_weighted_moving/cs3e08f/
     var weightedArray = [];
     for( var i = 0; i <= array.length - weightedPeriod; i++ ) {
