@@ -54,6 +54,8 @@ var dataArray2 = [];     //array to store all the combined data
 
 var velocity = {"x": 0, "y": 0, "z": 0};
 
+var urlParams = null;
+
 var alpha = 0;
 var beta = 0;
 var gamma = 0;
@@ -448,6 +450,10 @@ function startSensors() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    //Read URL params
+    urlParams = new URLSearchParams(window.location.search);
+    nosensors = urlParams.has('nosensors'); //to specify whether or not to use sensors in the URL
+    console.log(nosensors);
     startSensors();     //start sensors instantly to avoid gyro drift
 }, false);
 
