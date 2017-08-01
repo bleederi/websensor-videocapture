@@ -21,6 +21,7 @@
 'use strict';
 
 
+var nosensors = false;
 var accel_sensor = null;
 var orientation_sensor = null;
 var gyroscope = null;
