@@ -298,6 +298,7 @@ function lpFilterOri(quatArrayIn)
 {
 let quatArray = [];     //array of quaternions without timestamps
 let tempArray = [];     //for storing quatArray orientation values
+let tempArray2 = [];
 //Obtain array of quaternions
 for (let i=0; i<quatArrayIn.length; i++)
 {
@@ -314,7 +315,8 @@ for (let i=0; i<quatArrayIn.length; i++)
 }
 for(let s of tempArray)
 {
-        console.log(s.ori);        
+        console.log(s.ori);
+        tempArray2.push(s.ori);      
 }
         console.log(tempArray);
         console.log(quatArray);
