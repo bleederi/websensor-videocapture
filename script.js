@@ -312,9 +312,9 @@ for (let i=0; i<quatArrayIn.length; i++)
         //console.log(ori);
         //quatArray.push(ori);
 }
-for(let i=0; i<tempArray.length; i++)
+for(let s of tempArray)
 {
-        console.log(tempArray[i].ori);        
+        console.log(s.ori);        
 }
         console.log(tempArray);
         console.log(quatArray);
