@@ -298,10 +298,10 @@ function average(data) {
 */
 function lpFilterOri(quatArrayIn)
 {
+let quatArray = [];     //array of quaternions without timestamps
+let tempArray = [];     //for storing quatArray orientation values
 if(1 === 2)
 {
-        let quatArray = [];     //array of quaternions without timestamps
-        let tempArray = [];     //for storing quatArray orientation values
         //Obtain array of quaternions
         for (let i=0; i<quatArrayIn.length; i++)
         {
