@@ -294,13 +294,14 @@ function average(data) {
 * Input: Array of orientation data
 * Output: Euler angles
 */
-function lpFilterOri(quatArray)
+function lpFilterOri(quatArrayIn)
 {
+let quatArray = [];
 //Obtain array of quaternions
-/*for (let i=0; i<absoris.length; i++)
+for (let i=0; i<quatArrayIn.length; i++)
 {
-        quatArray.push(absoris[i].ori);
-}*/
+        quatArray.push(quatArrayIn[i].ori);
+}
         let quatArray2 = [];        //windowed quaternions
         for (let i=0; i<quatArray.length; i++)
         {
