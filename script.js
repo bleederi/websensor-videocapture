@@ -452,7 +452,7 @@ function startSensors() {
                 const euler = new Float32Array(3);
                 absori_sensor.onreading = () => {
                         absori_sensor.populateMatrix(mat4);
-                        let b = {"ori": null, "time": null};     //need to push by value
+                        let b = {"ori": mat4, "time": absori_sensor.timestamp};     //need to push by value
                 
                         //Object.assign(b.ori, mat4);
                         absoris.push(b);
