@@ -318,6 +318,7 @@ for (let i=0; i<quatArrayIn.length; i++)
                 {
                 const euler = new Float32Array(3);
                 toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
+                console.log(euler);
                 let roll = euler[0];
                 let pitch = euler[1];
                 let yaw = euler[2];
