@@ -576,6 +576,17 @@ videoElement.addEventListener('play', function() {
             //console.log(quatArray2);
             let quatArrayFiltered = hannWindow(quatArray2);
                 var anglesArray = [];
+        for (let i=0; i<quatArrayFiltered.length; i++)
+                {
+                const euler = new Float32Array(3);
+                toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
+                let roll = euler[0];
+                let pitch = euler[1];
+                let yaw = euler[2];
+                let angles = {"roll": roll, "pitch": pitch, "yaw": yaw};
+                anglesArray.push(angles);
+        }
+        console.log(anglesArray);
         }
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
