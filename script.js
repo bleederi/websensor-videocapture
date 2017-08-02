@@ -254,7 +254,8 @@ function hannWindow(dataIn) {   //Low-pass filter with Hann window of length dat
                 //dataOut[i] = multiplier * dataIn[i];
                 dataOut.push(multiplier * dataIn[i]);
         }
-        console.log(multipliers);
+        //console.log(multipliers);
+        console.log(dataOut);
         return dataOut;   
 }
 
