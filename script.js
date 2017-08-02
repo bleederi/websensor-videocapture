@@ -101,6 +101,8 @@ var cameraPath = [];    //smoothed camera path
 var cameraPath2 = [];    //array of canvas coordinates describing the camera path
 var cameraCoord = {"x": null, "y": null, "time": null};
 
+var absoris = [];
+
 var recordingStarted = false;
 
 //Sliders
@@ -448,8 +450,11 @@ function startSensors() {
                 };
                 orientation_sensor.start();
                 absori_sensor = new AbsoluteOrientationSensor({frequency: sensorfreq});
+                const mat4 = new Float32Array(16);
+                const euler = new Float32Array(3);
                 absori_sensor.onreading = () => {
-                        //populate orientation matrix here
+                        absori_sensor.populateMatrix(mat4);
+                        absoris.push(mat4);
                 };
                 absori_sensor.onactivate = () => {
                 };
