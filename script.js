@@ -245,21 +245,14 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 }
 
 function hannWindow(dataIn) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths
-        console.log(dataIn);
         let dataOut = [];
-        let multipliers = [];
         for (let i = 0; i < dataIn.length; i++) {
                 let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
-                multipliers.push(multiplier);
                 let value = dataIn[i].map(function(x) { return x * multiplier; });;
-                //console.log(value);
                 var b = new Array;     //need to push by value
                 Object.assign(b, value);
                 dataOut.push(b);
-                //console.log(dataOut[i]);
         }
-        //console.log(multipliers);
-        console.log(dataOut);
         return dataOut;   
 }
 
