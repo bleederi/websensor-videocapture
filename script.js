@@ -635,7 +635,7 @@ videoElement.addEventListener('play', function() {
 let filteredAnglesArray = lpFilterOri(quatArray);
 for (let i=0; i<dataArray.length; i++)
 {
-        dataArray[i].ori = filteredAnglesArray[i;]
+        dataArray[i].ori = filteredAnglesArray[i];
 }
 /* TEST END */        
         console.log(filteredAnglesArray);
