@@ -246,7 +246,7 @@ function hannWindow(dataIn) {   //Low-pass filter with Hanning window of length 
         let dataOut = [];
         let multipliers = [];
         for (let i = 0; i < dataIn.length; i++) {
-                let multiplier = 0.5 * (1 + Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
+                let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
                 multipliers.push(multiplier);
                 //dataOut[i] = multiplier * dataIn[i];
                 dataOut.push(multiplier * dataIn[i]);
