@@ -554,6 +554,7 @@ videoElement.addEventListener('play', function() {
                 {
                     quat.push(quatArray[i].j);
                 }
+                console.log(quat);
                 quatArray2.push(quat);
             }
             console.log(quatArray2);
