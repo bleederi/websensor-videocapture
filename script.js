@@ -300,8 +300,10 @@ let quatArray = [];
 //Obtain array of quaternions
 for (let i=0; i<quatArrayIn.length; i++)
 {
-        let ori = quatArrayIn[i].ori;
-        console.log(quatArrayIn[i]);        
+        var b = new Object;     //need to push by value
+        Object.assign(b, quatArray[i]);
+        console.log(b);
+        let ori = b.ori;       
         //console.log(ori);
         quatArray.push(ori);
 }
