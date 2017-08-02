@@ -302,6 +302,7 @@ for (let i=0; i<quatArrayIn.length; i++)
 {
         quatArray.push(quatArrayIn[i].ori);
 }
+        console.log(quatArray);
         let quatArray2 = [];        //windowed quaternions
         for (let i=0; i<quatArray.length; i++)
         {
