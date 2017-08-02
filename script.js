@@ -301,7 +301,8 @@ let quatArray = [];
 for (let i=0; i<quatArrayIn.length; i++)
 {
         let ori = quatArrayIn[i].ori;
-        console.log(ori);
+        console.log(quatArrayIn[i]);        
+        //console.log(ori);
         quatArray.push(ori);
 }
         console.log(quatArray);
