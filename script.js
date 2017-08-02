@@ -296,13 +296,14 @@ function average(data) {
 */
 function lpFilterOri(quatArrayIn)
 {
-console.log(quatArrayIn);
 let quatArray = [];
 //Obtain array of quaternions
 for (let i=0; i<quatArrayIn.length; i++)
 {
+        let ori = quatArrayIn[i].ori;
         var b = new Array;     //need to push by value
-        Object.assign(b, quatArrayIn[i].ori);
+        Object.assign(b, ori);
+        console.log(b);
         quatArray.push(b);
 }
         console.log(quatArray);
