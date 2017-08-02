@@ -296,11 +296,12 @@ function average(data) {
 */
 function lpFilterOri(quatArrayIn)
 {
+console.log(quatArrayIn);
 let quatArray = [];
 //Obtain array of quaternions
 for (let i=0; i<quatArrayIn.length; i++)
 {
-        var b = new Object;     //need to push by value
+        var b = new Array;     //need to push by value
         Object.assign(b, quatArrayIn[i].ori);
         quatArray.push(b);
 }
@@ -321,7 +322,7 @@ for (let i=0; i<quatArrayIn.length; i++)
                 {
                 const euler = new Float32Array(3);
                 toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
-                console.log(euler);
+                //console.log(euler);
                 let roll = euler[0];
                 let pitch = euler[1];
                 let yaw = euler[2];
