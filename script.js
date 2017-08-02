@@ -242,6 +242,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 }
 
 function hannWindow(dataIn) {   //Low-pass filter with Hanning window of length dataIn.length TODO: Should split into smaller lengths
+        console.log(dataIn);
         let dataOut = [];
         for (let i = 0; i < dataIn.length; i++) {
                 let multiplier = 0.5 * (1 + Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
@@ -553,7 +554,7 @@ videoElement.addEventListener('play', function() {
                 Object.entries(quatArray[i]).forEach(
                     ([key, value]) => quat.push(value)
                 );
-                console.log(quat);
+                //console.log(quat);
                 quatArray2.push(quat);
             }
             console.log(quatArray2);
