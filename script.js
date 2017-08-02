@@ -244,6 +244,10 @@ function magnitude(vector)      //Calculate the magnitude of a vector
 return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
+/*
+* Input: Array of orientation matrices
+* Output: Low-pass filtered array of orientation matrices
+*/
 function hannWindow(dataIn) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths
         let dataOut = [];
         for (let i = 0; i < dataIn.length; i++) {
@@ -574,8 +578,20 @@ videoElement.addEventListener('play', function() {
                 quatArray2.push(quat);
             }
             //console.log(quatArray2);
-            hannWindow(quatArray2);
+        let quatArrayFiltered = [];
+            quatArrayFiltered = hannWindow(quatArray2);
+        var anglesArray = [];
+        for(let i=0; i<quatArrayFiltered.length; i++)
+                {
+                const euler = new Float32Array(3);
+                toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
+                let roll = euler[0];
+                let pitch = euler[1];
+                let yaw = euler[2];
+                let angles = {"roll": roll, "pitch": pitch, "yaw": yaw};
+                anglesArray.push(angles);
         }
+        console.log(anglesArray);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
         let weightedIndex = 10;
