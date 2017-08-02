@@ -574,7 +574,8 @@ videoElement.addEventListener('play', function() {
                 quatArray2.push(quat);
             }
             //console.log(quatArray2);
-            hannWindow(quatArray2);
+            let quatArrayFiltered = hannWindow(quatArray2);
+                var anglesArray = [];
         }
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
