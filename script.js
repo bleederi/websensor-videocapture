@@ -550,7 +550,7 @@ videoElement.addEventListener('play', function() {
             for (let i=0; i<quatArray.length; i++)
             {
                 let quat = [];
-                Object.entries(obj).forEach(
+                Object.entries(quatArray[i]).forEach(
                     ([key, value]) => quat.push(value)
                 );
                 console.log(quat);
