@@ -615,7 +615,6 @@ videoElement.addEventListener('play', function() {
         console.log(cameraPath2);
         //cameraPath2 = cameraPath;     //comment for smoothing
         readFrameData();    //reads the video into dataArray2
-}, false);
 
                         /*//Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
