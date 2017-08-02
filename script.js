@@ -305,8 +305,8 @@ if(1 === 1)
         //Obtain array of quaternions
         for (let i=0; i<quatArrayIn.length; i++)
         {
-                var b = new Object;     //need to push by value
-                Object.assign(b, quatArrayIn[i]);
+                var b = new Array;     //need to push by value
+                Object.assign(b, JSON.parse(JSON.stringify(quatArrayIn[i].ori)));
                 //console.log(b);
                 tempArray.push(b);
                 //var c = new Array;     //need to push by value
@@ -315,11 +315,7 @@ if(1 === 1)
                 //let ori = c;       
                 //console.log(ori);
                 //quatArray.push(ori);
-        }
-        for (let i=0; i<tempArray.length; i++)
-        {
-                tempArray2.push(JSON.parse(JSON.stringify(tempArray[i].ori)));
-        }    
+        }   
         console.log(tempArray);
         console.log(tempArray2);
         console.log(quatArray);
