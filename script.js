@@ -301,10 +301,8 @@ let quatArray = [];
 for (let i=0; i<quatArrayIn.length; i++)
 {
         let ori = quatArrayIn[i].ori;
-        var b = new Array;     //need to push by value
-        Object.assign(b, ori);
-        console.log(b);
-        quatArray.push(b);
+        console.log(ori);
+        quatArray.push(ori);
 }
         console.log(quatArray);
         let quatArray2 = [];        //windowed quaternions
@@ -317,7 +315,7 @@ for (let i=0; i<quatArrayIn.length; i++)
                 quatArray2.push(quat);
         }
         //console.log(quatArray2);
-        let quatArrayFiltered = hannWindow(quatArray2);
+        let quatArrayFiltered = hannWindow(quatArray2); //Hann window to low-pass filter
         var anglesArray = [];   //Euler angles corresponding to the low-pass filtered quaternions
         for (let i=0; i<quatArrayFiltered.length; i++)
                 {
