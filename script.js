@@ -316,7 +316,7 @@ if(1 === 2)
                 //console.log(ori);
                 //quatArray.push(ori);
         }
-        tempArray2 = tempArray.map(a.ori => Object.assign({}, a.ori));      
+        tempArray2 = JSON.parse(JSON.stringify(tempArray.ori));     
         console.log(tempArray);
         console.log(tempArray2);
         console.log(quatArray);
