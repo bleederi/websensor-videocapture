@@ -578,10 +578,9 @@ videoElement.addEventListener('play', function() {
                 quatArray2.push(quat);
             }
             //console.log(quatArray2);
-        let quatArrayFiltered = [];
-            quatArrayFiltered = hannWindow(quatArray2);
+            let quatArrayFiltered = hannWindow(quatArray2);
         var anglesArray = [];
-        for(let i=0; i<quatArrayFiltered.length; i++)
+        for (let i=0; i<quatArrayFiltered.length; i++)
                 {
                 const euler = new Float32Array(3);
                 toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
@@ -615,6 +614,7 @@ videoElement.addEventListener('play', function() {
         console.log(cameraPath2);
         //cameraPath2 = cameraPath;     //comment for smoothing
         readFrameData();    //reads the video into dataArray2
+}, false);
 
                         /*//Read blob data so we can stabilize the video                        
                         var reader = new FileReader();
