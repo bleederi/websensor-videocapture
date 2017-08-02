@@ -300,7 +300,9 @@ let quatArray = [];
 //Obtain array of quaternions
 for (let i=0; i<quatArrayIn.length; i++)
 {
-        quatArray.push(quatArrayIn[i].ori);
+        var b = new Object;     //need to push by value
+        Object.assign(b, quatArrayIn[i].ori);
+        quatArray.push(b);
 }
         console.log(quatArray);
         let quatArray2 = [];        //windowed quaternions
