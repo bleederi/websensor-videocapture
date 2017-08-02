@@ -316,11 +316,7 @@ if(1 === 2)
                 //console.log(ori);
                 //quatArray.push(ori);
         }
-        for(let s of tempArray)
-        {
-                console.log(s.ori);
-                tempArray2.push(s.ori);      
-        }
+        tempArray2 = tempArray.map(a.ori => Object.assign({}, a.ori));      
         console.log(tempArray);
         console.log(tempArray2);
         console.log(quatArray);
