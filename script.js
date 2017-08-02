@@ -24,6 +24,7 @@
 var nosensors = false;
 var accel_sensor = null;
 var orientation_sensor = null;
+var absori_sensor = null;
 var gyroscope = null;
 var sensorfreq = 30;
 var fps = 30;
@@ -241,7 +242,7 @@ function magnitude(vector)      //Calculate the magnitude of a vector
 return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
-function hannWindow(dataIn) {   //Low-pass filter with Hanning window of length dataIn.length TODO: Should split into smaller lengths
+function hannWindow(dataIn) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths
         console.log(dataIn);
         let dataOut = [];
         let multipliers = [];
@@ -446,6 +447,13 @@ function startSensors() {
                 orientation_sensor.onactivate = () => {
                 };
                 orientation_sensor.start();
+                absori_sensor = new AbsoluteOrientationSensor({frequency: sensorfreq});
+                absori_sensor.onreading = () => {
+                        //populate orientation matrix here
+                };
+                absori_sensor.onactivate = () => {
+                };
+                absori_sensor.start();
                 }
                 catch(err) {
                         console.log(err.message);
