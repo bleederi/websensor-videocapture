@@ -580,7 +580,7 @@ videoElement.addEventListener('play', function() {
             //console.log(quatArray2);
             let quatArrayFiltered = hannWindow(quatArray2);
         var anglesArray = [];
-        for (let i=0; i<quatArrayFiltered.length; i++)
+        /*for (let i=0; i<quatArrayFiltered.length; i++)
                 {
                 const euler = new Float32Array(3);
                 toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
@@ -590,7 +590,7 @@ videoElement.addEventListener('play', function() {
                 let angles = {"roll": roll, "pitch": pitch, "yaw": yaw};
                 anglesArray.push(angles);
         }
-        console.log(anglesArray);
+        console.log(anglesArray);*/
         cameraPath = buildCameraPath(dataArray);     //build camera path
         console.log(cameraPath);
         let weightedIndex = 10;
