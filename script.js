@@ -302,9 +302,9 @@ for (let i=0; i<quatArrayIn.length; i++)
 {
         var b = new Object;     //need to push by value
         Object.assign(b, quatArrayIn[i]);
-        console.log(b);
+        //console.log(b);
         let ori = b.ori;       
-        //console.log(ori);
+        console.log(ori);
         quatArray.push(ori);
 }
         console.log(quatArray);
