@@ -322,6 +322,8 @@ for (let i=0; i<quatArrayIn.length; i++)
                 let pitch = euler[1];
                 let yaw = euler[2];
                 let angles = {"roll": roll, "pitch": pitch, "yaw": yaw, "time": null};
+                var b = new Object;     //need to push by value
+                Object.assign(b, angles);
                 anglesArray.push(angles);
         }
         return anglesArray;
