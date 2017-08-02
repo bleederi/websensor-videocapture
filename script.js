@@ -301,7 +301,7 @@ let quatArray = [];     //array of quaternions without timestamps
 for (let i=0; i<quatArrayIn.length; i++)
 {
         var b = new Object;     //need to push by value
-        Object.assign(b, quatArray[i]);
+        Object.assign(b, quatArrayIn[i]);
         console.log(b);
         let ori = b.ori;       
         //console.log(ori);
