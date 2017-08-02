@@ -296,7 +296,7 @@ function average(data) {
 */
 function lpFilterOri(quatArrayIn)
 {
-let quatArray = [];
+let quatArray = [];     //array of quaternions without timestamps
 //Obtain array of quaternions
 for (let i=0; i<quatArrayIn.length; i++)
 {
