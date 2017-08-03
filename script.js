@@ -335,6 +335,7 @@ else
         }
         console.log(quatArray2);
         let quatArrayFiltered = hannWindow(quatArray2); //Hann window to low-pass filter
+        console.log(quatArrayFiltered);
         var anglesArray = [];   //Euler angles corresponding to the low-pass filtered quaternions
         for (let i=0; i<quatArrayFiltered.length; i++)
                 {
