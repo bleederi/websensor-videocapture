@@ -355,6 +355,8 @@ else
                 let angles2 = {"roll": roll2, "pitch2": pitch2, "yaw": yaw2, "time": null};
                 var b = new Object;     //need to push by value
                 Object.assign(b, angles);
+                var c = new Object;     //need to push by value
+                Object.assign(c, angles2);
                 anglesArray.push(angles);
                 anglesArray2.push(angles2);
         }
