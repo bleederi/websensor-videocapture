@@ -341,24 +341,14 @@ else
         for (let i=0; i<quatArrayFiltered.length; i++)
                 {
                 const euler = new Float32Array(3);
-                const euler2 = new Float32Array(3);
                 toEulerianAngle(quatArrayFiltered[i], euler);      //From quaternion to Euler angles
-                toEulerianAngle(quatArray2[i], euler2);      //From quaternion to Euler angles
-                console.log(euler2);
                 let roll = euler[0];
                 let pitch = euler[1];
                 let yaw = euler[2];
-                let roll2 = euler2[0];
-                let pitch2 = euler2[1];
-                let yaw2 = euler2[2];
                 let angles = {"roll": roll, "pitch": pitch, "yaw": yaw, "time": null};
-                let angles2 = {"roll": roll2, "pitch2": pitch2, "yaw": yaw2, "time": null};
                 var b = new Object;     //need to push by value
                 Object.assign(b, angles);
-                var c = new Object;     //need to push by value
-                Object.assign(c, angles2);
                 anglesArray.push(angles);
-                anglesArray2.push(angles2);
         }
         return anglesArray;
 }
