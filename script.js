@@ -104,6 +104,7 @@ var cameraCoord = {"x": null, "y": null, "time": null};
 var absoris = [];
 
 var tempArray2 = [];
+var anglesArray2 = [];
 
 var recordingStarted = false;
 
@@ -226,7 +227,7 @@ class OriSensor {
         const euler = new Float32Array(3);
         sensor.onreading = () => {
                 sensor.populateMatrix(mat4);
-                toEulerianAngle(sensor.quaternion, euler);      //From quaternion to Eulerian angles
+                toEulerianAngle(sensor.quaternion, euler);      //From quaternion to Euler angles
                 this.roll = euler[0];
                 this.pitch = euler[1];
                 this.yaw = euler[2];
@@ -340,15 +341,21 @@ else
         for (let i=0; i<quatArrayFiltered.length; i++)
                 {
                 const euler = new Float32Array(3);
-                toEulerianAngle(quatArrayFiltered[i], euler);      //From quaternion to Eulerian angles
+                const euler2 = new Float32Array(3);
+                toEulerianAngle(quatArrayFiltered[i], euler);      //From quaternion to Euler angles
                 //console.log(euler);
                 let roll = euler[0];
                 let pitch = euler[1];
                 let yaw = euler[2];
+                let roll2 = euler2[0];
+                let pitch2 = euler2[1];
+                let yaw2 = euler2[2];
                 let angles = {"roll": roll, "pitch": pitch, "yaw": yaw, "time": null};
+                let angles2 = {"roll": roll2, "pitch2": pitch2, "yaw": yaw2, "time": null};
                 var b = new Object;     //need to push by value
                 Object.assign(b, angles);
                 anglesArray.push(angles);
+                anglesArray2.push(angles2);
         }
         return anglesArray;
 }
