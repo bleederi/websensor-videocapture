@@ -340,7 +340,7 @@ else
         for (let i=0; i<quatArrayFiltered.length; i++)
                 {
                 const euler = new Float32Array(3);
-                toEulerianAngle(quatArray[i], euler);      //From quaternion to Eulerian angles
+                toEulerianAngle(quatArrayFiltered[i], euler);      //From quaternion to Eulerian angles
                 //console.log(euler);
                 let roll = euler[0];
                 let pitch = euler[1];
