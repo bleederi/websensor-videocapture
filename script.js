@@ -331,7 +331,7 @@ else
                 Object.entries(quatArray[i]).forEach(
                     ([key, value]) => quat.push(value)
                 );
-                quatArray2.push(quat);
+                quatArray2.push(quat[0]);
         }
         console.log(quatArray2);
         let quatArrayFiltered = hannWindow(quatArray2); //Hann window to low-pass filter
