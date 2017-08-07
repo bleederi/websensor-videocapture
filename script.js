@@ -267,6 +267,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         });
         let testStatistic1Sum = 0;   //Sum to track the amount of movement that has happened since the last index
         let testStatistic2Sum = 0;   //Sum to track the amount of movement that has happened since the last index
+        let magnitudesUntilNow = [];
         for(let i=1; i<gyroDataArray.length; i++)
         {
                 let distanceMeasure1 = 0;
@@ -274,6 +275,8 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                 let testStatistic1 = 0;
                 let testStatistic2 = 0;
                 let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
+                magnitudesUntilNow.push(magnitude);
+                let lsEstimation = magnitudesUntilNow => magnitudesUntilNow.reduce( ( p, c ) => p + c, 0 ) / magnitudesUntilNow.length; //average of magnitudes until now
                 if(i > 0)
                 {
                         let magnitudePrev = Math.sqrt(gyroDataArray[i-1].x * gyroDataArray[i-1].x + gyroDataArray[i-1].y * gyroDataArray[i-1].y + gyroDataArray[i-1].z * gyroDataArray[i-1].z);
@@ -282,8 +285,8 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                 }
                 else
                 {
-                        distanceMeasure1 = magnitude;
-                        distanceMeasure2 = -magnitude;
+                        distanceMeasure1 = magnitude - lsEstimation;
+                        distanceMeasure2 = -magnitude + lsEstimation;
                 }
                 if(i > 0)
                 {
@@ -306,6 +309,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                         //lsEstimation = 0;
                         testStatistic1Sum = 0;
                         testStatistic2Sum = 0;
+                        magnitudesUntilNow = [];
                 }
         }
         if(indices[indices.length-1] !== gyroDataArray.length-1)
