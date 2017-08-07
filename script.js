@@ -251,12 +251,16 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 *       Input: Gyroscope data (angular velocity)
 *       Output: Array of indices indicating where to split the Hann windowing
 */
-function getHannIndices(gyroData)       //Splits the Hann windowing into parts, where the change (angular velocity) is fast the windows are smaller (indices closer together) and where it is slow the windows are larger
+function getHannIndices(aVelData)       //Splits the Hann windowing into parts, where the change (angular velocity) is fast the windows are smaller (indices closer together) and where it is slow the windows are larger
 {
         let indices = [];
+        aVelData.forEach(function(entry) {
+        let gyroData = (({ x, y, z }) => ({ x, y, z }))(entry);    //only select x,y,z
+        });
         for(let i=0; i<gyroData.length; i++)
         {
-                console.log(gyroData[i]);
+                let magnitude = Math.sqrt(gyroData.x * gyroData.x + gyroData.y * gyroData.y = gyroData.z + gyroData.z);
+                console.log(magnitude);
         }
         return indices;
 }
