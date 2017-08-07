@@ -321,7 +321,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
 
 function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths as indicated by indices
         //Split using the indices
-        let dataInByIndices = new Float32Array();
+        let dataInByIndices = [];       //Array, not Float32Array because need push method
         for(let i=0; i<indices.length-1; i++)
         {
                 let dataInPart = dataIn.slice(indices[i], indices[i+1]);
