@@ -250,7 +250,7 @@ function hannWindow(dataIn) {   //Low-pass filter with Hann window of length dat
         for (let i = 0; i < dataIn.length; i++) {
                 let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
                 let value = dataIn[i].map(function(x) { return x * multiplier; });;
-                var b = new Array;     //need to push by value
+                var b = new Float32Array(16);     //need to push by value
                 Object.assign(b, value);
                 dataOut.push(b);
         }
