@@ -263,11 +263,9 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         for(let i=0; i<gyroDataArray.length; i++)
         {
                 let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
-                //console.log(magnitude);
                 magnitudeSum = magnitudeSum + magnitude;
                 if(magnitudeSum > 10)   //10 just some random value, need to change
                 {
-                        console.log(i);
                         indices.push(i);
                         magnitudeSum = 0;
                 }
@@ -276,6 +274,14 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
 }
 
 function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths as indicated by indices
+        //Split using the indices
+        let dataInByIndices = [];
+        for(let i=0; i<indices.length-1; i++)
+        {
+                let dataInPart = dataIn.slice(indices[i], indices[i+1]);
+                dataInByIndices.push(dataInPart);
+        }
+        console.log(dataInByIndices);
         let dataOut = [];
         for (let i = 0; i < dataIn.length; i++) {
                 let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
@@ -341,6 +347,7 @@ function lpFilterOri(quatArrayIn, gyroData)
         }
         console.log(quatArray2);
         let indices = getHannIndices(gyroData);
+        console.log(indices);
         let quatArrayFiltered = hannWindow(quatArray2, indices); //Hann window to low-pass filter
         console.log(quatArrayFiltered);
         var anglesArray = [];   //Euler angles corresponding to the low-pass filtered quaternions
