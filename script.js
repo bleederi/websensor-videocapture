@@ -265,7 +265,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         {
                 let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
                 magnitudeSum = magnitudeSum + magnitude;
-                if(magnitudeSum > 10)   //10 just some random value, need to change
+                if(magnitudeSum > 10 && i > 0)   //Cannot push 0 twice! 10 just some random value, need to change
                 {
                         indices.push(i);
                         magnitudeSum = 0;
