@@ -319,7 +319,7 @@ function findSegments(indices) //Splits the segments into two types: segments fo
         for(let i=1; i<indices.length; i++)
         {
                 let segmentLength = indices[i]-indices[i-1];
-                let interval = [indices[i-1], indices[i]]:
+                let interval = [indices[i-1], indices[i]];
                 segmentLength > k ? bigSegments.push(interval) : smallSegments.push(interval);
         }
         console.log(bigSegments);
