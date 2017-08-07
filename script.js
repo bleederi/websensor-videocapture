@@ -484,7 +484,7 @@ function startSensors() {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
-                        time_sensor = orientation_sensor.timestamp;
+                        let time_sensor = orientation_sensor.timestamp;
                         let time_window = window.performance.now();
                         if(!initialoriobtained && recordingStarted) //obtain initial orientation
                         {
