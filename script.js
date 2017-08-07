@@ -76,6 +76,9 @@ var delay = 0;
 var smoothing = 0.85;
 var rco = 1;    //determines canvas rotation amount
 var sensorframeTimeDiff = 0;    //time difference between sensor and frame data in ms - this is how much the timestamps differ
+var k = 10;     //bigger window size
+var l = 2;      //smaller window size
+
 
 //canvas
 var canvas = document.getElementById('myCanvas');
@@ -265,7 +268,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         {
                 let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
                 magnitudeSum = magnitudeSum + magnitude;
-                if(magnitudeSum > 10 && i > 0)   //Cannot push 0 twice! 10 just some random value, need to change
+                if(magnitudeSum > 20 && i > 0)   //Cannot push 0 twice! 20 just some random value, need to change
                 {
                         indices.push(i);
                         magnitudeSum = 0;
