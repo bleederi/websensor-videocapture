@@ -297,32 +297,9 @@ function average(data) {
 */
 function lpFilterOri(quatArrayIn)
 {
-let quatArray = [];     //array of quaternions without timestamps
-let tempArray = [];     //for storing quatArray orientation values
-if(1 === 2)
-{
-        //Obtain array of quaternions
-        for (let i=0; i<quatArrayIn.length; i++)
-        {
-                var b = new Array;     //need to push by value
-                Object.assign(b, JSON.parse(JSON.stringify(quatArrayIn[i].ori)));
-                //console.log(b);
-                tempArray.push(b);
-                //var c = new Array;     //need to push by value
-                //Object.assign(c, b.ori);
-                //console.log(c);        
-                //let ori = c;       
-                //console.log(ori);
-                //quatArray.push(ori);
-        }   
-        console.log(tempArray);
-        console.log(tempArray2);
-        console.log(quatArray);
-}
-else
-{
+        let quatArray = [];     //array of quaternions without timestamps
+        let tempArray = [];     //for storing quatArray orientation values
         quatArray = quatArrayIn;
-}
         let quatArray2 = [];        //windowed quaternions
         for (let i=0; i<quatArray.length; i++)
         {
@@ -371,7 +348,7 @@ function selectSensor() {
         console.log(selectedSensor, "selected");
 }
 
-function buildCameraPath(dataArray) {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection
+function buildCameraPath(dataArray) {    //Build the shaky camera path from the sensor measurements (convert to canvas coordinates) using projection TODO: Change to using the low-pass filtered angles
         let cameraPath = [];
         for (let i=0; i<dataArray.length; i++)
         {
