@@ -79,6 +79,7 @@ var sensorframeTimeDiff = 0;    //time difference between sensor and frame data 
 var k = 10;     //bigger window size
 var l = 2;      //smaller window size
 var h = 20;     //alarm parameter for splitting using gyro data, chosen manually
+var mu = 0;     //small drift term used in LS filter, chosen manually
 
 
 //canvas
@@ -264,15 +265,43 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         let gyroData = (({ x, y, z }) => ({ x, y, z }))(entry);    //only select x,y,z
         gyroDataArray.push(gyroData);
         });
-        let magnitudeSum = 0;   //Sum to track the amount of movement that has happened since the last index
-        for(let i=0; i<gyroDataArray.length; i++)
+        let testStatistic1Sum = 0;   //Sum to track the amount of movement that has happened since the last index
+        let testStatistic2Sum = 0;   //Sum to track the amount of movement that has happened since the last index
+        for(let i=1; i<gyroDataArray.length; i++)
         {
+                let distanceMeasure1 = 0;
+                let distanceMeasure2 = 0;
+                let testStatistic1 = 0;
+                let testStatistic2 = 0;
                 let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
-                magnitudeSum = magnitudeSum + magnitude;
-                if(magnitudeSum > h && i > 0)   //Cannot push 0 twice!
+                if(i > 0)
+                {
+                        let magnitudePrev = Math.sqrt(gyroDataArray[i-1].x * gyroDataArray[i-1].x + gyroDataArray[i-1].y * gyroDataArray[i-1].y + gyroDataArray[i-1].z * gyroDataArray[i-1].z);
+                        distanceMeasure1 = magnitude - magnitudePrev;
+                        distanceMeasure2 = -magnitude + magnitudePrev;
+                }
+                else
+                {
+                        distanceMeasure1 = magnitude;
+                        distanceMeasure2 = -magnitude;
+                }
+                if(i > 0)
+                {
+                        let testStatistic1Prev = testStatistic1;    //store previous value
+                        testStatistic1 = Math.max(testStatistic1Prev + distanceMeasure1 - mu, 0);
+                        testStatistic2 = Math.max(testStatistic2Prev + distanceMeasure2 - mu, 0);
+                }
+                else
+                {
+                        testStatistic1 = Math.max(distanceMeasure1 - mu, 0);
+                        testStatistic2 = Math.max(distanceMeasure2 - mu, 0);
+                }
+                testStatistic1Sum = testStatistic1Sum + testStatistic1;
+                if(testStatistic1Sum > h && i > 0)   //Cannot push 0 twice!
                 {
                         indices.push(i);
-                        magnitudeSum = 0;
+                        //lsEstimation = 0;
+                        testStatistic1Sum = 0;
                 }
         }
         if(indices[indices.length-1] !== gyroDataArray.length-1)
