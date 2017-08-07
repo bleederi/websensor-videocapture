@@ -298,6 +298,8 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                         testStatistic2 = Math.max(distanceMeasure2 - mu, 0);
                 }
                 testStatistic1Sum = testStatistic1Sum + testStatistic1;
+                testStatistic2Sum = testStatistic2Sum + testStatistic2;
+                console.log(testStatistic1Sum, testStatistic1Sum); 
                 if(testStatistic1Sum > h && i > 0)   //Cannot push 0 twice!
                 {
                         indices.push(i);
@@ -706,11 +708,11 @@ videoElement.addEventListener('play', function() {
         let tempCameraPath = {"x": null, "y": null};
         //Hanning window, first process data
         filteredAnglesArray = lpFilterOri(absoris, aVelData);       
-        console.log(filteredAnglesArray);
+        //console.log(filteredAnglesArray);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         let stableCameraPath = buildCameraPath2(filteredAnglesArray);
-        console.log(cameraPath);
-        console.log(stableCameraPath);
+        //console.log(cameraPath);
+        //console.log(stableCameraPath);
         let weightedIndex = 10;
         tempCameraPath.x = doWMA(cameraPath.map(a => a.x), weightedIndex);       //smoothen the path
         tempCameraPath.y = doWMA(cameraPath.map(a => a.y), weightedIndex);      //smoothen the path
