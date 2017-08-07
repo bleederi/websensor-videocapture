@@ -292,7 +292,7 @@ function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of l
         {
                 let part = dataInByIndices[partIndex];
                 console.log(part);
-                for (let i = 0; i < part[i].length; i++) {
+                for (let i = 0; i < part.length; i++) {
                         let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(part.length-1))); //the weight
                         let value = part[i].map(function(x) { return x * multiplier; });;
                         var b = new Float32Array(16);     //need to push by value
