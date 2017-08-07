@@ -271,7 +271,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                         magnitudeSum = 0;
                 }
         }
-        if(indices[indices.length-1] !== gyroData.length-1)
+        if(indices[indices.length-1] !== gyroDataArray.length-1)
         { 
                 indices.push(indices.length-1);   //last index is always the index of the last element
         }
