@@ -300,11 +300,12 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                 testStatistic1Sum = testStatistic1Sum + testStatistic1;
                 testStatistic2Sum = testStatistic2Sum + testStatistic2;
                 console.log(testStatistic1Sum, testStatistic1Sum); 
-                if(testStatistic1Sum > h && i > 0)   //Cannot push 0 twice!
+                if(testStatistic1Sum > 5 && i > 0)   //Cannot push 0 twice!
                 {
                         indices.push(i);
                         //lsEstimation = 0;
                         testStatistic1Sum = 0;
+                        testStatistic2Sum = 0;
                 }
         }
         if(indices[indices.length-1] !== gyroDataArray.length-1)
