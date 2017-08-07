@@ -261,7 +261,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         });
         for(let i=0; i<gyroDataArray.length; i++)
         {
-                let magnitude = Math.sqrt(gyroData[i].x * gyroData[i].x + gyroData[i].y * gyroData[i].y + gyroData[i].z * gyroData[i].z);
+                let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
                 console.log(magnitude);
         }
         return indices;
