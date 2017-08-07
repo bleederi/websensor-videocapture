@@ -104,6 +104,7 @@ var absoris = [];
 
 var tempArray2 = [];
 var anglesArray2 = [];
+var filteredAnglesArray = [];
 
 var recordingStarted = false;
 
@@ -369,6 +370,31 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
         return cameraPath;
 }
 
+/*
+*       Input: The low-pass filtered angles
+*       Output: The path of the camera in terms of canvas coordinates x,y
+*/
+function buildCameraPath2(angleArray) {    //Build the stabilized camera path from the sensor measurements (convert to canvas coordinates) using projection
+        let cameraPath = [];
+        let angleArray = filteredAnglesArray;
+        for (let i=0; i<angleArray.length; i++)
+        {
+                let ori = angleArray[i];
+                let oriDiff = null;
+                if(ori !== undefined)
+                {
+                        oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
+                        //console.log(oriDiff.yaw);
+                        cameraCoord.x = (2/2)* Math.sin(oriDiff.yaw*2) * canvas.width;  //These coefficients chosen by testing, still need to improve
+                        cameraCoord.y = (2/2)* Math.sin(oriDiff.roll*2) * canvas.height;
+                        var b = new Object;     //need to push by value
+                        Object.assign(b, cameraCoord);
+                        cameraPath.push(b);
+                }
+        }
+        return cameraPath;
+}
+
 //WINDOWS 10 HAS DIFFERENT CONVENTION: Yaw z, pitch x, roll y
 function toEulerianAngle(quat, out)
 {
@@ -512,8 +538,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function startRecording(stream) {
                 recordingStarted = true;
                 interval=window.setInterval(update_debug,100);
-	        //var options = {mimeType: 'video/webm;codecs=vp9'};
-		//mediaRecorder = new MediaRecorder(stream, options);
 		mediaRecorder = new MediaRecorder(stream);
 
 	        mediaRecorder.start(1000/(2*fps));  //argument blob length in ms
@@ -523,83 +547,77 @@ function startRecording(stream) {
 	        videoElement.src = url ? url.createObjectURL(stream) : stream;	        
                 //videoElement.play();
 
-	        mediaRecorder.ondataavailable = function(e) {
-                        //console.log("Data available", e);
-                        //console.log(time);
-                        frameData.frame = frame;
-                        time = Date.now();
-                        timestamps.push(time);
-                        frameData.time = time;
-                        timestampDiffs.push(time-timeAtSensorStart);
-		        chunks.push(e.data);
-                        frameData.data = e.data; 
-                        absoris.push(absori);        
-                        orientationData.push(ori);
-                        aVelData.push(aVel);
-                        frameData.absori = absori;
-                        frameData.ori = ori;
-                        frameData.aVel = aVel;
-                        frameData.accel = accel;        //maybe should use filtered acceleration instead?
-                        frameData.timeDiff = time-timeAtSensorStart;
-                        //frameData.accelnog = accelNoG;
-                        //dataArray.push(frameData);
-                        var b = new Object;     //need to push by value
-                        Object.assign(b, frameData);
-                        dataArray.push(b);
-                        frameData = {"frame": null, "data": null, "time": null, "absori":null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
-                        frame = frame + 1;
-	        };
+/*      Event listeners below   */
+mediaRecorder.ondataavailable = function(e) {
+        //console.log("Data available", e);
+        //console.log(time);
+        frameData.frame = frame;
+        time = Date.now();
+        timestamps.push(time);
+        frameData.time = time;
+        timestampDiffs.push(time-timeAtSensorStart);
+        chunks.push(e.data);
+        frameData.data = e.data; 
+        absoris.push(absori);        
+        orientationData.push(ori);
+        aVelData.push(aVel);
+        frameData.absori = absori;
+        frameData.ori = ori;
+        frameData.aVel = aVel;
+        frameData.accel = accel;        //maybe should use filtered acceleration instead?
+        frameData.timeDiff = time-timeAtSensorStart;
+        var b = new Object;     //need to push by value
+        Object.assign(b, frameData);
+        dataArray.push(b);
+        frameData = {"frame": null, "data": null, "time": null, "absori":null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
+        frame = frame + 1;
+};
 
-	        mediaRecorder.onerror = function(e){
-		        console.log('Error: ', e);
-	        };
+mediaRecorder.onerror = function(e){
+        console.log('Error: ', e);
+};
 
 
-	        mediaRecorder.onstart = function(){
-                        console.log("Recording started", mediaRecorder.state);
-	        };
+mediaRecorder.onstart = function(){
+        console.log("Recording started", mediaRecorder.state);
+};
 
-	        mediaRecorder.onstop = function(){
-		        var blob = new Blob(chunks, {type: "video/webm"});
-		        chunks = [];
+mediaRecorder.onstop = function(){
+        var blob = new Blob(chunks, {type: "video/webm"});
+        chunks = [];
 
-		        videoURLBase = window.URL.createObjectURL(blob);
+        videoURLBase = window.URL.createObjectURL(blob);
 
-		        videoElement.src = videoURLBase + "#xywh=pixel:0,0,320,240";
-                        videoElement.load();
+        videoElement.src = videoURLBase + "#xywh=pixel:0,0,320,240";
+        videoElement.load();
                         
                         //resize canvas
 videoElement.addEventListener('loadedmetadata', function() {
         console.log("Loaded metadata");
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-//canvas.style.display="none";
-  canvas2.width = videoElement.videoWidth;
-  canvas2.height = videoElement.videoHeight;
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        canvas2.width = videoElement.videoWidth;
+        canvas2.height = videoElement.videoHeight;
         ctx.save();     //save canvas state for later restoration
-        //duration = videoElement.duration;
 });
-/*
-videoElement.addEventListener('durationchange', function() {
-        duration = videoElement.duration;
-});
-*/
         duration = (dataArray[dataArray.length-1].time - dataArray[0].time)/1000;      //duration in s
-        //videoElement.play();
+
 videoElement.addEventListener('play', function() { 
         videoElement.play();
         nFrame = 0;
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         let tempCameraPath = {"x": null, "y": null};
         //Hanning window, first process data
-        let filteredAnglesArray = lpFilterOri(absoris);       
+        filteredAnglesArray = lpFilterOri(absoris);       
         console.log(filteredAnglesArray);
         cameraPath = buildCameraPath(dataArray);     //build camera path
+        let stableCameraPath = buildCameraPath2(filteredAnglesArray);
         console.log(cameraPath);
+        console.log(stableCameraPath);
         let weightedIndex = 10;
         tempCameraPath.x = doWMA(cameraPath.map(a => a.x), weightedIndex);       //smoothen the path
         tempCameraPath.y = doWMA(cameraPath.map(a => a.y), weightedIndex);      //smoothen the path
-        //need to add first elements separately due to MA filter losing them
+        //need to add first elements separately due to MA filter losing them. Note: they will of course not be filtered
         for(let i=0; i<tempCameraPath.x.length+weightedIndex-1; i++)
         {
                 if(i<weightedIndex)
@@ -637,21 +655,13 @@ function stopRecording(){
 //Idea: copy video to canvas, operate on the video, and then use the canvas with the stabilized video as source for the video element
 function readFrameData() {     //Read video data from blob to object form with pixel data we can operate on
         //TODO: sensor readings and frame data in desync - frame data too late/sensor data ahead
-        //console.log("frame");
-        //nFrame = videoElement.webkitDecodedFrameCount + videoElement.webkitDroppedFrameCount - extraFrames;
         nFrame = Math.floor(videoElement.currentTime*fps);
-        //console.log(nFrame);
-        //console.log(prevFrame, nFrame);
-        //let x = 0;
-        //let y = 0;
         let dx = 0;
         let dy = 0;
         let trans = {"x": null, "y": null};
         //let delay = -10;
         var timeFromStart = null;
-        //var cameraPos = null;
         let frameDataL = (nFrame-delay >=0 && nFrame-delay <= dataArray.length) ? dataArray[nFrame - delay] : dataArray[nFrame];
-        //let frameDataL = dataArray[nFrame];
         if(nFrame === 0 && !videoElement.ended)
         {
                 //console.log(dataArray);
