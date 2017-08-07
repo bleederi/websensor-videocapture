@@ -325,9 +325,7 @@ function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of l
         for(let i=0; i<indices.length-1; i++)
         {
                 let dataInPart = dataIn.slice(indices[i], indices[i+1]);
-                var b = new Float32Array(16);     //need to push by value
-                Object.assign(b, dataInPart);
-                dataInByIndices.push(b);
+                dataInByIndices.push(dataInPart);
         }
         console.log(dataInByIndices);
         let dataOut = [];
