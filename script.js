@@ -254,6 +254,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 function getHannIndices(aVelData)       //Splits the Hann windowing into parts, where the change (angular velocity) is fast the windows are smaller (indices closer together) and where it is slow the windows are larger
 {
         let indices = [];
+        indices.push(0);        //the first index is always 0
         let gyroDataArray = [];
         aVelData.forEach(function(entry) {
         let gyroData = (({ x, y, z }) => ({ x, y, z }))(entry);    //only select x,y,z
@@ -269,6 +270,10 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                         indices.push(i);
                         magnitudeSum = 0;
                 }
+        }
+        if(indices[indices.length-1] !== indices.length-1)
+        { 
+                indices.push(indices.length-1);   //last index is always the index of the last element
         }
         return indices;
 }
