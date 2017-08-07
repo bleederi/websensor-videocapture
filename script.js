@@ -376,7 +376,6 @@ function buildCameraPath(dataArray) {    //Build the shaky camera path from the 
 */
 function buildCameraPath2(angleArray) {    //Build the stabilized camera path from the sensor measurements (convert to canvas coordinates) using projection
         let cameraPath = [];
-        let angleArray = filteredAnglesArray;
         for (let i=0; i<angleArray.length; i++)
         {
                 let ori = angleArray[i];
