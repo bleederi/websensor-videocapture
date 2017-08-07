@@ -69,7 +69,7 @@ var time = null;
 var timestamp = null;
 var timestamps = [];
 var timestampDiffs = [];
-var timeAtStart = null;
+var timeAtSensorStart = null;
 var nFrame = 0; //frame number with which we can combine timestamp and frame data
 var prevFrame = null;      //previous frame
 var delay = 0;
@@ -484,27 +484,19 @@ function startSensors() {
                         let roll = orientation_sensor.roll;
                         let pitch = orientation_sensor.pitch;
                         let yaw = orientation_sensor.yaw;
-                        //time = orientation_sensor.timestamp;
-                        //time = Date.now();
+                        time_sensor = orientation_sensor.timestamp;
+                        let time_window = window.performance.now();
                         if(!initialoriobtained && recordingStarted) //obtain initial orientation
                         {
                                 oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                                //timeAtStart = orientation_sensor.timestamp;
-                                timeAtStart = window.performance.now();
+                                //timeAtSensorStart = orientation_sensor.timestamp;
+                                timeAtSensorStart = window.performance.now();
                                 initialoriobtained = true;
-                                sensorframeTimeDiff = timeAtStart - timeInitial;
+                                sensorframeTimeDiff = timeAtSensorStart - timeInitial;
                                 console.log("Initial orientation obtained");
                         }
-                        ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
-                        //console.log(orientation_sensor);
+                        ori = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time_sensor": time_sensor, "time_window": time_window};
                         ori_filtered.update(ori);
-                        //console.log(ori_filtered);
-                        //ori = ori_filtered;
-                        //ori.roll = ori_filtered.roll;
-                        //ori.pitch = ori_filtered.pitch;
-                        //ori.yaw = ori_filtered.yaw;
-                        //ori.time = orientation_sensor.timestamp;
-                        //console.log(ori_filtered);
                 };
                 orientation_sensor.onactivate = () => {
                 };
@@ -535,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //Read URL params
     urlParams = new URLSearchParams(window.location.search);
     nosensors = urlParams.has('nosensors'); //to specify whether or not to use sensors in the URL
-    console.log(nosensors);
+    console.log("Sensors:", !nosensors);
     startSensors();     //start sensors instantly to avoid gyro drift
 }, false);
 
@@ -560,7 +552,7 @@ function startRecording(stream) {
                         time = Date.now();
                         timestamps.push(time);
                         frameData.time = time;
-                        timestampDiffs.push(time-timeAtStart);
+                        timestampDiffs.push(time-timeAtSensorStart);
 		        chunks.push(e.data);
                         frameData.data = e.data;         
                         orientationData.push(ori);
@@ -568,7 +560,7 @@ function startRecording(stream) {
                         frameData.ori = ori;
                         frameData.aVel = aVel;
                         frameData.accel = accel;        //maybe should use filtered acceleration instead?
-                        frameData.timeDiff = time-timeAtStart;
+                        frameData.timeDiff = time-timeAtSensorStart;
                         //frameData.accelnog = accelNoG;
                         //dataArray.push(frameData);
                         var b = new Object;     //need to push by value
@@ -683,7 +675,7 @@ function readFrameData() {     //Read video data from blob to object form with p
         if(nFrame === 0 && !videoElement.ended)
         {
                 //console.log(dataArray);
-                //timeAtStart = frameDataL.ori.time;
+                //timeAtSensorStart = frameDataL.ori.time;
         }
         else if(nFrame !== 0 && nFrame !== prevFrame && frameDataL !== undefined && nFrame < videoElement.duration * fps)    //all subsequent frames
         {
@@ -691,7 +683,7 @@ function readFrameData() {     //Read video data from blob to object form with p
                 //console.log(frame, nFrame);
                 //console.log(nFrame);
                 //console.log(dataL);
-                timeFromStart = frameDataL.time - timeAtStart; //time since recording start (in ms)
+                timeFromStart = frameDataL.time - timeAtSensorStart; //time since recording start (in ms)
                 //console.log(timeFromStart);
                 //console.log(frameDataL);
                 //console.log(nFrame);
