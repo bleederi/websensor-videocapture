@@ -319,12 +319,12 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         return indices;
 }
 
-function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths as indicated by indices
+function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of length dataIn.length
         //Split using the indices
         let dataInByIndices = [];
         for(let i=0; i<indices.length-1; i++)
         {
-                let dataInPart = dataIn.slice(indices[i], indices[i+1]);
+                let dataInPart = dataIn.slice(indices[i], indices[i+1]);        //loses datatype Float32Array
                 dataInByIndices.push(dataInPart);
         }
         console.log(dataInByIndices);
@@ -490,8 +490,8 @@ function buildCameraPath2(angleArray) {    //Build the stabilized camera path fr
                 {
                         oriDiff = {"roll": ori.roll-oriInitial.roll, "pitch": ori.pitch-oriInitial.pitch, "yaw": ori.yaw-oriInitial.yaw};
                         //console.log(oriDiff.yaw);
-                        cameraCoord.x = (2/2)* Math.sin(oriDiff.yaw*2) * canvas.width;  //These coefficients chosen by testing, still need to improve
-                        cameraCoord.y = (2/2)* Math.sin(oriDiff.roll*2) * canvas.height;
+                        cameraCoord.x = (2/2)* Math.sin(oriDiff.yaw) * canvas.width;  //These coefficients chosen by testing, still need to improve
+                        cameraCoord.y = (2/2)* Math.sin(oriDiff.roll) * canvas.height;
                         var b = new Object;     //need to push by value
                         Object.assign(b, cameraCoord);
                         cameraPath.push(b);
