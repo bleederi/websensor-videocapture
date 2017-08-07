@@ -288,12 +288,17 @@ function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of l
         }
         console.log(dataInByIndices);
         let dataOut = [];
-        for (let i = 0; i < dataIn.length; i++) {
-                let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
-                let value = dataIn[i].map(function(x) { return x * multiplier; });;
-                var b = new Float32Array(16);     //need to push by value
-                Object.assign(b, value);
-                dataOut.push(b);
+        for (let partIndex = 0; partIndex < dataInByIndices.length; partIndex++)
+        {
+                let part = dataInByIndices[partIndex];
+                console.log(part);
+                for (let i = 0; i < part[i].length; i++) {
+                        let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(part.length-1))); //the weight
+                        let value = part[i].map(function(x) { return x * multiplier; });;
+                        var b = new Float32Array(16);     //need to push by value
+                        Object.assign(b, value);
+                        dataOut.push(b);
+                }
         }
         return dataOut;   
 }
@@ -352,7 +357,6 @@ function lpFilterOri(quatArrayIn, gyroData)
         }
         console.log(quatArray2);
         let indices = getHannIndices(gyroData);
-        console.log(indices);
         let quatArrayFiltered = hannWindow(quatArray2, indices); //Hann window to low-pass filter
         console.log(quatArrayFiltered);
         var anglesArray = [];   //Euler angles corresponding to the low-pass filtered quaternions
