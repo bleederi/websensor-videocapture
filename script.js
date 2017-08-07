@@ -307,6 +307,26 @@ function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of l
         return dataOut;   
 }
 
+/*
+*       Input: Indices according to which the segments are split
+*       Output: Intervals of the respective segments
+*/
+function findSegments(indices) //Splits the segments into two types: segments for which the length is greater than the wider window length k (big segments) and the rest (small segments) by indices
+{
+        //Arrays of intervals
+        let bigSegments = [];
+        let smallSegments = [];
+        for(let i=1; i<indices.length; i++)
+        {
+                let segmentLength = indices[i]-indices[i-1];
+                let interval = [indices[i-1], indices[i]]:
+                segmentLength > k ? bigSegments.push(interval) : smallSegments.push(interval);
+        }
+        console.log(bigSegments);
+        console.log(smallSegments);
+        return {"bigSegments": bigSegments, "smallSegments": smallSegments}
+}
+
 function doWMA( array, weightedPeriod ) {       //https://www.reddit.com/r/learnprogramming/comments/39cg7r/javascript_looking_for_sample_weighted_moving/cs3e08f/
     var weightedArray = [];
     for( var i = 0; i <= array.length - weightedPeriod; i++ ) {
