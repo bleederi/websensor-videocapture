@@ -80,10 +80,8 @@ var sensorframeTimeDiff = 0;    //time difference between sensor and frame data 
 //canvas
 var canvas = document.getElementById('myCanvas');
 var canvas2 = document.getElementById('myCanvas2');
-//CSS.elementSources.set("pfcanvas", canvas);
 var ctx = canvas.getContext('2d');
 var ctx2 = canvas2.getContext('2d');
-//var ctx = document.getCSSCanvasContext("2d", "name_of_canvas", 100, 100); - polyfill from https://css-tricks.com/media-fragments-uri-spatial-dimension/
 
 //video element
 var videoElement = document.querySelector('video');
@@ -424,7 +422,8 @@ function startDemo () {
 
 function startSensors() {
                 try {
-                timeInitial = Date.now();
+                //timeInitial = Date.now();
+                timeInitial = window.performance.now();
                 const bias = 0.98;
                 //Initialize sensors
                 accel_sensor = new Accelerometer({frequency: sensorfreq});
@@ -446,7 +445,6 @@ function startSensors() {
                 //accl = new Accelerometer({frequency: sensorfreq});
                 const gyro_filtered = new LowPassFilterData(gyroscope, 0.85);
                 gyroscope.onreading = () => {
-                        //console.log(Date.now());
                         gyro_filtered.update(gyroscope);
                         //aVel = {x:gyro_data.x, y:gyro_data.y, z:gyro_data.z};
                         //aVel = {x:gyroscope.x, y:gyroscope.y, z:gyroscope.z, alpha: alpha};
@@ -492,7 +490,7 @@ function startSensors() {
                         {
                                 oriInitial = {"roll": orientation_sensor.roll, "pitch": orientation_sensor.pitch, "yaw": orientation_sensor.yaw, "time": orientation_sensor.timestamp};
                                 //timeAtStart = orientation_sensor.timestamp;
-                                timeAtStart = Date.now();
+                                timeAtStart = window.performance.now();
                                 initialoriobtained = true;
                                 sensorframeTimeDiff = timeAtStart - timeInitial;
                                 console.log("Initial orientation obtained");
