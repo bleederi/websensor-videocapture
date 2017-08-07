@@ -432,7 +432,6 @@ function startSensors() {
                 accel_sensor = new Accelerometer({frequency: sensorfreq});
                 // Remove drift with a high pass filter.
                 const accel_filtered =  new HighPassFilterData(accel_sensor, 0.8);
-                //console.log(accel_filtered);  //null, null, null
                 accel_sensor.onreading = () => {
                         accel = {"x": accel_sensor.x, "y": accel_sensor.y, "z": accel_sensor.z, "time": accel_sensor.timestamp};
                         //accel = {"x": (1/2)*(accel_last.x + accel_sensor.x), "y": (1/2)*(accel_last.y + accel_sensor.y), "z": (1/2)*(accel_last.z + accel_sensor.z)};
@@ -530,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //Read URL params
     urlParams = new URLSearchParams(window.location.search);
     nosensors = urlParams.has('nosensors'); //to specify whether or not to use sensors in the URL
-    console.log("Sensors:", !nosensors);
+    console.log("Sensors (URL):", !nosensors);
     startSensors();     //start sensors instantly to avoid gyro drift
 }, false);
 
