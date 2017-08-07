@@ -288,6 +288,7 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
                 if(i > 0)
                 {
                         let testStatistic1Prev = testStatistic1;    //store previous value
+                        let testStatistic2Prev = testStatistic2;    //store previous value
                         testStatistic1 = Math.max(testStatistic1Prev + distanceMeasure1 - mu, 0);
                         testStatistic2 = Math.max(testStatistic2Prev + distanceMeasure2 - mu, 0);
                 }
