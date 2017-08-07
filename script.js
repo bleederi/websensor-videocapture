@@ -259,10 +259,18 @@ function getHannIndices(aVelData)       //Splits the Hann windowing into parts, 
         let gyroData = (({ x, y, z }) => ({ x, y, z }))(entry);    //only select x,y,z
         gyroDataArray.push(gyroData);
         });
+        let magnitudeSum = 0;   //Sum to track the amount of movement that has happened since the last index
         for(let i=0; i<gyroDataArray.length; i++)
         {
                 let magnitude = Math.sqrt(gyroDataArray[i].x * gyroDataArray[i].x + gyroDataArray[i].y * gyroDataArray[i].y + gyroDataArray[i].z * gyroDataArray[i].z);
-                console.log(magnitude);
+                //console.log(magnitude);
+                magnitudeSum = magnitudeSum + magnitude;
+                if(magnitudeSum > 10)   //10 just some random value, need to change
+                {
+                        console.log(i);
+                        indices.push(i);
+                        magnitudeSum = 0;
+                }
         }
         return indices;
 }
