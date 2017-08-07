@@ -255,7 +255,7 @@ return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 *       Input: Gyroscope data (angular velocity)
 *       Output: Array of indices indicating where to split the Hann windowing
 */
-function getHannIndices(aVelData)       //Splits the Hann windowing into parts, where the change (angular velocity) is fast the windows are smaller (indices closer together) and where it is slow the windows are larger
+function getHannIndices(aVelData)       //Splits the Hann windowing into parts, where the change (angular velocity) is fast the windows are smaller (indices closer together) and where it is slow the windows are larger TODO: No drift term yet, incorrect algorithm implemented
 {
         let indices = [];
         indices.push(0);        //the first index is always 0
@@ -295,7 +295,7 @@ function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of l
         for (let partIndex = 0; partIndex < dataInByIndices.length; partIndex++)
         {
                 let part = dataInByIndices[partIndex];
-                console.log(part);
+                //console.log(part);
                 for (let i = 0; i < part.length; i++) {
                         let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(part.length-1))); //the weight
                         let value = part[i].map(function(x) { return x * multiplier; });;
@@ -323,8 +323,6 @@ function findSegments(indices) //Splits the segments into two types: segments fo
                 i > 1 ? interval = [indices[i-1]+1, indices[i]] : interval = [indices[i-1], indices[i]];
                 segmentLength > k ? bigSegments.push(interval) : smallSegments.push(interval);
         }
-        console.log(bigSegments);
-        console.log(smallSegments);
         return {"bigSegments": bigSegments, "smallSegments": smallSegments};
 }
 
