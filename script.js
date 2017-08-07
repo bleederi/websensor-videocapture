@@ -319,12 +319,12 @@ function findSegments(indices) //Splits the segments into two types: segments fo
         for(let i=1; i<indices.length; i++)
         {
                 let segmentLength = indices[i]-indices[i-1];
-                let interval = [indices[i-1], indices[i]];
+                i > 1 ? let interval = [indices[i-1]+1, indices[i]] : let interval = [indices[i-1], indices[i]];
                 segmentLength > k ? bigSegments.push(interval) : smallSegments.push(interval);
         }
         console.log(bigSegments);
         console.log(smallSegments);
-        return {"bigSegments": bigSegments, "smallSegments": smallSegments}
+        return {"bigSegments": bigSegments, "smallSegments": smallSegments};
 }
 
 function doWMA( array, weightedPeriod ) {       //https://www.reddit.com/r/learnprogramming/comments/39cg7r/javascript_looking_for_sample_weighted_moving/cs3e08f/
