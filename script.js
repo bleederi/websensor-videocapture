@@ -247,7 +247,21 @@ function magnitude(vector)      //Calculate the magnitude of a vector
 return Math.sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
-function hannWindow(dataIn) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths
+/*
+*       Input: Gyroscope data (angular velocity)
+*       Output: Array of indices indicating where to split the Hann windowing
+*/
+function getHannIndices(gyroData)       //Splits the Hann windowing into parts, where the change (angular velocity) is fast the windows are smaller (indices closer together) and where it is slow the windows are larger
+{
+        let indices = [];
+        for(let i=0; i<gyroData.length; i++)
+        {
+                console.log(gyroData[i]);
+        }
+        return indices;
+}
+
+function hannWindow(dataIn, indices) {   //Low-pass filter with Hann window of length dataIn.length TODO: Should split into smaller lengths as indicated by indices
         let dataOut = [];
         for (let i = 0; i < dataIn.length; i++) {
                 let multiplier = 0.5 * (1 - Math.cos(2*Math.PI*i/(dataIn.length-1))); //the weight
@@ -297,7 +311,7 @@ function average(data) {
 * Input: Array of orientation data including timestamps
 * Output: Euler angles
 */
-function lpFilterOri(quatArrayIn)
+function lpFilterOri(quatArrayIn, gyroData)
 {
         let quatArray = [];     //array of quaternions without timestamps
         let tempArray = [];     //for storing quatArray orientation values
@@ -312,7 +326,8 @@ function lpFilterOri(quatArrayIn)
                 quatArray2.push(quat[0]);
         }
         console.log(quatArray2);
-        let quatArrayFiltered = hannWindow(quatArray2); //Hann window to low-pass filter
+        let indices = getHannIndices(gyroData);
+        let quatArrayFiltered = hannWindow(quatArray2, indices); //Hann window to low-pass filter
         console.log(quatArrayFiltered);
         var anglesArray = [];   //Euler angles corresponding to the low-pass filtered quaternions
         for (let i=0; i<quatArrayFiltered.length; i++)
@@ -606,7 +621,7 @@ videoElement.addEventListener('play', function() {
         let durationPerFrame = duration*1000/dataArray.length;   //frame duration in ms
         let tempCameraPath = {"x": null, "y": null};
         //Hanning window, first process data
-        filteredAnglesArray = lpFilterOri(absoris);       
+        filteredAnglesArray = lpFilterOri(absoris, aVelData);       
         console.log(filteredAnglesArray);
         cameraPath = buildCameraPath(dataArray);     //build camera path
         let stableCameraPath = buildCameraPath2(filteredAnglesArray);
