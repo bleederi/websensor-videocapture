@@ -630,7 +630,7 @@ videoElement.addEventListener('play', function() {
                 }
         }        
         console.log(cameraPath2);
-        //cameraPath2 = cameraPath;     //comment for smoothing
+        cameraPath2 = stableCameraPath;     //comment for smoothing
         readFrameData();    //reads the video into dataArray2
 }, false);
 	        };
