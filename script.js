@@ -50,7 +50,7 @@ var oriInitial = {"roll": null, "pitch": null, "yaw": null, "time": null};
 var initialoriobtained = false;
 var orientationData = [];       //array to store all the orientation data
 var aVelData = [];
-var frameData = {"frame": null, "data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
+var frameData = {"frame": null, "data": null, "time": null, "absori":null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
 var dataArray = [];     //array to store all the combined data
 var dataArray2 = [];     //array to store all the combined data
 
@@ -99,6 +99,7 @@ var cameraPath = [];    //smoothed camera path
 var cameraPath2 = [];    //array of canvas coordinates describing the camera path
 var cameraCoord = {"x": null, "y": null, "time": null};
 
+var absori = {"ori": null, "time": null};
 var absoris = [];
 
 var tempArray2 = [];
@@ -483,10 +484,10 @@ function startSensors() {
                 const euler = new Float32Array(3);
                 absori_sensor.onreading = () => {
                         absori_sensor.populateMatrix(mat4);
-                        let b = {"ori": mat4, "time": absori_sensor.timestamp};     //need to push by value
+                        absori = {"ori": mat4, "time": absori_sensor.timestamp};     //need to push by value
                 
                         //Object.assign(b.ori, mat4);
-                        absoris.push(b);
+                        //absoris.push(b);
                 };
                 absori_sensor.onactivate = () => {
                 };
@@ -531,9 +532,11 @@ function startRecording(stream) {
                         frameData.time = time;
                         timestampDiffs.push(time-timeAtSensorStart);
 		        chunks.push(e.data);
-                        frameData.data = e.data;         
+                        frameData.data = e.data; 
+                        absoris.push(absori);        
                         orientationData.push(ori);
                         aVelData.push(aVel);
+                        frameData.absori = absori;
                         frameData.ori = ori;
                         frameData.aVel = aVel;
                         frameData.accel = accel;        //maybe should use filtered acceleration instead?
@@ -543,7 +546,7 @@ function startRecording(stream) {
                         var b = new Object;     //need to push by value
                         Object.assign(b, frameData);
                         dataArray.push(b);
-                        frameData = {"frame": null, "data": null, "time": null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
+                        frameData = {"frame": null, "data": null, "time": null, "absori":null, "ori": null, "aVel": null, "accel": null, "accelnog": null, "timeDiff": null};
                         frame = frame + 1;
 	        };
 
