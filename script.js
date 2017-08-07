@@ -381,6 +381,7 @@ function lpFilterOri(quatArrayIn, gyroData)
         }
         console.log(quatArray2);
         let indices = getHannIndices(gyroData);
+        let segments = findSegments(indices);
         let quatArrayFiltered = hannWindow(quatArray2, indices); //Hann window to low-pass filter
         console.log(quatArrayFiltered);
         var anglesArray = [];   //Euler angles corresponding to the low-pass filtered quaternions
